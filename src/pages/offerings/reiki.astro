@@ -1,0 +1,51 @@
+---
+// Reiki page stub: what it is / session shape / training. The
+// BookingCTA component with the [data-cta="booking"] selector contract
+// lands in phase 3 (T3.3); until then the plain links below keep E-3/E-4
+// honestly red while the page structure is real.
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
+import site from "../../content/site.json";
+
+const offerings = (await getCollection("offerings")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const sessions = offerings.filter((o) => o.data.kind === "session");
+const trainings = offerings.filter((o) => o.data.kind === "training");
+---
+
+<Page title="Reiki">
+  <section>
+    <h2>What reiki is</h2>
+    <p>
+      Placeholder: a grounded description of reiki energy work — gentle,
+      non-invasive, unhurried. <!-- TODO(kylie) -->
+    </p>
+  </section>
+  <section>
+    <h2>Sessions</h2>
+    {
+      sessions.map((o) => (
+        <article class="card">
+          <h3>{o.data.title}</h3>
+          <p>{o.data.summary}</p>
+        </article>
+      ))
+    }
+    <p><a href={site.booking.url}>Book a session (booking opens soon)</a></p>
+  </section>
+  <section>
+    <h2>Training</h2>
+    {
+      trainings.map((o) => (
+        <article class="card">
+          <h3>{o.data.title}</h3>
+          <p>{o.data.summary}</p>
+        </article>
+      ))
+    }
+    <p>
+      <a href={site.booking.training_url}>Sign up for training (sign-up opens soon)</a>
+    </p>
+  </section>
+</Page>

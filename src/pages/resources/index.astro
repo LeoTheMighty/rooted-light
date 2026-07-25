@@ -1,0 +1,34 @@
+---
+// Resources index: explainer collection (modalities, reiki, reiki types)
+// with outbound reference links (ICRT). Detail pages land in phase 3.
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
+
+const resources = (await getCollection("resources")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Page title="Resources">
+  <p>
+    Plain-language explainers about this work — no hype, no jargon.
+    <!-- TODO(kylie): intro voice pass -->
+  </p>
+  {
+    resources.map((r) => (
+      <article class="card">
+        <h2>{r.data.title}</h2>
+        <p>{r.data.summary}</p>
+        {r.data.links.length > 0 && (
+          <ul>
+            {r.data.links.map((l) => (
+              <li>
+                <a href={l.url}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </article>
+    ))
+  }
+</Page>

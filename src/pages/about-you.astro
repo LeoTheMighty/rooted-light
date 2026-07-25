@@ -1,0 +1,27 @@
+---
+// About You: who-benefits narrative + modality map generated from the
+// modalities collection's who_benefits[] fields (design.md Architecture).
+import { getCollection } from "astro:content";
+import Page from "../layouts/Page.astro";
+import { Content, frontmatter } from "../content/about-you.md";
+
+const modalities = (await getCollection("modalities")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Page title={frontmatter.title}>
+  <Content />
+  {
+    modalities.map((m) => (
+      <section class="card">
+        <h3>{m.data.title}</h3>
+        <ul>
+          {m.data.who_benefits.map((w) => (
+            <li>{w}</li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Page>

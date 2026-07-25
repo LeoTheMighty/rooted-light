@@ -1,0 +1,63 @@
+---
+// Shared page layout: landmarks (<header>/<main>/<footer>), global nav from
+// site.json, one-<h1>-per-page rule (the layout owns the h1; pages pass
+// `title` and start their own headings at h2).
+import site from "../content/site.json";
+import "../styles/base.css";
+
+interface Props {
+  title: string;
+  /** Skip the layout-rendered <h1> (a page that renders its own hero h1). */
+  bareTitle?: boolean;
+  /** Per-page meta description; falls back to the site intention line. */
+  description?: string;
+}
+
+const { title, bareTitle = false, description = site.intention } = Astro.props;
+const docTitle = title === site.name ? site.name : `${title} · ${site.name}`;
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isCurrent = (href: string) =>
+  (href.replace(/\/$/, "") || "/") === currentPath;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{docTitle}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">{site.name}</a>
+        <nav class="site-nav" aria-label="Main">
+          <ul>
+            {
+              site.nav.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    aria-current={isCurrent(item.href) ? "page" : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap flow">
+      {!bareTitle && <h1>{title}</h1>}
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>{site.legal_name} · {site.tagline}</p>
+      </div>
+    </footer>
+  </body>
+</html>

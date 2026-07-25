@@ -1,0 +1,16 @@
+{
+  "name": "rooted-light-website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:full": "astro build",
+    "preview": "astro preview",
+    "evals": "node scripts/run-evals.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.12.0"
+  }
+}
