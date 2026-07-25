@@ -218,7 +218,7 @@ loop:
     - 60000
     - 120000
     - 240000
-init_partial: true
+init_partial: false
 
 # Hand-edit (preserved by /devx-init): projects: runners for engine gate
 # evals. The rooted-light site project itself gets a runner entry in
