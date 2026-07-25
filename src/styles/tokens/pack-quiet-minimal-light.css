@@ -1,0 +1,13 @@
+/* pack-quiet-minimal-light — near-white, brightness-first, thin
+   hairlines, no cards. The quietest direction: type and space only. */
+:root {
+  --color-bg: #fefefc;
+  --color-surface: #f4f4ee;
+  --color-text-body: #45483f;
+  --color-text-heading: #2f322c;
+  --color-accent: #5f6f5c;
+  --font-heading: "Optima", "Gill Sans", "Segoe UI", sans-serif;
+  --font-body: "Helvetica Neue", -apple-system, "Segoe UI", sans-serif;
+  /* pack extras */
+  --hairline: 1px solid #dcdcd2;
+}

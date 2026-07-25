@@ -1,0 +1,87 @@
+---
+// Botanical editorial: centered masthead, wide-tracked nav row between
+// thin rules, single centered column, leaf dividers, section rhythm
+// carried by rules and whitespace rather than surfaces.
+import MockupShell from "./MockupShell.astro";
+import layoutCss from "./HomeEditorial.css?raw";
+import { home, nav } from "./_content";
+
+interface Props {
+  packCss: string;
+  title: string;
+  blurb?: string;
+}
+const { packCss, title, blurb } = Astro.props;
+---
+
+<MockupShell packCss={packCss} layoutCss={layoutCss} title={title} blurb={blurb}>
+  <header class="masthead">
+    <p class="kicker">therapy · reiki · rest</p>
+    <p class="brand">{home.name}</p>
+    <nav aria-label="Main">
+      <ul>
+        {nav.map((n) => <li><a href={n.anchor}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="welcome">
+      <h1>{home.tagline}</h1>
+      <p class="intention">{home.intention}</p>
+      <svg class="leaf" viewBox="0 0 80 24" aria-hidden="true">
+        <path
+          d="M4 12 C 24 2, 56 2, 76 12 C 56 22, 24 22, 4 12 Z M 40 4 L 40 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.2"></path>
+      </svg>
+    </section>
+
+    <section class="words" aria-label="Intentions">
+      <p>{home.intentionWords.join(" · ")}</p>
+    </section>
+
+    <section class="ruled" id="offerings">
+      <h2>Offerings</h2>
+      <div class="columns">
+        {
+          home.offerings.map((o) => (
+            <article>
+              <h3>{o.title}</h3>
+              <p>{o.blurb}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="cta-line">
+        <a class="cta" href={home.bookingUrl}>Book a session</a>
+      </p>
+    </section>
+
+    <section class="ruled" id="about">
+      <h2>About</h2>
+      <div class="columns two">
+        {
+          home.about.map((a) => (
+            <article>
+              <h3>{a.title}</h3>
+              <p>{a.blurb}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="ruled" id="resources">
+      <h2>Resources</h2>
+      <p class="resource-line">
+        {home.resources.map((r) => r.title).join("  ·  ")}
+      </p>
+    </section>
+  </main>
+
+  <footer class="colophon">
+    <p>{home.legalName} · {home.tagline}</p>
+  </footer>
+</MockupShell>

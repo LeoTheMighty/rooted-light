@@ -1,0 +1,16 @@
+/* pack-forest-deep — the optional darker direction: deep green
+   grounding with light content wells and a warm gold accent. Body and
+   heading tokens sit on the dark ground; well text is a pack extra. */
+:root {
+  --color-bg: #223528;
+  --color-surface: #2d4636;
+  --color-text-body: #e9ecdb;
+  --color-text-heading: #f4f6e7;
+  --color-accent: #d9b86a;
+  --font-heading: "Hoefler Text", "Iowan Old Style", Georgia, serif;
+  --font-body: "Seravek", "Gill Sans", "Segoe UI", sans-serif;
+  /* pack extras — light wells hold long-form content */
+  --well-bg: #f5f2e7;
+  --well-text: #2c3a2e;
+  --well-heading: #223528;
+}

@@ -1,0 +1,202 @@
+---
+// Review index for Kylie: one card per style direction with real color
+// swatches parsed from the pack CSS at build time (no drift), a
+// one-liner, and a link. Self-contained (inline CSS, explicit
+// index.html links) so it works from a zip over file:// on a phone.
+import site from "../../content/site.json";
+import { directions } from "./_directions";
+
+const packSources = import.meta.glob("../../styles/tokens/pack-*.css", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+
+// Comments are stripped before parsing so a commented-out declaration
+// can never drive a swatch; a missing token fails the build loudly
+// instead of rendering `background:undefined`.
+const token = (css: string, pack: string, name: string) => {
+  const stripped = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  const v = (stripped.match(new RegExp(`${name}\\s*:\\s*([^;]+);`)) ||
+    [])[1]?.trim();
+  if (!v) throw new Error(`${pack}: token ${name} missing or unparseable`);
+  return v;
+};
+
+const cards = directions.map((d) => {
+  const entry = Object.entries(packSources).find(([path]) =>
+    path.endsWith(`${d.pack}.css`),
+  );
+  if (!entry) throw new Error(`no token pack found for ${d.pack}`);
+  const css = entry[1];
+  const fontRaw = token(css, d.pack, "--font-heading");
+  return {
+    ...d,
+    bg: token(css, d.pack, "--color-bg"),
+    surface: token(css, d.pack, "--color-surface"),
+    accent: token(css, d.pack, "--color-accent"),
+    heading: token(css, d.pack, "--color-text-heading"),
+    font: fontRaw,
+    fontName: fontRaw.split(",")[0]?.replace(/"/g, "").trim(),
+  };
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Style directions · {site.name}</title>
+    <meta
+      name="description"
+      content={`Review index: ${cards.length} home-page style directions for ${site.name}.`}
+    />
+    <style is:inline>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      * {
+        margin: 0;
+      }
+      body {
+        background: #faf8f4;
+        color: #3d3a33;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+        padding: 1.5rem 1.25rem 4rem;
+      }
+      .intro {
+        max-width: 38rem;
+        margin: 0 auto 2rem;
+        text-align: center;
+      }
+      .intro h1 {
+        font-family: Georgia, serif;
+        color: #4a5544;
+        font-size: 1.7rem;
+      }
+      .intro p {
+        margin-top: 0.7rem;
+      }
+      .intro .how {
+        margin-top: 1rem;
+        background: #f1ede4;
+        border-radius: 8px;
+        padding: 0.8rem 1rem;
+        font-size: 0.92rem;
+      }
+      .grid {
+        display: grid;
+        gap: 1.1rem;
+        max-width: 60rem;
+        margin-inline: auto;
+      }
+      @media (min-width: 640px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 960px) {
+        .grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        border: 1px solid #ddd8ca;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .swatch {
+        display: flex;
+        height: 64px;
+      }
+      .swatch span {
+        flex: 1;
+      }
+      .card .body {
+        padding: 0.9rem 1rem 1.1rem;
+      }
+      .card h2 {
+        font-size: 1.05rem;
+        color: #4a5544;
+      }
+      .card .font {
+        font-size: 0.78rem;
+        opacity: 0.7;
+        margin-top: 0.15rem;
+      }
+      .card p.blurb {
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+      .card .open {
+        display: inline-block;
+        margin-top: 0.7rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #5a6b4e;
+      }
+      .foot {
+        text-align: center;
+        margin-top: 2.5rem;
+        font-size: 0.85rem;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="intro">
+      <h1>{site.name} — style directions</h1>
+      <p>
+        {cards.length} looks for the home page, all showing the same words —
+        only the feel changes. Best browsed on your phone.
+      </p>
+      <p class="how">
+        Tap each one, live with them for a bit, then reply with your
+        favorite — or a blend of two (e.g. “colors of one, type of
+        another”). Nothing is final; this only picks a direction.
+      </p>
+      <p class="how">
+        A note on type: the fonts are your device’s own, so they render
+        truest on an iPhone or iPad — on other devices some directions
+        will share a similar typeface.
+      </p>
+    </header>
+
+    <main class="grid">
+      {
+        cards.map((c, i) => (
+          <a class="card" href={`./${c.slug}/index.html`}>
+            <span class="swatch" aria-hidden="true">
+              <span style={`background:${c.bg}`} />
+              <span style={`background:${c.surface}`} />
+              <span style={`background:${c.accent}`} />
+              <span style={`background:${c.heading}`} />
+            </span>
+            <div class="body">
+              <h2>
+                {i + 1}. {c.title}
+              </h2>
+              <p class="font" style={`font-family:${c.font}`}>
+                {c.fontName}
+              </p>
+              <p class="blurb">{c.blurb}</p>
+              <span class="open">Open this direction →</span>
+            </div>
+          </a>
+        ))
+      }
+    </main>
+
+    <footer class="foot">
+      <p>{site.legal_name} · mockup review package · {cards.length} directions</p>
+    </footer>
+  </body>
+</html>

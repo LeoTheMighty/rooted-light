@@ -1,0 +1,16 @@
+/* pack-lavender-dusk — calm lavender gradient washes, soft rounded
+   forms. Solid --color-bg fallback declared per token contract;
+   the gradient itself is a pack extra. */
+:root {
+  --color-bg: #efeaf4;
+  --color-surface: #faf8fc;
+  --color-text-body: #3f3856;
+  --color-text-heading: #493c6e;
+  --color-accent: #71549e;
+  --font-heading: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+  --font-body: "Seravek", "Segoe UI", -apple-system, sans-serif;
+  /* pack extras */
+  --wash-hero: linear-gradient(170deg, #d9cfe8 0%, #efeaf4 55%, #f2ece6 100%);
+  --wash-foot: linear-gradient(0deg, #ded4ea 0%, #efeaf4 100%);
+  --radius-soft: 22px;
+}

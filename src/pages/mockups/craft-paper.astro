@@ -1,0 +1,8 @@
+---
+import HomeCraft from "../../layouts/home/HomeCraft.astro";
+import packCss from "../../styles/tokens/pack-craft-paper.css?raw";
+import { direction } from "./_directions";
+const d = direction("craft-paper");
+---
+
+<HomeCraft packCss={packCss} title={d.title} blurb={d.blurb} />

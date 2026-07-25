@@ -106,6 +106,20 @@ what each provider supports either way.
 
 - [ ] Kylie decides payment timing for reiki sessions/trainings.
 
+## (from /devx rlw102) Kylie's style-direction pick
+
+The mockup package is built (7 directions behind `/mockups/`; share zip
+via `npm run mockups:package` — see the MANUAL.md entry for delivery
+steps). rlw105 (theme promotion) is gated on this answer.
+
+**Options:** botanical-editorial / craft-paper / lavender-dusk /
+grounded-modern / hand-touched-organic / quiet-minimal-light /
+forest-deep — or a blend of two (one pack's palette + the other's type).
+**Recommendation:** none — this is Kylie's call; the index asks her to
+reply with a favorite or a blend of two.
+
+- [ ] Record Kylie's pick (or blend) here once she replies.
+
 ## (from /devx-plan cdea58) Content Kylie needs to supply (tracking)
 
 Not blocking any build phase (placeholders are marked `TODO(kylie)`),

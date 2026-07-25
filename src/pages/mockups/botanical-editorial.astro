@@ -1,0 +1,8 @@
+---
+import HomeEditorial from "../../layouts/home/HomeEditorial.astro";
+import packCss from "../../styles/tokens/pack-botanical-editorial.css?raw";
+import { direction } from "./_directions";
+const d = direction("botanical-editorial");
+---
+
+<HomeEditorial packCss={packCss} title={d.title} blurb={d.blurb} />

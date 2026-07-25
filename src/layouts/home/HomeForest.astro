@@ -1,0 +1,71 @@
+---
+// Forest-deep accent: dark green ground, side-rail nav on desktop,
+// long-form content in light "wells", warm gold accents. The one
+// deliberately darker direction in the set.
+import MockupShell from "./MockupShell.astro";
+import layoutCss from "./HomeForest.css?raw";
+import { home, nav } from "./_content";
+
+interface Props {
+  packCss: string;
+  title: string;
+  blurb?: string;
+}
+const { packCss, title, blurb } = Astro.props;
+---
+
+<MockupShell packCss={packCss} layoutCss={layoutCss} title={title} blurb={blurb}>
+  <div class="frame">
+    <header class="rail">
+      <span class="brand">{home.name}</span>
+      <nav aria-label="Main">
+        <ul>
+          {nav.map((n) => <li><a href={n.anchor}>{n.label}</a></li>)}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="welcome">
+        <h1>{home.tagline}</h1>
+        <p class="gold-rule" aria-hidden="true"></p>
+        <p class="intention">{home.intention}</p>
+        <p class="words">{home.intentionWords.join(" · ")}</p>
+        <a class="gold-cta" href={home.bookingUrl}>Book a session</a>
+      </section>
+
+      <section class="well" id="offerings">
+        <h2>Offerings</h2>
+        {
+          home.offerings.map((o) => (
+            <article>
+              <h3>{o.title}</h3>
+              <p>{o.blurb}</p>
+            </article>
+          ))
+        }
+      </section>
+
+      <section class="well" id="about">
+        <h2>About</h2>
+        {
+          home.about.map((a) => (
+            <article>
+              <h3>{a.title}</h3>
+              <p>{a.blurb}</p>
+            </article>
+          ))
+        }
+      </section>
+
+      <section class="well" id="resources">
+        <h2>Resources</h2>
+        <p>{home.resources.map((r) => r.title).join(" · ")}</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="deep-foot">
+    <p>{home.legalName} · {home.tagline}</p>
+  </footer>
+</MockupShell>

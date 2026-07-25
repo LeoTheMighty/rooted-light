@@ -1,0 +1,87 @@
+/* _shared.css — minimal reset + token wiring inlined into every mockup
+   page (mockups are fully self-contained for zip/file:// sharing; the
+   real site keeps using base.css). Layout personality lives in each
+   Home*.css, not here. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-body);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+main {
+  flex: 1;
+}
+
+/* Review chrome shared by every mockup (not part of the direction) */
+.booking-note {
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.75;
+  padding: 0.4rem 1rem 0.8rem;
+  /* the sticky review-bar sits below; keep the note visible above it
+     when the booking CTA anchors here */
+  scroll-margin-bottom: 3rem;
+}
+
+.review-bar {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  background: var(--color-surface);
+  /* derived from body text so it stays visible on dark packs too */
+  border-top: 1px solid
+    color-mix(in srgb, var(--color-text-body) 25%, transparent);
+}
+
+.review-bar .which {
+  opacity: 0.8;
+}
