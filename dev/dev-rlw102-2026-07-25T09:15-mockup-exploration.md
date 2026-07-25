@@ -5,7 +5,7 @@ created: 2026-07-25T09:15:00-06:00
 title: Mockup exploration — 6+ style packs + review index for Kylie
 from: _devx/workstreams/rooted-light-website/plan.md (phase 2)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-25T1647-23250
 branch: feat/dev-rlw102
 ---
@@ -83,3 +83,12 @@ earthy (sage, lavender, tan, brown) — not kitschy, not glamorous.
   configured for this stack (honest no-ops per rlw101); full eval
   summary 4/6 green (E-3, E-4 red by design — phases 3/6).
 - 2026-07-25T16:47:29-06:00 — claimed by /devx in session /devx-2026-07-25T1647-23250
+- 2026-07-25 — phase 7: pushed feat/dev-rlw102 (c21694e); PR #3 opened
+  → https://github.com/LeoTheMighty/rooted-light/pull/3 (no unresolved
+  placeholders in body); remote CI devx-ci run 30178869474 SUCCESS.
+- 2026-07-25 — phase 7.5: tour built (6 stops, 3 grep-verified trails,
+  6-entry decision ledger) + published to devx-tours (1ece160); PR body
+  updated with tour link + orientation fallback.
+- 2026-07-25 — phase 8: check-hold clean, merge-gate {"merge":true};
+  merged via PR #3 (squash → 478203b). gh exited non-zero in-worktree
+  (known quirk) — verified MERGED via gh pr view.
