@@ -5,8 +5,8 @@ created: 2026-07-25T17:45:00-06:00
 title: Lavender refinement round — ≥5 simple variants + Modalities section in all mockups
 from: _devx/workstreams/rooted-light-website/plan.md (phase 2b)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-25T1757-30209
 branch: feat/dev-rlw108
 entered_at: execute
 ---
@@ -57,3 +57,4 @@ first, and re-package the share channel.
 - 2026-07-25T17:45 — emitted by the /devx revision of workstream cdea58
   (phase 2b), from Leo's 2026-07-25 decision: lavender pick + keep
   simple + Modalities top-level.
+- 2026-07-25T17:57:43-06:00 — claimed by /devx in session /devx-2026-07-25T1757-30209
