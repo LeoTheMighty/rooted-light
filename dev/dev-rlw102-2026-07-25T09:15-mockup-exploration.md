@@ -5,8 +5,8 @@ created: 2026-07-25T09:15:00-06:00
 title: Mockup exploration — 6+ style packs + review index for Kylie
 from: _devx/workstreams/rooted-light-website/plan.md (phase 2)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-25T1647-23250
 branch: feat/dev-rlw102
 ---
 
@@ -52,3 +52,4 @@ earthy (sage, lavender, tan, brown) — not kitschy, not glamorous.
 
 - 2026-07-25T09:15 — emitted by /devx-plan from workstream cdea58
   (rooted-light-website), phase 2.
+- 2026-07-25T16:47:29-06:00 — claimed by /devx in session /devx-2026-07-25T1647-23250
