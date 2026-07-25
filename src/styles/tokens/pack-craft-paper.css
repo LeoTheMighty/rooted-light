@@ -1,0 +1,18 @@
+/* pack-craft-paper — warm tan/brown, humanist sans, tactile paper
+   cards. Grounded and handmade without being kitschy. */
+:root {
+  --color-bg: #f4ead9;
+  --color-surface: #ecdfc6;
+  --color-text-body: #43301f;
+  --color-text-heading: #52381c;
+  --color-accent: #8f5327;
+  --font-heading: "Avenir Next", "Avenir", "Segoe UI", Verdana, sans-serif;
+  --font-body: "Avenir Next", "Avenir", "Segoe UI", Verdana, sans-serif;
+  /* pack extras */
+  --paper-grain: repeating-linear-gradient(
+    -3deg,
+    rgba(82, 56, 28, 0.03) 0 2px,
+    transparent 2px 6px
+  );
+  --card-shadow: 4px 4px 0 rgba(82, 56, 28, 0.14);
+}

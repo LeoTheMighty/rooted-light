@@ -1,0 +1,8 @@
+---
+import HomeForest from "../../layouts/home/HomeForest.astro";
+import packCss from "../../styles/tokens/pack-forest-deep.css?raw";
+import { direction } from "./_directions";
+const d = direction("forest-deep");
+---
+
+<HomeForest packCss={packCss} title={d.title} blurb={d.blurb} />

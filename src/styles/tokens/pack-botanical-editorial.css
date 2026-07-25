@@ -1,0 +1,14 @@
+/* pack-botanical-editorial — serif display, generous whitespace,
+   sage-forward. Editorial calm: thin rules, centered masthead. */
+:root {
+  --color-bg: #f8f7f0;
+  --color-surface: #edefe2;
+  --color-text-body: #333a2e;
+  --color-text-heading: #2e4031;
+  --color-accent: #4f6d58;
+  --font-heading: "Didot", "Bodoni MT", Georgia, serif;
+  --font-body: "Charter", "Iowan Old Style", Georgia, serif;
+  /* pack extras */
+  --rule: 1px solid #c9cdb9;
+  --letter-wide: 0.14em;
+}

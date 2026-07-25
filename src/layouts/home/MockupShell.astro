@@ -1,0 +1,44 @@
+---
+// Document shell for every home mockup: inlines all CSS (pack tokens +
+// shared reset + the layout's own styles) so each built page is fully
+// self-contained — the package must open from a zip over file://, where
+// external stylesheet URLs would break. Also renders the review bar.
+import shared from "./_shared.css?raw";
+import { home } from "./_content";
+
+interface Props {
+  packCss: string;
+  layoutCss: string;
+  title: string;
+  blurb?: string;
+}
+
+const { packCss, layoutCss, title, blurb = home.intention } = Astro.props;
+const css = `${packCss}\n${shared}\n${layoutCss}`;
+// A literal "</style" anywhere in the CSS would terminate the inline
+// style element and dump the rest as visible body text — fail the build
+// instead of shipping a broken page.
+if (css.includes("</style"))
+  throw new Error(`${title}: injected CSS contains "</style"`);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{`${title} · ${home.name} mockup`}</title>
+    <meta name="description" content={blurb} />
+    <style is:inline set:html={css}></style>
+  </head>
+  <body>
+    <slot />
+    <p class="booking-note" id="booking-note">
+      “Book a session” is a placeholder — booking goes live at launch.
+    </p>
+    <footer class="review-bar">
+      <a href="../index.html">← All directions</a>
+      <span class="which">{title}</span>
+    </footer>
+  </body>
+</html>

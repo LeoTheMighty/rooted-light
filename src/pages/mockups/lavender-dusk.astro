@@ -1,0 +1,8 @@
+---
+import HomeDusk from "../../layouts/home/HomeDusk.astro";
+import packCss from "../../styles/tokens/pack-lavender-dusk.css?raw";
+import { direction } from "./_directions";
+const d = direction("lavender-dusk");
+---
+
+<HomeDusk packCss={packCss} title={d.title} blurb={d.blurb} />

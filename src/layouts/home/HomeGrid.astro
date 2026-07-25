@@ -1,0 +1,86 @@
+---
+// Grounded modern: sticky bordered header with right-aligned uppercase
+// nav, split hero (text | textured earth block), bordered grid blocks,
+// full-width brown intention band. Structure-forward.
+import MockupShell from "./MockupShell.astro";
+import layoutCss from "./HomeGrid.css?raw";
+import { home, nav } from "./_content";
+
+interface Props {
+  packCss: string;
+  title: string;
+  blurb?: string;
+}
+const { packCss, title, blurb } = Astro.props;
+---
+
+<MockupShell packCss={packCss} layoutCss={layoutCss} title={title} blurb={blurb}>
+  <header class="topbar">
+    <span class="brand">{home.name}</span>
+    <nav aria-label="Main">
+      <ul>
+        {nav.map((n) => <li><a href={n.anchor}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="split-hero" id="welcome">
+      <div class="hero-copy">
+        <h1>{home.tagline}</h1>
+        <p>{home.intention}</p>
+        <a class="block-cta" href={home.bookingUrl}>Book a session</a>
+      </div>
+      <div class="hero-block" aria-hidden="true"></div>
+    </section>
+
+    <section class="band" aria-label="Intentions">
+      <p>{home.intentionWords.join(" — ")}</p>
+    </section>
+
+    <section class="blocks" id="offerings">
+      <h2>Offerings</h2>
+      <div class="grid three">
+        {
+          home.offerings.map((o) => (
+            <article class="block">
+              <h3>{o.title}</h3>
+              <p>{o.blurb}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="blocks" id="about">
+      <h2>About</h2>
+      <div class="grid two">
+        {
+          home.about.map((a) => (
+            <article class="block">
+              <h3>{a.title}</h3>
+              <p>{a.blurb}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="blocks" id="resources">
+      <h2>Resources</h2>
+      <div class="grid three">
+        {
+          home.resources.map((r) => (
+            <article class="block slim">
+              <h3>{r.title}</h3>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <footer class="baseline">
+    <p>{home.legalName} · {home.tagline}</p>
+  </footer>
+</MockupShell>

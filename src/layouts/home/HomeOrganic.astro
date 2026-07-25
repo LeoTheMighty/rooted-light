@@ -1,0 +1,75 @@
+---
+// Hand-touched organic: pill-chip nav, asymmetric hero over soft blob
+// shapes, staggered rounded cards, wavy heading underlines. Warm and
+// human without being kitschy.
+import MockupShell from "./MockupShell.astro";
+import layoutCss from "./HomeOrganic.css?raw";
+import { home, nav } from "./_content";
+
+interface Props {
+  packCss: string;
+  title: string;
+  blurb?: string;
+}
+const { packCss, title, blurb } = Astro.props;
+---
+
+<MockupShell packCss={packCss} layoutCss={layoutCss} title={title} blurb={blurb}>
+  <header class="chips-head">
+    <span class="brand">{home.name}</span>
+    <nav aria-label="Main">
+      <ul>
+        {nav.map((n) => <li><a class="chip" href={n.anchor}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="welcome">
+      <div class="blob blob-a" aria-hidden="true"></div>
+      <div class="blob blob-b" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <h1>{home.name}</h1>
+        <p class="tagline">{home.tagline}</p>
+        <p>{home.intention}</p>
+        <a class="round-cta" href={home.bookingUrl}>Book a session</a>
+      </div>
+    </section>
+
+    <section class="stagger" id="offerings">
+      <h2>Offerings</h2>
+      {
+        home.offerings.map((o) => (
+          <article class="pebble">
+            <h3>{o.title}</h3>
+            <p>{o.blurb}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="stagger" id="about">
+      <h2>About</h2>
+      {
+        home.about.map((a) => (
+          <article class="pebble">
+            <h3>{a.title}</h3>
+            <p>{a.blurb}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="stagger" id="resources">
+      <h2>Resources</h2>
+      <article class="pebble">
+        <p>{home.resources.map((r) => r.title).join(" · ")}</p>
+      </article>
+      <p class="words">{home.intentionWords.join(" ✳ ")}</p>
+    </section>
+  </main>
+
+  <footer class="soft-foot">
+    <p>{home.legalName} · {home.tagline}</p>
+  </footer>
+</MockupShell>

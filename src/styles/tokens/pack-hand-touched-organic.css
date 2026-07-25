@@ -1,0 +1,15 @@
+/* pack-hand-touched-organic — rounded forms, illustrated accents,
+   warm cream. Human and imperfect: blob shapes, squiggle underlines. */
+:root {
+  --color-bg: #fdf8ec;
+  --color-surface: #f3ead1;
+  --color-text-body: #4a3b28;
+  --color-text-heading: #6b4526;
+  --color-accent: #a4632f;
+  --font-heading: "Cochin", "Baskerville", "Palatino", serif;
+  --font-body: "Optima", "Candara", "Segoe UI", sans-serif;
+  /* pack extras */
+  --blob-sage: #b7c4a1;
+  --blob-lavender: #cfc3dd;
+  --radius-blob: 42% 58% 62% 38% / 55% 44% 56% 45%;
+}

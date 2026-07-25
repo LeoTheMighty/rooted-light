@@ -1,0 +1,133 @@
+/* Forest-deep layout — dark ground, side rail, light wells. */
+.frame {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.rail {
+  padding: 1.4rem 1.4rem 0.6rem;
+}
+
+.rail .brand {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  color: var(--color-text-heading);
+  display: block;
+  margin-bottom: 0.7rem;
+}
+
+.rail nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.2rem;
+}
+
+.rail nav a {
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 860px) {
+  .frame {
+    flex-direction: row;
+    gap: 2rem;
+    max-width: 64rem;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .rail {
+    flex: 0 0 13rem;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    padding-top: 2.5rem;
+  }
+
+  .rail nav ul {
+    flex-direction: column;
+    gap: 0.55rem;
+    border-left: 1px solid var(--color-accent);
+    padding-left: 1rem;
+    margin-top: 0.4rem;
+  }
+}
+
+main {
+  flex: 1;
+  padding: 1.5rem 1.4rem 3.5rem;
+  max-width: 46rem;
+  /* centers the column below the 860px rail breakpoint (no-op above,
+     where the flex row governs) */
+  margin-inline: auto;
+}
+
+.hero {
+  padding: 2.2rem 0 2.6rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 5vw, 2.7rem);
+  font-weight: 500;
+}
+
+.gold-rule {
+  width: 72px;
+  border-top: 3px solid var(--color-accent);
+  margin: 1.3rem 0;
+}
+
+.hero .intention {
+  max-width: 32rem;
+}
+
+.hero .words {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.gold-cta {
+  display: inline-block;
+  margin-top: 1.8rem;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.75rem 1.8rem;
+  border-radius: 4px;
+}
+
+.well {
+  background: var(--well-bg);
+  color: var(--well-text);
+  border-radius: 10px;
+  padding: 1.6rem;
+  margin-top: 1.6rem;
+}
+
+.well h2 {
+  color: var(--well-heading);
+  font-size: 1.3rem;
+  margin-bottom: 0.9rem;
+}
+
+.well h3 {
+  color: var(--well-heading);
+  font-size: 1.02rem;
+  margin-bottom: 0.25rem;
+}
+
+.well article + article {
+  margin-top: 1.1rem;
+}
+
+.deep-foot {
+  border-top: 1px solid var(--color-accent);
+  text-align: center;
+  padding: 1.6rem 1.4rem;
+  font-size: 0.85rem;
+}

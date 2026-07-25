@@ -1,0 +1,76 @@
+---
+// Soft lavender dusk: full-height gradient-wash hero with the nav
+// floating over it, content in soft rounded cards that drift over the
+// wash, gradient footer. Calm, quiet, dusky.
+import MockupShell from "./MockupShell.astro";
+import layoutCss from "./HomeDusk.css?raw";
+import { home, nav } from "./_content";
+
+interface Props {
+  packCss: string;
+  title: string;
+  blurb?: string;
+}
+const { packCss, title, blurb } = Astro.props;
+---
+
+<MockupShell packCss={packCss} layoutCss={layoutCss} title={title} blurb={blurb}>
+  <section class="hero" id="welcome">
+    <header class="float-nav">
+      <span class="brand">{home.name}</span>
+      <nav aria-label="Main">
+        <ul>
+          {nav.map((n) => <li><a href={n.anchor}>{n.label}</a></li>)}
+        </ul>
+      </nav>
+    </header>
+    <div class="hero-inner">
+      <h1>{home.name}</h1>
+      <p class="tagline">{home.tagline}</p>
+      <p class="intention">{home.intention}</p>
+      <a class="pill-cta" href={home.bookingUrl}>Book a session</a>
+    </div>
+  </section>
+
+  <main>
+    <section class="drift" id="offerings">
+      <h2>Offerings</h2>
+      <div class="cards">
+        {
+          home.offerings.map((o) => (
+            <article class="soft">
+              <h3>{o.title}</h3>
+              <p>{o.blurb}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="drift" id="about">
+      <h2>About</h2>
+      <div class="cards two">
+        {
+          home.about.map((a) => (
+            <article class="soft">
+              <h3>{a.title}</h3>
+              <p>{a.blurb}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="drift" id="resources">
+      <h2>Resources</h2>
+      <article class="soft">
+        <p>{home.resources.map((r) => r.title).join(" · ")}</p>
+      </article>
+      <p class="words">{home.intentionWords.join(" · ")}</p>
+    </section>
+  </main>
+
+  <footer class="dusk-foot">
+    <p>{home.legalName} · {home.tagline}</p>
+  </footer>
+</MockupShell>

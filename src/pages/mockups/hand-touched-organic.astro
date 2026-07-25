@@ -1,0 +1,8 @@
+---
+import HomeOrganic from "../../layouts/home/HomeOrganic.astro";
+import packCss from "../../styles/tokens/pack-hand-touched-organic.css?raw";
+import { direction } from "./_directions";
+const d = direction("hand-touched-organic");
+---
+
+<HomeOrganic packCss={packCss} title={d.title} blurb={d.blurb} />

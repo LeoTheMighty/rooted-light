@@ -1,0 +1,15 @@
+/* pack-grounded-modern — strong grid, earth-blocked sections, square
+   corners, confident sans. Modern structure over earthy color. */
+:root {
+  --color-bg: #f5f4ef;
+  --color-surface: #e7e4d9;
+  --color-text-body: #24261f;
+  --color-text-heading: #1e2a22;
+  --color-accent: #3f624b;
+  --font-heading: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* pack extras */
+  --block-border: 2px solid #1e2a22;
+  --block-tan: #d9c9ab;
+  --block-brown: #6d5638;
+}

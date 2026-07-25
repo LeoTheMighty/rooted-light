@@ -1,0 +1,76 @@
+---
+// Warm craft-paper: left brand / right nav bar, paper-grain hero card,
+// stacked offset-shadow cards, stamp-style CTA. Tactile and handmade.
+import MockupShell from "./MockupShell.astro";
+import layoutCss from "./HomeCraft.css?raw";
+import { home, nav } from "./_content";
+
+interface Props {
+  packCss: string;
+  title: string;
+  blurb?: string;
+}
+const { packCss, title, blurb } = Astro.props;
+---
+
+<MockupShell packCss={packCss} layoutCss={layoutCss} title={title} blurb={blurb}>
+  <header class="bar">
+    <span class="brand">{home.name}</span>
+    <nav aria-label="Main">
+      <ul>
+        {nav.map((n) => <li><a href={n.anchor}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="paper hero" id="welcome">
+      <h1>{home.name}</h1>
+      <p class="tagline">{home.tagline}</p>
+      <p>{home.intention}</p>
+      <ul class="word-tags" aria-label="Intentions">
+        {home.intentionWords.map((w) => <li>{w}</li>)}
+      </ul>
+    </section>
+
+    <section id="offerings">
+      <h2>Offerings</h2>
+      {
+        home.offerings.map((o) => (
+          <article class="paper">
+            <h3>{o.title}</h3>
+            <p>{o.blurb}</p>
+          </article>
+        ))
+      }
+      <p class="cta-line">
+        <a class="stamp" href={home.bookingUrl}>Book a session</a>
+      </p>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      {
+        home.about.map((a) => (
+          <article class="paper">
+            <h3>{a.title}</h3>
+            <p>{a.blurb}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section id="resources">
+      <h2>Resources</h2>
+      <article class="paper">
+        <ul class="resource-list">
+          {home.resources.map((r) => <li>{r.title}</li>)}
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>{home.legalName} · {home.tagline}</p>
+  </footer>
+</MockupShell>

@@ -8,7 +8,8 @@
     "build": "astro build",
     "build:full": "astro build",
     "preview": "astro preview",
-    "evals": "node scripts/run-evals.mjs"
+    "evals": "node scripts/run-evals.mjs",
+    "mockups:package": "npm run build:full && node scripts/package-mockups.mjs"
   },
   "dependencies": {
     "astro": "^5.12.0"
