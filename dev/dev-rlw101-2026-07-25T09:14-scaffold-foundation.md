@@ -5,8 +5,8 @@ created: 2026-07-25T09:14:00-06:00
 title: Scaffold & foundation — Astro project, content schemas, base layout
 from: _devx/workstreams/rooted-light-website/plan.md (phase 1)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-25T1525-15993
 branch: feat/dev-rlw101
 ---
 
@@ -54,3 +54,4 @@ devx-ci.yml managed markers.
 
 - 2026-07-25T09:14 — emitted by /devx-plan from workstream cdea58
   (rooted-light-website), phase 1.
+- 2026-07-25T15:25:22-06:00 — claimed by /devx in session /devx-2026-07-25T1525-15993
