@@ -227,3 +227,8 @@ projects:
   - name: rooted-light-website-evals
     path: _devx/workstreams/rooted-light-website/evals
     test: node
+  # Added by rlw101: build is the site's verifiable gate until a test
+  # framework lands (validates schemas + renders every route).
+  - name: rooted-light-website
+    path: .
+    test: npm run build

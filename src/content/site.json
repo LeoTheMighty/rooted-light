@@ -1,0 +1,22 @@
+{
+  "name": "Rooted Light",
+  "legal_name": "Rooted Light LLC",
+  "tagline": "Therapy and reiki, one integrated body of work.",
+  "intention": "A place to feel safe, seen, and unpressured — and to leave feeling whole again.",
+  "intention_words": ["safe", "seen", "unpressured", "empowered", "whole again", "connected"],
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "About Me", "href": "/about-me/" },
+    { "label": "About You", "href": "/about-you/" },
+    { "label": "Offerings", "href": "/offerings/" },
+    { "label": "Resources", "href": "/resources/" }
+  ],
+  "booking": {
+    "url": "#booking-tbd",
+    "training_url": "#booking-tbd"
+  },
+  "contact": {
+    "form_action": "#booking-tbd",
+    "psychology_today_url": "#TODO(kylie)-psychology-today-url"
+  }
+}

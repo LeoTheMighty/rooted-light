@@ -1,0 +1,47 @@
+---
+// Therapy page stub: inquiry-only — no booking affordances, ever (E-3
+// contract). The modality <details> accordion with [data-modality] /
+// [data-field] attributes, the inquiry form, and the Psychology Today
+// link land in phase 3 (T3.4); this stub renders the real structure the
+// accordion will fill.
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
+
+const modalities = (await getCollection("modalities")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Page title="Therapy">
+  <p>
+    Therapy with Kylie begins with a conversation, not a checkout.
+    Scheduling, paperwork, and intake all happen after we connect.
+    <!-- TODO(kylie): voice pass -->
+  </p>
+  <section>
+    <h2>How I work</h2>
+    {
+      modalities.map((m) => (
+        <details class="card">
+          <summary>{m.data.title}</summary>
+          <p>{m.data.summary}</p>
+        </details>
+      ))
+    }
+  </section>
+  <section>
+    <h2>Reach out</h2>
+    <p>
+      Placeholder: the inquiry form arrives with the content build-out;
+      until then, this page intentionally has no contact mechanics.
+    </p>
+  </section>
+  <section>
+    <h2>If you need help right now</h2>
+    <p>
+      This practice is not an emergency service. If you are in crisis, call
+      or text <strong>988</strong> (Suicide &amp; Crisis Lifeline, US) or go
+      to your nearest emergency room.
+    </p>
+  </section>
+</Page>

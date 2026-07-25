@@ -1,0 +1,10 @@
+---
+// About Me (FR-3): three contractual H2 subsections live in the markdown
+// source (Experiences / Interests & Devotions / Education & Certifications).
+import Page from "../layouts/Page.astro";
+import { Content, frontmatter } from "../content/about-me.md";
+---
+
+<Page title={frontmatter.title}>
+  <Content />
+</Page>

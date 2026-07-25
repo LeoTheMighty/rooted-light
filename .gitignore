@@ -3,4 +3,7 @@
 # preserved across re-runs; the markers themselves are sacrosanct.
 .worktrees/
 .devx-cache/
+node_modules/
+dist/
+.astro/
 # <<< devx

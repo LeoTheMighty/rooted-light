@@ -1,0 +1,33 @@
+---
+// Offerings landing: the two paths — reiki (bookable) and therapy
+// (inquiry-only). Cards link to the offering pages; booking wiring is
+// phase 6's concern.
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
+
+const offerings = (await getCollection("offerings")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Page title="Offerings">
+  <article class="card">
+    <h2><a href="/offerings/reiki/">Reiki</a></h2>
+    <ul>
+      {
+        offerings.map((o) => (
+          <li>
+            <strong>{o.data.title}</strong> — {o.data.summary}
+          </li>
+        ))
+      }
+    </ul>
+  </article>
+  <article class="card">
+    <h2><a href="/offerings/therapy/">Therapy</a></h2>
+    <p>
+      Talk therapy with Kylie — reach out by inquiry; scheduling and intake
+      happen after we connect. <!-- TODO(kylie): voice pass -->
+    </p>
+  </article>
+</Page>
