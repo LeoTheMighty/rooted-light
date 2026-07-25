@@ -75,13 +75,13 @@ production build), phase 6 and the deploy workflow run it flagless.
 Target dates track G-1 (mockups to Kylie 2026-08-08) and G-3 (launch
 2026-09-30); phases 3–4 run during Kylie's review window.
 
-- [ ] Phase 1: Scaffold & foundation — by 2026-08-01
-- [ ] Phase 2: Mockup exploration — 6+ style packs + review index — delivered by 2026-08-06
-- [ ] Phase 3: Content pages & information architecture — by 2026-08-22
-- [ ] Phase 4: Booking-provider comparison — by 2026-08-15
-- [ ] Phase 5: Theme promotion — by 2026-09-05 (gated: Kylie's style pick)
-- [ ] Phase 6: Booking & form wiring — by 2026-09-12 (gated: provider choice)
-- [ ] Phase 7: Deploy — S3 + CloudFront + domain — by 2026-09-23 (buffer to 09-30)
+- [ ] Phase 1: Scaffold & foundation — by 2026-08-01 (dev spec: rlw101)
+- [ ] Phase 2: Mockup exploration — 6+ style packs + review index — delivered by 2026-08-06 (dev spec: rlw102)
+- [ ] Phase 3: Content pages & information architecture — by 2026-08-22 (dev spec: rlw103)
+- [ ] Phase 4: Booking-provider comparison — by 2026-08-15 (dev spec: rlw104)
+- [ ] Phase 5: Theme promotion — by 2026-09-05 (gated: Kylie's style pick) (dev spec: rlw105)
+- [ ] Phase 6: Booking & form wiring — by 2026-09-12 (gated: provider choice) (dev spec: rlw106)
+- [ ] Phase 7: Deploy — S3 + CloudFront + domain — by 2026-09-23 (buffer to 09-30) (dev spec: rlw107)
 
 ## Phases
 

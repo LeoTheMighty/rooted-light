@@ -219,3 +219,11 @@ loop:
     - 120000
     - 240000
 init_partial: true
+
+# Hand-edit (preserved by /devx-init): projects: runners for engine gate
+# evals. The rooted-light site project itself gets a runner entry in
+# phase 1 of workstream cdea58 (npm test), scoped to the repo root.
+projects:
+  - name: rooted-light-website-evals
+    path: _devx/workstreams/rooted-light-website/evals
+    test: node
