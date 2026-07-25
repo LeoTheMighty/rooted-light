@@ -56,6 +56,40 @@ which variant feels right before falling back.
 
 - [ ] Pick (and register) the domain.
 
+## (from /devx rlw104) Booking provider + payment timing + form provider — decide together with the domain name above
+
+The FR-10 comparison is done:
+`_devx/workstreams/rooted-light-website/decisions/booking-provider-comparison.md`
+(4 providers × fees / PayPal / friction / schedule control, verified
+2026-07-25). This bundles the three open picks into one client touchpoint
+with the **domain-name entry directly above** — one sit-down with Kylie
+settles all four. rlw106 (booking & form wiring) is gated on this.
+
+**1. Booking provider** (full reasoning in the doc):
+- **Calendly Standard, $12/mo** — recommended. Only option with PayPal
+  at booking ("Yes to PayPal?" ✓, "No to Stripe" ✓); lowest friction;
+  Fridays-only trivial; group trainings included. No deposits, no
+  manual approval.
+- Acuity Starter, $20/mo — runner-up if deposits, booking-time intake
+  forms, or approval-style booking matter.
+- Square Appointments Free, $0/mo — fallback iff PayPal is dropped
+  (e.g. pay-in-person chosen). No PayPal ever.
+- SimplePractice — ruled out for reiki booking (Stripe-powered, no
+  pay-at-booking, no online group signup); stays therapy-only.
+
+**2. Payment timing** (same entry as "Reiki payment timing" below —
+answer once): pay-at-booking / pay-in-person / deposit. Note the
+interaction: pay-at-booking → Calendly; deposit → Acuity; pay-in-person
+→ Square Free becomes the cheap option.
+
+**3. Therapy-form provider**: **Web3Forms free** recommended (plain-HTML
+form, $0 at 250 submissions/mo, own thank-you page, email hidden);
+Formspree free as runner-up; mailto rejected (silent failures + address
+scraping). Addendum section of the same doc.
+
+- [ ] Pick booking provider (with payment timing below + domain above).
+- [ ] Confirm form provider for the therapy inquiry form.
+
 ## (from /devx-plan cdea58) Reiki payment timing
 
 Affects the booking-provider choice (phase 4 comparison). Whiteboard

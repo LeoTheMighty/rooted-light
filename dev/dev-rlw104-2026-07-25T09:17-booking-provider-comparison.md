@@ -5,7 +5,7 @@ created: 2026-07-25T09:17:00-06:00
 title: Booking-provider comparison — research doc + decision entry
 from: _devx/workstreams/rooted-light-website/plan.md (phase 4)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-25T1525-16474
 branch: feat/dev-rlw104
 ---
@@ -69,3 +69,4 @@ domain-name question.
   (devx-tours/tours/rlw104); PR opened:
   https://github.com/LeoTheMighty/rooted-light/pull/2
 - 2026-07-25T15:25:49-06:00 — claimed by /devx in session /devx-2026-07-25T1525-16474
+- 2026-07-25T16:40 — merged via PR #2 (squash → 426dae4)

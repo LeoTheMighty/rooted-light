@@ -11,7 +11,10 @@
 
 ## /devx-init deferred work
 
-- [ ] **devx-init: no-remote** — GitHub-side scaffolding deferred — no `origin` remote
+- [x] **devx-init: no-remote** — GitHub-side scaffolding deferred — no `origin` remote
+  Resolved 2026-07-25: user created `LeoTheMighty/rooted-light` (private) and
+  added `origin`; `devx init --resume-gh` replayed queued ops (workflows
+  verified on main; single-branch config — no develop, no protection).
   GitHub-side scaffolding deferred — repo has no `origin` remote.
   
   Once you `git remote add origin <url>` and `git push -u origin main`,
