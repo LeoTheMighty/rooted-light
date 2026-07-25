@@ -44,6 +44,44 @@ If it's pure CLI / API, pick none — devx will skip browser harness setup.
 
 - [ ] Pick a browser harness (or `none`).
 
+## (from /devx-plan cdea58) Domain name for Rooted Light
+
+Needed only by the deploy phase (DNS step) — not urgent, but registrars
+move fast on good names.
+
+**Options:** rootedlight.com / rootedlightllc.com / rootedlighthealing.com
+/ a .co or .care variant if .com is taken.
+**Recommendation:** rootedlight.com if available; otherwise ask Kylie
+which variant feels right before falling back.
+
+- [ ] Pick (and register) the domain.
+
+## (from /devx-plan cdea58) Reiki payment timing
+
+Affects the booking-provider choice (phase 4 comparison). Whiteboard
+left it open: "People pay before/after (to book?)".
+
+**Options:**
+- Pay at booking (fewer no-shows, cleaner provider requirements)
+- Pay in person / after (softer feel, matches "not transactional" tone,
+  loosens provider requirements considerably)
+- Deposit at booking, remainder in person
+
+**Recommendation:** Kylie's call — phase 4's comparison will present
+what each provider supports either way.
+
+- [ ] Kylie decides payment timing for reiki sessions/trainings.
+
+## (from /devx-plan cdea58) Content Kylie needs to supply (tracking)
+
+Not blocking any build phase (placeholders are marked `TODO(kylie)`),
+but blocking launch polish: Experiences copy for About Me,
+Education/Certifications list, photography/imagery, Psychology Today
+profile URL.
+
+- [ ] Gather Kylie's content + photos (can trickle in any time before
+      phase 5).
+
 ## (from devx init) What are you building? <!-- devx:init-defaults:n1 -->
 
 Non-interactive scaffold took a default: placeholder ("Scaffolded non-interactively — describe what this project builds (see INTERVIEW.md).").
