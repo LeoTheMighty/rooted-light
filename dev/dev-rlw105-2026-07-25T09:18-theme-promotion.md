@@ -37,3 +37,7 @@ profile prunes them.
 
 - 2026-07-25T09:18 — emitted by /devx-plan from workstream cdea58
   (rooted-light-website), phase 5. Blocked on Kylie's style pick.
+- 2026-07-25 — gate rewired by the cdea58 revision: direction is chosen
+  (soft lavender dusk, keep simple); the block is now Kylie's/Leo's
+  FINAL refinement pick via rlw108 (INTERVIEW.md "lavender refinement
+  pick" entry). Promotion applies the picked lavender variant.

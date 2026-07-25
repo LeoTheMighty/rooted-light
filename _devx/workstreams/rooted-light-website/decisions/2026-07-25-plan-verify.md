@@ -1,6 +1,6 @@
 ---
 gate: PASS
-status_reason: 'All 6 source IDs fully covered in plan mode.'
+status_reason: 'All 7 source IDs fully covered in plan mode.'
 reviewer: 'devx gate coverage (plan mode)'
 updated: 2026-07-25
 waiver: { active: false, approver: null, reason: null }
@@ -16,12 +16,13 @@ waiver: { active: false, approver: null, reason: null }
 
 | ID | Status | Where covered | Note |
 |---|---|---|---|
-| E-1 | ✅ | Phase 2 | Full, tests-first; Phase 2 runs the exact eval as pass criterion (plus E-5 and a human phone check). Path matches Verified-by. Caveat: evals/ dir is empty today — plan assigns authorship to RED stage before phase 1. |
-| E-2 | ✅ | Phase 3 | Full at Phase 3 (nav completeness); Phase 1 honestly flags E-2 as possibly partial until then. Same RED-stage caveat: eval file not yet on disk. |
-| E-3 | ✅ | Phase 6 | Honest phased split: Phase 3 runs with --allow-placeholder (external href deferred), Phase 6 flagless = full; flag hard-errors on production builds. Table and bodies agree. |
-| E-4 | ✅ | Phase 3 | Full at Phase 3 via data-cta="booking" selector contract (href liveness explicitly E-3's concern); re-run in Phase 6 against live CTA. Notes section justifies the split. |
-| E-5 | ✅ | Phase 2 | Full, tests-first; T2.4 tunes every pack until green; source-token (non-dist) read is a documented exception; Phase 5 re-runs after theme promotion. |
-| E-6 | ✅ | Phase 4 | Full, tests-first; Phase 4 sole pass criterion is this eval (≥3 providers × 4 axes + recommendation) against decisions/booking-provider-comparison.md. |
+| E-1 | ✅ | plan.md Expectation coverage table + phase 2 Verification plan | Green since rlw102. |
+| E-2 | ✅ | plan.md phase 3 Verification plan (revised: eight routes) | Eval revised for 8 routes / 5 named nav sections. |
+| E-3 | ✅ | plan.md phases 3 (--allow-placeholder) and 6 (flagless) Verification plans | Eval revised: modality catalog contract moved to /modalities/ page; therapy requires link to it. |
+| E-4 | ✅ | plan.md phase 3 Verification plan |  |
+| E-5 | ✅ | plan.md phases 2/2b Verification plans (packs join the contrast set) | Green since rlw102; round-2 packs must keep it green. |
+| E-6 | ✅ | plan.md phase 4 Verification plan | Green since rlw104. |
+| E-7 | ✅ | plan.md phase 2b Verification plan (tests-first; authored RED at this revision) | Verified RED for the right reason (1 lavender pack, phase 2b missing). |
 
 ## Extras requiring product approval
 

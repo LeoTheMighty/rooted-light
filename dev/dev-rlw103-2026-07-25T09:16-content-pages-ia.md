@@ -49,3 +49,8 @@ note e.g. 988). Nav complete everywhere.
 
 - 2026-07-25T09:16 — emitted by /devx-plan from workstream cdea58
   (rooted-light-website), phase 3.
+- 2026-07-25 — scope revised by the cdea58 revision (Leo's decision):
+  Modalities promoted to a top-level route — EIGHT routes / six nav
+  sections; the four-field modality catalog moves to /modalities/ (with
+  id anchors, FR-13); therapy page keeps a summary + link. See plan.md
+  phase 3 (revised) + E-2/E-3 (revised).

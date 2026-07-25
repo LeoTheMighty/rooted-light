@@ -13,9 +13,10 @@
 
 - [x] `dev/dev-rlw101-2026-07-25T09:14-scaffold-foundation.md` — Scaffold & foundation — Astro project, content schemas, base layout — PR: https://github.com/LeoTheMighty/rooted-light/pull/1 (merged 23e7031)
 - [x] `dev/dev-rlw102-2026-07-25T09:15-mockup-exploration.md` — Mockup exploration — 6+ style packs + review index for Kylie (depends: rlw101) — PR: https://github.com/LeoTheMighty/rooted-light/pull/3 (merged 478203b)
-- [ ] `dev/dev-rlw103-2026-07-25T09:16-content-pages-ia.md` — Content pages & information architecture — all seven routes full (depends: rlw101)
+- [ ] `dev/dev-rlw108-2026-07-25T17:45-lavender-refinement-round.md` — Lavender refinement round — ≥5 simple variants + Modalities section in all mockups (depends: rlw102; added 2026-07-25 revision)
+- [ ] `dev/dev-rlw103-2026-07-25T09:16-content-pages-ia.md` — Content pages & information architecture — all EIGHT routes full incl. /modalities/ (depends: rlw101; scope revised 2026-07-25)
 - [x] `dev/dev-rlw104-2026-07-25T09:17-booking-provider-comparison.md` — Booking-provider comparison — research doc + decision entry (parallel-safe) — PR: https://github.com/LeoTheMighty/rooted-light/pull/2 (merged 426dae4)
-- [-] `dev/dev-rlw105-2026-07-25T09:18-theme-promotion.md` — Theme promotion — apply Kylie's chosen style pack site-wide (blocked: Kylie's pick via rlw102)
+- [-] `dev/dev-rlw105-2026-07-25T09:18-theme-promotion.md` — Theme promotion — apply the chosen lavender variant site-wide (blocked: refinement pick via rlw108; rewired 2026-07-25)
 - [-] `dev/dev-rlw106-2026-07-25T09:19-booking-form-wiring.md` — Booking & form wiring — live provider integration (blocked: rlw103 + rlw104 decisions)
 - [-] `dev/dev-rlw107-2026-07-25T09:20-deploy-s3-cloudfront.md` — Deploy — S3 + CloudFront + domain, production build profile (blocked: rlw105, rlw106)
 - [ ] `dev/dev-rlwret-2026-07-25T09:15-retro-rooted-light-website.md` — Retro + LEARN.md updates (interim retro discipline). Status: ready. Blocked-by: rlw101, rlw102, rlw103, rlw104, rlw105, rlw106, rlw107.

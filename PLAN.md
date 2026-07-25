@@ -7,5 +7,5 @@
 > once this file holds three or more items.
 <!-- devx-empty-state-end -->
 
-- [x] `plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md` — Rooted Light Website (PRD → Design → Plan → RED all passed 2026-07-25; 7 dev specs rlw101–rlw107 + rlwret emitted to DEV.md)
+- [/] `plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md` — Rooted Light Website (PRD → Design → Plan → RED passed 2026-07-25; revised 2026-07-25: lavender pick + Modalities top-level + phase 2b refinement round; 8 dev specs rlw101–rlw108 + rlwret; checkbox reconciled to spec status in-progress — mid-flight until phases ship)
 

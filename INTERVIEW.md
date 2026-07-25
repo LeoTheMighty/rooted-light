@@ -118,7 +118,19 @@ forest-deep — or a blend of two (one pack's palette + the other's type).
 **Recommendation:** none — this is Kylie's call; the index asks her to
 reply with a favorite or a blend of two.
 
-- [ ] Record Kylie's pick (or blend) here once she replies.
+- [x] **ANSWERED 2026-07-25 (Leo): direction 3 — soft lavender dusk.**
+  Constraints: stay with lavender, keep it simple. Plus an IA change:
+  "Modalities" becomes a top-level linkable section. A lavender
+  refinement round (rlw108) follows; the FINAL variant pick is the new
+  entry below. rlw105 now gates on that refinement pick.
+
+## (from /devx rlw108) Kylie's lavender refinement pick
+
+Round 2: simple lavender variants (all including the new top-level
+Modalities section) behind /mockups/. rlw105 (theme promotion) is gated
+on this answer.
+
+- [ ] Record the final lavender variant (or tweak request) here.
 
 ## (from /devx-plan cdea58) Content Kylie needs to supply (tracking)
 

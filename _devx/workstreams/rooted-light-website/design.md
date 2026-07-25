@@ -47,6 +47,11 @@
   meaningless → each style pack must differ in layout + typography +
   palette treatment, enforced mechanically → proven by **E-1**
   (distinct-identity threshold).
+- Refinement round inverts the risk: variants must stay *within*
+  lavender yet remain distinguishable, and "keep it simple" must not
+  erode into sameness → distinct (accent, heading-font) identities still
+  enforced across the whole pack set, Modalities nav presence checked on
+  every mockup → proven by **E-7**.
 - Soft palette fails accessibility → token-level contrast validation in
   the eval suite → proven by **E-5**.
 - Booking hand-off buried in prose → click-depth check from Home →
@@ -92,9 +97,12 @@
 
 ## Assumptions
 
-- Kylie will pick one direction (or a blend of two) from the mockup set;
-  a full second exploration round is not planned. (Breaks → revise G-1
-  timeline.)
+- ~~Kylie will pick one direction (or a blend of two) from the mockup
+  set; a full second exploration round is not planned.~~ **Broke
+  2026-07-25 — by decision, not by slip**: the pick landed early (soft
+  lavender dusk, G-1 met 2026-07-25) and Leo ordered a *scoped*
+  refinement round — lavender-only, simple, not a re-exploration (G-6,
+  FR-14). Theme promotion now gates on the refinement pick.
 - SimplePractice remains the therapy back-office; Psychology Today
   profile exists and is linkable. (Breaks → FR-7 revision.)
 - Reiki booking provider can either embed or link out from a static page
@@ -162,12 +170,20 @@ src/
     index.astro                 # home (final theme)
     about-me.astro
     about-you.astro
+    modalities.astro            # top-level modality catalog (added
+                                #   2026-07-25) — renders the modalities
+                                #   collection as the <details> accordion;
+                                #   each modality under a stable id anchor
+                                #   so Therapy/About You deep-link it
     resources/…                 # resources index + detail pages
     offerings/index.astro
     offerings/reiki.astro
-    offerings/therapy.astro
-    mockups/index.astro         # review index for Kylie
-    mockups/<pack>.astro        # one home-page mockup per style pack
+    offerings/therapy.astro     # short modality summary → /modalities/;
+                                #   full catalog no longer lives here
+    mockups/index.astro         # review index for Kylie (round 2 listed
+                                #   first, round 1 kept below)
+    mockups/<pack>.astro        # one home-page mockup per style pack;
+                                #   round-2 refinements: pack-lavender-*
 public/               # images (placeholders until Kylie's photos)
 ```
 
@@ -218,6 +234,12 @@ routes are excluded from the production deploy artifact at the deploy
 phase, so the public site never ships the review index.)
 
 ## Resolved design questions
+
+- Visual direction? → **soft lavender dusk** (Leo, 2026-07-25), kept
+  simple; refinement round narrows within it (FR-14).
+- Where does the modality catalog live? → **top-level `/modalities/`
+  page** with per-modality anchors (Leo, 2026-07-25); Therapy keeps a
+  short summary + link. Nav becomes six sections / eight routes.
 
 - Static site generator? → **Astro** (see Trade-offs; decided here).
 - Mockups as designs-in-code vs design-tool files? → **Built HTML style

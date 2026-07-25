@@ -48,8 +48,10 @@ E-1..E-6 green under their respective profiles.
 - No online therapy booking anywhere on the site (inquiry form only).
 - No CMS, blog, client portal, or user accounts.
 - No final copywriting or photography (placeholders marked `TODO(kylie)`).
-- No second full mockup round (blend-of-two refinement is in scope of
-  theme promotion, not a new exploration).
+- No second full mockup *exploration* round. (Revised 2026-07-25: a
+  **scoped lavender refinement round** (phase 2b / FR-14) IS in scope —
+  variants within the chosen direction, not a re-exploration. Blend
+  handling stays in theme promotion.)
 - No analytics beyond, at most, a privacy-light pageview counter (needs
   product approval — flagged extra from design verify).
 
@@ -63,6 +65,7 @@ E-1..E-6 green under their respective profiles.
 | E-4 | P1 | 3 | tests-first | _devx/workstreams/rooted-light-website/evals/E-4_click-depth.mjs | full |
 | E-5 | P2 | 2 | tests-first | _devx/workstreams/rooted-light-website/evals/E-5_contrast.mjs | full |
 | E-6 | P2 | 4 | tests-first | _devx/workstreams/rooted-light-website/evals/E-6_provider-comparison.mjs | full |
+| E-7 | P0 | 2b | tests-first | _devx/workstreams/rooted-light-website/evals/E-7_lavender-refinement.mjs | full |
 
 Notes: E-4's threshold is click depth to the booking CTA element
 (selector contract `data-cta="booking"`), independent of href liveness —
@@ -75,11 +78,12 @@ production build), phase 6 and the deploy workflow run it flagless.
 Target dates track G-1 (mockups to Kylie 2026-08-08) and G-3 (launch
 2026-09-30); phases 3–4 run during Kylie's review window.
 
-- [ ] Phase 1: Scaffold & foundation — by 2026-08-01 (dev spec: rlw101)
-- [ ] Phase 2: Mockup exploration — 6+ style packs + review index — delivered by 2026-08-06 (dev spec: rlw102)
-- [ ] Phase 3: Content pages & information architecture — by 2026-08-22 (dev spec: rlw103)
-- [ ] Phase 4: Booking-provider comparison — by 2026-08-15 (dev spec: rlw104)
-- [ ] Phase 5: Theme promotion — by 2026-09-05 (gated: Kylie's style pick) (dev spec: rlw105)
+- [x] Phase 1: Scaffold & foundation — by 2026-08-01 (dev spec: rlw101, merged 2026-07-25)
+- [x] Phase 2: Mockup exploration — 6+ style packs + review index — delivered by 2026-08-06 (dev spec: rlw102, merged 2026-07-25; **picked: soft lavender dusk**)
+- [ ] Phase 2b: Lavender refinement round — ≥5 simple lavender variants + Modalities section in all mockups — by 2026-08-13 (dev spec: rlw108) *(added 2026-07-25)*
+- [ ] Phase 3: Content pages & information architecture — all EIGHT routes incl. /modalities/ — by 2026-08-22 (dev spec: rlw103)
+- [x] Phase 4: Booking-provider comparison — by 2026-08-15 (dev spec: rlw104, merged 2026-07-25)
+- [ ] Phase 5: Theme promotion — by 2026-09-05 (gated: Kylie's **refinement** pick via rlw108) (dev spec: rlw105)
 - [ ] Phase 6: Booking & form wiring — by 2026-09-12 (gated: provider choice) (dev spec: rlw106)
 - [ ] Phase 7: Deploy — S3 + CloudFront + domain — by 2026-09-23 (buffer to 09-30) (dev spec: rlw107)
 
@@ -211,21 +215,78 @@ light content wells. Every pack must pass token contrast (E-5).
       photos, Psychology Today URL — see INTERVIEW.md); record her
       style pick in INTERVIEW.md" — files: `MANUAL.md`
 
-### 3. Phase: Content pages & information architecture
+### 2b. Phase: Lavender refinement round (added 2026-07-25)
 
-**Overview**: Flesh out all seven routes from stubs to full structure:
-About Me (three subsections), About You (who-benefits + modality map),
-Resources (explainer collection + ICRT), Offerings landing, Reiki page
-(what it is, session shape, training section, booking CTA — placeholder
-href until phase 6), Therapy page (modality `<details>` accordion with
-the four required fields per modality, inquiry form markup posting to
-the `contact.form_action` seam, small Psychology Today link, and a
-crisis-resources note — e.g. 988 — per the PRD anti-persona). Nav wired
-everywhere.
+**Overview**: Leo picked soft lavender dusk with "keep it simple" and a
+new top-level Modalities section. Produce ≥ 5 additional lavender-led,
+deliberately simple home-page variants (distinct identities within the
+family: shift temperature, depth, and type while staying lavender-led),
+add the Modalities section to the shared mockup content + nav so EVERY
+mockup (both rounds) carries it, and restructure the review index with
+round 2 first. Same share-channel flow as phase 2.
 
 **Files**:
-- `src/pages/{about-me,about-you}.astro`, `src/pages/resources/**`,
-  `src/pages/offerings/**` — full page structure.
+- `src/styles/tokens/pack-lavender-*.css` — ≥ 5 new refinement packs
+  (original `pack-lavender-dusk.css` stays; identities distinct across
+  the entire pack set).
+- `src/layouts/home/` — simple layout variants for the refinements
+  (lean on minimal structures); Modalities section added to
+  `_content.ts` + all existing round-1 layouts.
+- `src/pages/mockups/` — refinement routes; index restructured into
+  rounds.
+- `MANUAL.md` / `INTERVIEW.md` — round-2 delivery + refinement-pick
+  entries.
+
+**Context**:
+- E-7 distinctness: no two packs in the whole set share
+  (--color-accent, --font-heading); every dist/mockups page must carry
+  a "Modalities" nav entry.
+- "Simple" is a design constraint, not a mechanical one — refinement
+  layouts favor fewer decorations, calmer sections.
+- E-1/E-5 must stay green (round-1 packs untouched; new packs join the
+  contrast set).
+
+**Verification plan**:
+- Type: tests-first
+- Success criteria:
+  - `node …/evals/E-7_lavender-refinement.mjs` passes (authored RED at
+    this revision, before phase 2b executes).
+  - E-1, E-5 still green.
+  - Human: Leo forwards the round-2 package; refinement pick recorded
+    in INTERVIEW.md.
+
+**Tasks**:
+- [ ] T2b.1 Author ≥ 5 lavender refinement packs — files:
+      `src/styles/tokens/`
+- [ ] T2b.2 Add Modalities to shared mockup content/nav + all layouts —
+      files: `src/layouts/home/`
+- [ ] T2b.3 Simple refinement layouts + routes — files:
+      `src/layouts/home/`, `src/pages/mockups/`
+- [ ] T2b.4 Index restructure (round 2 first) + package + MANUAL/
+      INTERVIEW entries — files: `src/pages/mockups/index.astro`,
+      `MANUAL.md`, `INTERVIEW.md`
+
+### 3. Phase: Content pages & information architecture
+
+**Overview** *(revised 2026-07-25: Modalities is now a top-level route —
+eight routes, six nav sections)*: Flesh out all eight routes from stubs
+to full structure:
+About Me (three subsections), About You (who-benefits + modality map
+deep-linking /modalities/ anchors), **Modalities page** (top-level
+`<details>` accordion: four required fields per modality, stable id
+anchors — FR-13), Resources (explainer collection + ICRT), Offerings
+landing, Reiki page (what it is, session shape, training section,
+booking CTA — placeholder href until phase 6), Therapy page (short
+modality summary linking to /modalities/, inquiry form markup posting
+to the `contact.form_action` seam, small Psychology Today link, and a
+crisis-resources note — e.g. 988 — per the PRD anti-persona). Nav wired
+everywhere (six sections).
+
+**Files**:
+- `src/pages/{about-me,about-you}.astro`, `src/pages/modalities.astro`,
+  `src/pages/resources/**`, `src/pages/offerings/**` — full page
+  structure.
+- `src/content/site.json` — nav gains the Modalities entry.
 - `src/components/` — ModalityAccordion, BookingCTA, InquiryForm,
   ResourceCard. BookingCTA renders `data-cta="booking"` — the stable
   selector E-3/E-4 target.
@@ -255,11 +316,15 @@ everywhere.
 - [ ] T3.3 Reiki page with training section + BookingCTA
       (`data-cta="booking"`) — files:
       `src/pages/offerings/reiki.astro`, `src/components/`
-- [ ] T3.4 Therapy page: accordion, form, PT link, crisis-resources
-      note — files: `src/pages/offerings/therapy.astro`,
+- [ ] T3.4 Modalities page: top-level accordion, 4 fields per modality,
+      stable anchors — files: `src/pages/modalities.astro`,
       `src/components/`
-- [ ] T3.5 Nav completeness + click-depth pass — files:
-      `src/layouts/Page.astro`
+- [ ] T3.5 Therapy page: modality summary → /modalities/ link, form,
+      PT link, crisis-resources note — files:
+      `src/pages/offerings/therapy.astro`, `src/components/`
+- [ ] T3.6 Nav completeness (six sections incl. Modalities) +
+      click-depth pass — files: `src/layouts/Page.astro`,
+      `src/content/site.json`
 
 ### 4. Phase: Booking-provider comparison
 

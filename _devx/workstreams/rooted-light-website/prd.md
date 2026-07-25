@@ -23,6 +23,13 @@ The immediate need is twofold: (1) an overall build plan for the site, and
 (2) a set of distinct home-page design mockups Kylie can review to pick a
 visual direction before full content build-out.
 
+**Decision update (2026-07-25, Leo):** the round-1 mockup set (rlw102)
+was reviewed and **soft lavender dusk** was picked, with two riders:
+(a) *keep it simple* — the refinement should lean minimal, and (b) the
+information architecture gains a top-level, linkable **Modalities**
+section (previously the modality catalog lived inside the Therapy
+page). A lavender-only refinement round follows before theme promotion.
+
 ## Goals
 
 <!-- User goals in prose; business/project goals MUST be numeric + dated so
@@ -40,6 +47,10 @@ visual direction before full content build-out.
   Leo to maintain.
 - **G-5**: A reiki visitor reaches the external booking/payment flow in
   **≤ 3 clicks** from the home page.
+- **G-6**: Kylie confirms the final visual direction from **≥ 5 simple,
+  lavender-led refinement mockups** (every mockup carrying the new
+  top-level Modalities section) by **2026-08-13**. (G-1 was met
+  2026-07-25 — direction picked: soft lavender dusk.)
 
 ## Non-goals
 
@@ -92,8 +103,9 @@ visual direction before full content build-out.
 ## Capabilities
 
 - **CAP-1**: Static multi-page site with the agreed information
-  architecture: Home, About Me, About You, Resources, Offerings (Reiki &
-  Reiki Training; Therapy).
+  architecture: Home, About Me, About You, **Modalities**, Resources,
+  Offerings (Reiki & Reiki Training; Therapy). (Modalities promoted to
+  top level 2026-07-25.)
 - **CAP-2**: External booking + payment integration point for reiki
   (embed or link-out; provider selected by a comparison in the design
   stage — Calendly and SimplePractice-native are the seed candidates).
@@ -103,7 +115,9 @@ visual direction before full content build-out.
   modality has a description, what it is, who benefits, resources to dig
   deeper, and Kylie's certifications — rendered as a clean
   accordion/dropdown if it stays clean, otherwise a simple list of
-  sections.
+  sections. Lives at the top-level **/modalities/** page with a stable
+  per-modality anchor so any page (Therapy, About You) can deep-link a
+  modality.
 - **CAP-5**: Design-exploration pipeline: multiple visually distinct
   home-page mockups built from one shared content source, packaged into a
   single index Kylie can browse and compare.
@@ -114,10 +128,12 @@ visual direction before full content build-out.
 
 ### FR-1: Information architecture
 
-The site SHALL have five top-level sections routed as pages: Home, About
-Me, About You, Resources, Offerings — with Offerings split into
-Reiki & Reiki Training and Therapy subpages. Navigation SHALL reach every
-section from every page.
+The site SHALL have six top-level sections routed as pages: Home, About
+Me, About You, Modalities, Resources, Offerings — with Offerings split
+into Reiki & Reiki Training and Therapy subpages (eight routes total).
+Navigation SHALL reach every section from every page. (Revised
+2026-07-25: Modalities promoted from a Therapy-page subsection to a
+top-level, linkable section.)
 
 ### FR-2: Home page
 
@@ -152,16 +168,20 @@ Fridays"). Reaching this CTA from Home SHALL take ≤ 3 clicks.
 
 ### FR-7: Therapy offering page
 
-The Therapy page SHALL list Kylie's modalities (accordion/dropdown if
-clean), an email inquiry form as the only contact path (no booking
-widget), and a small Psychology Today link. Each modality entry SHALL
-carry: description, who benefits, resources, and Kylie's certifications.
+The Therapy page SHALL present an email inquiry form as the only contact
+path (no booking widget), a small Psychology Today link, and a short
+modality summary that links to the top-level Modalities page for the
+full catalog. (Revised 2026-07-25: the full per-modality catalog moved
+to FR-13; the four-field content contract lives there now.)
 
 ### FR-8: Visual language
 
 All designs SHALL use the agreed direction: soft earthy palette (sage
 green, lavender, tan, brown), bright and warm but not glamorous or
 kitschy; typography and imagery that read genuine, caring, human.
+(Narrowed 2026-07-25: **lavender-led** per the chosen soft-lavender-dusk
+direction, kept deliberately simple; sage/tan/brown remain as supporting
+accents.)
 
 ### FR-9: Home-page mockup set
 
@@ -189,6 +209,24 @@ Pages SHALL be usable on mobile widths (≥ 360px) and meet basic
 accessibility: semantic headings, alt text, WCAG AA contrast within the
 soft palette.
 
+### FR-13: Modalities page (added 2026-07-25)
+
+The Modalities page SHALL render the modality catalog at the top level:
+each modality with description, who benefits, resources, and Kylie's
+certifications (the CAP-4 contract), each modality addressable via a
+stable anchor so other pages can deep-link it. Rendered as the clean
+`<details>` accordion (or flat sections if cleaner).
+
+### FR-14: Lavender refinement round (added 2026-07-25)
+
+The design exploration SHALL produce ≥ 5 additional home-page mockups
+refining the chosen soft-lavender-dusk direction: lavender-led palettes,
+deliberately simple layouts, rendered from the same content source, each
+with a distinct style identity, and — together with the round-1 mockups —
+every mockup SHALL include the new top-level Modalities section in its
+navigation. Packaged behind the same review index (round 2 listed
+first).
+
 ## Evals seed
 
 <!-- Raw material for expectations.md — behaviors worth pinning, thresholds
@@ -202,6 +240,11 @@ soft palette.
   booking embed → DOM assertions on built HTML.
 - Click depth Home → booking CTA ≤ 3 → link-graph check.
 - Contrast of palette tokens meets WCAG AA → token-level contrast check.
+- Lavender refinement round: ≥ 5 lavender-led packs with distinct
+  identities; every mockup page (both rounds) carries "Modalities" in
+  nav → runnable check on packs + build output.
+- Full-site build now = eight routes / six top-level nav sections
+  (Modalities added) → E-2 revision.
 
 ## Open questions
 

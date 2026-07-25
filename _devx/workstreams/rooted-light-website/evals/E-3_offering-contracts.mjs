@@ -1,9 +1,12 @@
 #!/usr/bin/env node
-// E-3: Offering-page contracts. Covers UC-1, UC-3, CAP-2/3/4, FR-6, FR-7.
+// E-3: Offering-page contracts. Covers UC-1, UC-3, CAP-2/3/4, FR-6,
+// FR-7, FR-13.
 // Reiki page: ≥1 booking CTA ([data-cta="booking"]) with an off-site href
 // (or provider embed). Therapy page: form present, psychologytoday.com
-// link present, ZERO booking affordances, every modality entry
-// ([data-modality]) carries the 4 required fields ([data-field=...]).
+// link present, ≥1 link to /modalities/, ZERO booking affordances.
+// Modalities page (top-level, revised 2026-07-25 via devx revise
+// cdea58): every modality entry ([data-modality]) carries the 4
+// required fields ([data-field=...]) and an id anchor.
 // --allow-placeholder: skips the external-href requirement (phase 3 use
 // only) and HARD-ERRORS against a production build (no dist/mockups/).
 import { readFileSync, existsSync } from "node:fs";
@@ -52,15 +55,22 @@ if (!/psychologytoday\.com/.test(therapy)) fail("therapy page has no psychologyt
 if (/data-cta="booking"/.test(therapy) || /<iframe[^>]*(calendly|acuity|squareup)/i.test(therapy))
   fail("therapy page contains a booking affordance — contract is inquiry-only");
 
-const modalities = therapy.split(/data-modality/g).length - 1;
+if (!/href="[^"]*\/modalities\/?[^"]*"/.test(therapy))
+  fail("therapy page has no link to /modalities/ (catalog moved top-level, FR-7/FR-13)");
+
+// --- Modalities page (top-level catalog) ---
+const modalitiesPage = page("modalities");
+const modalities = modalitiesPage.split(/data-modality/g).length - 1;
 if (modalities < 1)
-  fail("therapy page lists no [data-modality] entries (modality catalog missing)");
+  fail("modalities page lists no [data-modality] entries (catalog missing, FR-13)");
 const REQUIRED = ["what-it-is", "who-benefits", "resources", "certifications"];
-const blocks = therapy.split(/(?=<[^>]*data-modality)/g).filter((b) => /data-modality/.test(b));
+const blocks = modalitiesPage.split(/(?=<[^>]*data-modality)/g).filter((b) => /data-modality/.test(b));
 for (const [i, b] of blocks.entries()) {
   const missing = REQUIRED.filter((f) => !b.includes(`data-field="${f}"`));
   if (missing.length)
     fail(`modality entry #${i + 1} missing field(s): ${missing.join(", ")}`);
+  if (!/<[^>]*data-modality[^>]*\sid="[^"]+"/.test(b))
+    fail(`modality entry #${i + 1} has no id anchor (deep-link contract, FR-13)`);
 }
 
-console.log(`E-3 PASS: reiki CTA ${external || embed ? "live" : "placeholder-tolerated"}, therapy contract clean (${modalities} modalities)`);
+console.log(`E-3 PASS: reiki CTA ${external || embed ? "live" : "placeholder-tolerated"}, therapy contract clean, modalities catalog clean (${modalities} modalities)`);
