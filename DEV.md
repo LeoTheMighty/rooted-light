@@ -11,7 +11,7 @@
 
 ### Epic: rooted-light-website (plan cdea58)
 
-- [/] `dev/dev-rlw101-2026-07-25T09:14-scaffold-foundation.md` — Scaffold & foundation — Astro project, content schemas, base layout
+- [x] `dev/dev-rlw101-2026-07-25T09:14-scaffold-foundation.md` — Scaffold & foundation — Astro project, content schemas, base layout — PR: https://github.com/LeoTheMighty/rooted-light/pull/1 (merged 23e7031)
 - [ ] `dev/dev-rlw102-2026-07-25T09:15-mockup-exploration.md` — Mockup exploration — 6+ style packs + review index for Kylie (depends: rlw101)
 - [ ] `dev/dev-rlw103-2026-07-25T09:16-content-pages-ia.md` — Content pages & information architecture — all seven routes full (depends: rlw101)
 - [/] `dev/dev-rlw104-2026-07-25T09:17-booking-provider-comparison.md` — Booking-provider comparison — research doc + decision entry (parallel-safe)

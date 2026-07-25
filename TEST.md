@@ -7,3 +7,5 @@
 > header auto-deletes once this file holds three or more items.
 <!-- devx-empty-state-end -->
 
+- [ ] `test/test-rlwt101-2026-07-25T16:05-astro-check-lint-gate.md` — Wire astro check (+ a real test runner) into the lint/test gates (filed from rlw101; natural trigger: phase 3 components)
+
