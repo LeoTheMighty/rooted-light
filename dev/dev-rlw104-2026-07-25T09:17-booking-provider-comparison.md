@@ -5,8 +5,8 @@ created: 2026-07-25T09:17:00-06:00
 title: Booking-provider comparison — research doc + decision entry
 from: _devx/workstreams/rooted-light-website/plan.md (phase 4)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-25T1525-16474
 branch: feat/dev-rlw104
 ---
 
@@ -46,3 +46,4 @@ domain-name question.
 
 - 2026-07-25T09:17 — emitted by /devx-plan from workstream cdea58
   (rooted-light-website), phase 4.
+- 2026-07-25T15:25:49-06:00 — claimed by /devx in session /devx-2026-07-25T1525-16474
