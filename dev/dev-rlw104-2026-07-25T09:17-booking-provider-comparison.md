@@ -65,4 +65,7 @@ domain-name question.
   intersects touched paths (doc + spec only; evals runner path untouched);
   spec AC gate E-6 run directly: PASS. Coverage: n/a (no code), YOLO
   informational.
+- 2026-07-25T16:35 — phase 7: pushed feat/dev-rlw104; tour published
+  (devx-tours/tours/rlw104); PR opened:
+  https://github.com/LeoTheMighty/rooted-light/pull/2
 - 2026-07-25T15:25:49-06:00 — claimed by /devx in session /devx-2026-07-25T1525-16474
