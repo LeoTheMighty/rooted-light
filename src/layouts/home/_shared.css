@@ -63,8 +63,9 @@ main {
   opacity: 0.75;
   padding: 0.4rem 1rem 0.8rem;
   /* the sticky review-bar sits below; keep the note visible above it
-     when the booking CTA anchors here */
-  scroll-margin-bottom: 3rem;
+     when the booking CTA anchors here — 6rem clears the bar plus a
+     phone-width two-line wrap of the note itself */
+  scroll-margin-bottom: 6rem;
 }
 
 .review-bar {

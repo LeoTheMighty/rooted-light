@@ -47,9 +47,15 @@ const cards = directions.map((d, idx) => {
 
 const rounds = [
   {
+    key: 3,
+    title: "Round 3 — grounded mist, multi-page (start here)",
+    note: "Lavender mist won the vibe — these keep its type and palette, drop the gradient, and split into real pages (Home · Offerings · Modalities · About). What differs is the navigation, including where Modalities lives. The offerings are the main buttons now. Reply with the number that feels right (or a tweak).",
+    cards: cards.filter((c) => c.round === 3),
+  },
+  {
     key: 2,
-    title: "Round 2 — lavender refinements (start here)",
-    note: "Five takes on the dusk feel — same simple structure and lavender gradient, different temperature and type. All carry the new Modalities section. Reply with the number that feels right (or a tweak).",
+    title: "Round 2 — lavender refinements (for reference)",
+    note: "Five takes on the dusk feel — same simple structure and lavender gradient, different temperature and type. Lavender mist (no. 1) was the closest.",
     cards: cards.filter((c) => c.round === 2),
   },
   {
@@ -191,11 +197,12 @@ for (const r of rounds) {
   </head>
   <body>
     <header class="intro">
-      <h1>{site.name} — lavender refinements</h1>
+      <h1>{site.name} — grounded mist</h1>
       <p>
-        The direction is chosen — soft lavender dusk, kept simple. Now
-        the final look: five lavender variants up top, the original
-        seven below for reference. Best browsed on your phone.
+        Round 3: lavender mist's type and palette, no more gradient,
+        and real pages instead of one long scroll. The four up top
+        differ in how the navigation works — tap through the pages on
+        each one. Earlier rounds follow for reference.
       </p>
       <p class="how">
         A note on type: the fonts are your device’s own, so they render

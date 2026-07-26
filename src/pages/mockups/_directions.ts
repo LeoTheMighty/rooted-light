@@ -1,14 +1,19 @@
 // Registry of the style directions. Single source for the review index
 // and each mockup page's title/blurb; slugs must match both the route
 // filename and the token pack basename (E-1/E-7 link by slug).
-// Round 2 (lavender refinements, 2026-07-25) is listed first — the
-// direction is picked; these choose the final variant.
+// Round 3 (grounded mist, 2026-07-26) entries sit at the END of this
+// array so rounds 1–2 keep their numbers ("number N" replies stay
+// stable), but the review index displays round 3 first. Round-3
+// variants all share pack-lavender-mist — the palette is picked; the
+// options are navigation treatments (`nav`), and each is multi-page.
 export interface Direction {
   slug: string;
   pack: string;
   title: string;
   blurb: string;
-  round: 1 | 2;
+  round: 1 | 2 | 3;
+  /** round-3 only: which navigation treatment the variant demonstrates */
+  nav?: "classic" | "centered" | "rail" | "compact";
 }
 
 export const directions: Direction[] = [
@@ -107,6 +112,42 @@ export const directions: Direction[] = [
     blurb:
       "Deep green grounding, light content wells, warm gold accent. The darker option.",
     round: 1,
+  },
+  {
+    slug: "mist-classic",
+    pack: "pack-lavender-mist",
+    title: "Grounded classic",
+    blurb:
+      "Mist's type and palette, gradient gone — flat color and hairlines. A classic top bar; Modalities opens as a dropdown.",
+    round: 3,
+    nav: "classic",
+  },
+  {
+    slug: "mist-centered",
+    pack: "pack-lavender-mist",
+    title: "Grounded centered",
+    blurb:
+      "Centered brand over a centered menu. Tapping Modalities unfolds it in place, gently pushing the page down.",
+    round: 3,
+    nav: "centered",
+  },
+  {
+    slug: "mist-rail",
+    pack: "pack-lavender-mist",
+    title: "Grounded rail",
+    blurb:
+      "A side rail holds the whole site in one glance — modalities listed in the open, no dropdown at all.",
+    round: 3,
+    nav: "rail",
+  },
+  {
+    slug: "mist-compact",
+    pack: "pack-lavender-mist",
+    title: "Grounded compact",
+    blurb:
+      "The quietest bar — one Menu button holds everything, with Modalities as its own labeled group inside.",
+    round: 3,
+    nav: "compact",
   },
 ];
 

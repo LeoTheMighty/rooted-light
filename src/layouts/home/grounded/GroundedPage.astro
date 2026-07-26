@@ -1,0 +1,281 @@
+---
+// Grounded mist (round 3, rlw110): the lavender-mist look with the
+// gradient removed — flat color, hairlines, solid tint bands — split
+// into real pages (Home / Offerings / Modalities / About). One skeleton
+// renders all four nav variants; `variant.nav` picks the treatment.
+// Every page is self-contained (inline CSS) and every internal link is
+// an explicit ./…/index.html so the zip works over file:// at any depth.
+import packCss from "../../../styles/tokens/pack-lavender-mist.css?raw";
+import shared from "../_shared.css?raw";
+import layoutCss from "./Grounded.css?raw";
+import { home, pages } from "../_content";
+import type { Direction } from "../../../pages/mockups/_directions";
+
+interface Props {
+  variant: Direction;
+  page: "home" | "offerings" | "modalities" | "about";
+}
+const { variant, page } = Astro.props;
+if (!variant.nav) throw new Error(`${variant.slug}: round-3 variant missing nav kind`);
+
+const depth = page === "home" ? 0 : 1;
+const base = depth ? "../" : "./";
+const href = {
+  home: depth ? "../index.html" : "./index.html",
+  offerings: `${base}offerings/index.html`,
+  modalities: `${base}modalities/index.html`,
+  about: `${base}about/index.html`,
+};
+const backHref = depth ? "../../index.html" : "../index.html";
+const pageTitle =
+  page === "home" ? "Home" : pages[page as keyof typeof pages].title;
+const docTitle = `${variant.title}${page === "home" ? "" : ` — ${pageTitle}`}`;
+const cur = (k: string) => (k === page ? "page" : undefined);
+
+// The pack still carries the dusk-skeleton --wash-* gradient tokens for
+// the round-2 mist page; strip them here so a grounded page can never
+// grow a gradient by accident.
+const flatPack = packCss
+  .split("\n")
+  .filter((l) => !l.includes("--wash-"))
+  .join("\n");
+const css = `${flatPack}\n${shared}\n${layoutCss}`;
+// Same guard as MockupShell: a literal "</style" in the CSS would
+// terminate the inline style element — fail the build instead.
+if (css.includes("</style"))
+  throw new Error(`${docTitle}: injected CSS contains "</style"`);
+
+const modalityLinks = pages.modalities.items.map((m) => ({
+  label: m.title,
+  href: `${href.modalities}#${m.id}`,
+}));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{`${docTitle} · ${home.name} mockup`}</title>
+    <meta name="description" content={variant.blurb} />
+    <style is:inline set:html={css}></style>
+  </head>
+  <body class={`v-${variant.nav}`}>
+    {
+      variant.nav === "classic" && (
+        <header class="bar">
+          <a class="brand" href={href.home}>{home.name}</a>
+          <nav class="site-nav" aria-label="Main">
+            <a href={href.home} aria-current={cur("home")}>Home</a>
+            <a href={href.offerings} aria-current={cur("offerings")}>Offerings</a>
+            <details class="dd">
+              <summary class={page === "modalities" ? "is-here" : undefined}>Modalities</summary>
+              <div class="panel">
+                {modalityLinks.map((m) => <a href={m.href}>{m.label}</a>)}
+                <a class="panel-all" href={href.modalities} aria-current={cur("modalities")}>All modalities →</a>
+              </div>
+            </details>
+            <a href={href.about} aria-current={cur("about")}>About</a>
+          </nav>
+        </header>
+      )
+    }
+    {
+      variant.nav === "centered" && (
+        <header class="masthead">
+          <a class="brand" href={href.home}>{home.name}</a>
+          <nav class="site-nav" aria-label="Main">
+            <a href={href.home} aria-current={cur("home")}>Home</a>
+            <a href={href.offerings} aria-current={cur("offerings")}>Offerings</a>
+            <details class="dd">
+              <summary class={page === "modalities" ? "is-here" : undefined}>Modalities</summary>
+              <div class="panel">
+                {modalityLinks.map((m) => <a href={m.href}>{m.label}</a>)}
+                <a class="panel-all" href={href.modalities} aria-current={cur("modalities")}>All modalities →</a>
+              </div>
+            </details>
+            <a href={href.about} aria-current={cur("about")}>About</a>
+          </nav>
+        </header>
+      )
+    }
+    {
+      variant.nav === "rail" && (
+        <header class="rail">
+          <a class="brand" href={href.home}>{home.name}</a>
+          <nav aria-label="Main">
+            <a href={href.home} aria-current={cur("home")}>Home</a>
+            <a href={href.offerings} aria-current={cur("offerings")}>Offerings</a>
+            <a class="rail-label" href={href.modalities} aria-current={cur("modalities")}>Modalities</a>
+            <div class="rail-group">
+              {modalityLinks.map((m) => <a href={m.href}>{m.label}</a>)}
+            </div>
+            <a href={href.about} aria-current={cur("about")}>About</a>
+          </nav>
+        </header>
+      )
+    }
+    {
+      variant.nav === "compact" && (
+        <header class="bar">
+          <a class="brand" href={href.home}>{home.name}</a>
+          <details class="dd menu">
+            <summary>Menu</summary>
+            <div class="panel">
+              <a href={href.home} aria-current={cur("home")}>Home</a>
+              <a href={href.offerings} aria-current={cur("offerings")}>Offerings</a>
+              <p class="group-label">Modalities</p>
+              {modalityLinks.map((m) => <a class="grouped" href={m.href}>{m.label}</a>)}
+              <a class="grouped panel-all" href={href.modalities} aria-current={cur("modalities")}>All modalities →</a>
+              <a href={href.about} aria-current={cur("about")}>About</a>
+            </div>
+          </details>
+        </header>
+      )
+    }
+
+    <main>
+      {
+        page === "home" && (
+          <>
+            <section class="hero">
+              <div class="hero-inner">
+                <h1>{home.name}</h1>
+                <p class="tagline">{home.tagline}</p>
+                <p class="intention">{home.intention}</p>
+                <div class="offer-row">
+                  {pages.offerings.items.map((o) => (
+                    <a class="btn" href={`${href.offerings}#${o.id}`}>{o.title}</a>
+                  ))}
+                </div>
+                <p class="offer-hint">
+                  <a class="quiet-link" href={href.offerings}>Compare all three offerings →</a>
+                </p>
+              </div>
+            </section>
+            <section class="band">
+              <div class="band-inner">
+                <h2>Offerings</h2>
+                <div class="cards">
+                  {pages.offerings.items.map((o) => (
+                    <a class="card" href={`${href.offerings}#${o.id}`}>
+                      <h3>{o.title}</h3>
+                      <p>{o.blurb}</p>
+                      <span class="more">Learn more →</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <section class="band tint">
+              <div class="band-inner">
+                <h2>Modalities</h2>
+                <p>{pages.modalities.intro}</p>
+                <p class="mod-line">{pages.modalities.items.map((m) => m.title).join(" · ")}</p>
+                <a class="quiet-link" href={href.modalities}>How I work →</a>
+              </div>
+            </section>
+            <section class="band">
+              <div class="band-inner">
+                <h2>About</h2>
+                <div class="cards two">
+                  {pages.about.sections.map((a) => (
+                    <a class="card" href={`${href.about}#${a.id}`}>
+                      <h3>{a.title}</h3>
+                      <p>{a.body}</p>
+                      <span class="more">Read more →</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </>
+        )
+      }
+      {
+        page === "offerings" && (
+          <>
+            <header class="page-head">
+              <div class="band-inner">
+                <h1>{pages.offerings.title}</h1>
+                <p>{pages.offerings.intro}</p>
+              </div>
+            </header>
+            {pages.offerings.items.map((o) => (
+              <section class="entry" id={o.id}>
+                <div class="band-inner">
+                  <h2>{o.title}</h2>
+                  <p class="meta">{o.meta}</p>
+                  <p class="body">{o.body}</p>
+                  <a class="btn" href="#booking-note">{o.cta}</a>
+                </div>
+              </section>
+            ))}
+          </>
+        )
+      }
+      {
+        page === "modalities" && (
+          <>
+            <header class="page-head">
+              <div class="band-inner">
+                <h1>{pages.modalities.title}</h1>
+                <p>{pages.modalities.intro}</p>
+              </div>
+            </header>
+            {pages.modalities.items.map((m) => (
+              <section class="entry" id={m.id}>
+                <div class="band-inner">
+                  <h2>{m.title}</h2>
+                  <p class="body">{m.body}</p>
+                </div>
+              </section>
+            ))}
+            <section class="entry">
+              <div class="band-inner">
+                <p class="body">
+                  Wondering which is right for you? We'll find it together —{" "}
+                  <a href={href.offerings}>start with an offering</a>.
+                </p>
+              </div>
+            </section>
+          </>
+        )
+      }
+      {
+        page === "about" && (
+          <>
+            <header class="page-head">
+              <div class="band-inner">
+                <h1>{pages.about.title}</h1>
+                <p>{pages.about.intro}</p>
+              </div>
+            </header>
+            {pages.about.sections.map((a) => (
+              <section class="entry" id={a.id}>
+                <div class="band-inner">
+                  <h2>{a.title}</h2>
+                  <p class="body">{a.body}</p>
+                </div>
+              </section>
+            ))}
+          </>
+        )
+      }
+    </main>
+
+    <footer class="ground-foot">
+      <p class="foot-resources">{home.resources.map((r) => r.title).join(" · ")}</p>
+      <p>{home.intentionWords.join(" · ")}</p>
+      <p>{home.legalName} · {home.tagline}</p>
+    </footer>
+
+    <p class="booking-note" id="booking-note">
+      Booking opens at launch — the offering buttons are placeholders for now.
+    </p>
+    <footer class="review-bar">
+      <a href={backHref}>← All directions</a>
+      <span class="which">{docTitle}</span>
+    </footer>
+  </body>
+</html>

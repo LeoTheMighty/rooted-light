@@ -72,28 +72,50 @@ const index = readFileSync(join(MOCKUPS, "index.html"), "utf8");
 // built index so the single file can never disagree with it (round-2
 // framing, continuous numbering). Chunks split on the round headings.
 const roundChunks = index.split(/<h2 class="round-title">/).slice(1);
-if (roundChunks.length < 2) {
+if (roundChunks.length < 3) {
   console.error(
-    `package-mockups: review index has ${roundChunks.length} round section(s) — expected 2 (rounds restructure missing?)`,
+    `package-mockups: review index has ${roundChunks.length} round section(s) — expected 3 (rounds restructure missing?)`,
   );
   process.exit(1);
 }
+// Numbering comes FROM the index cards ("N. Title"), not a local
+// counter: display order (round 3 first) diverged from array order
+// (round 3 appended last, so old numbers stay stable) in rlw110 —
+// counting here would re-number and break "numbers match everywhere".
+// Each card is parsed on its own so a slug can never inherit a
+// neighbor's number; a card missing either piece fails loudly.
 const roundsMeta = roundChunks.map((chunk) => ({
   title: (chunk.match(/^([^<]*)</) || [])[1] ?? "Directions",
   note: (chunk.match(/<p class="round-note">([^<]*)</) || [])[1] ?? "",
-  slugs: [...chunk.matchAll(/href="\.\/([^/"]+)\/index\.html"/g)].map(
-    (m) => m[1],
-  ),
+  cards: chunk.split(/<a class="card" /).slice(1).map((card) => {
+    const slug = (card.match(/^href="\.\/([^/"]+)\/index\.html"/) || [])[1];
+    const num = (card.match(/<h3>\s*(\d+)\./) || [])[1];
+    if (!slug || !num) {
+      console.error(
+        `package-mockups: review-index card missing its slug or number (slug=${slug ?? "?"}, num=${num ?? "?"}) — card markup changed?`,
+      );
+      process.exit(1);
+    }
+    return { slug, num: Number(num) };
+  }),
 }));
-const slugs = roundsMeta.flatMap((r) => r.slugs);
-if (slugs.length < 12 || new Set(slugs).size !== slugs.length) {
+const slugs = roundsMeta.flatMap((r) => r.cards.map((c) => c.slug));
+const nums = roundsMeta.flatMap((r) => r.cards.map((c) => c.num));
+if (
+  slugs.length < 16 ||
+  new Set(slugs).size !== slugs.length ||
+  new Set(nums).size !== nums.length
+) {
   console.error(
-    `package-mockups: found ${slugs.length} direction links (${new Set(slugs).size} unique) in the review index — expected ≥ 12 unique (both rounds)`,
+    `package-mockups: found ${slugs.length} numbered direction cards (${new Set(slugs).size} unique slugs, ${new Set(nums).size} unique numbers) in the review index — expected ≥ 16, all unique (all three rounds)`,
   );
   process.exit(1);
 }
 
 const escAttr = (s) => s.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+// Titles/blurbs captured here come out of built HTML, so they are
+// already entity-escaped — safe in text AND attributes as-is. Running
+// escAttr over them again would double-escape (& → &amp;amp;).
 const pageMeta = (html, name) => {
   const get = (re) => (html.match(re) || [])[1];
   const title = get(/<title>([^<]*?)\s*·/) ?? name;
@@ -101,17 +123,57 @@ const pageMeta = (html, name) => {
   return { title, blurb };
 };
 
-let counter = 0;
+// The review bar's "../index.html" link can't resolve inside
+// srcdoc — strip it; the wrapper provides navigation instead.
+const stripBar = (html) =>
+  html.replace(/<footer class="review-bar">[\s\S]*?<\/footer>/, "");
+
+// Round-3 directions are multi-page. srcdoc iframes can't follow
+// relative file links, so each subpage gets its own frame in this
+// single file (the zip and the live site are where links click
+// through). Fixed order keeps the story straight; unknown dirs sort
+// after the known ones.
+const SUBPAGE_ORDER = ["offerings", "modalities", "about"];
+const subpagesOf = (slug, title) =>
+  readdirSync(join(MOCKUPS, slug), { withFileTypes: true })
+    .filter(
+      (e) =>
+        e.isDirectory() && existsSync(join(MOCKUPS, slug, e.name, "index.html")),
+    )
+    .map((e) => e.name)
+    .sort((a, b) => {
+      const ia = SUBPAGE_ORDER.indexOf(a);
+      const ib = SUBPAGE_ORDER.indexOf(b);
+      return (
+        (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib) || a.localeCompare(b)
+      );
+    })
+    .map((dir) => {
+      const sub = readFileSync(join(MOCKUPS, slug, dir, "index.html"), "utf8");
+      const meta = pageMeta(sub, `${slug}/${dir}`);
+      return {
+        dir,
+        // page titles are "<variant> — <page>"; show just the page part
+        label: meta.title.startsWith(`${title} — `)
+          ? meta.title.slice(title.length + 3)
+          : meta.title,
+        srcdoc: escAttr(stripBar(sub)),
+      };
+    });
+
 const roundSections = roundsMeta.map((r) => ({
   ...r,
-  sections: r.slugs.map((slug) => {
-    let page = readFileSync(join(MOCKUPS, slug, "index.html"), "utf8");
+  sections: r.cards.map(({ slug, num }) => {
+    const page = readFileSync(join(MOCKUPS, slug, "index.html"), "utf8");
     const { title, blurb } = pageMeta(page, slug);
-    // The review bar's "../index.html" link can't resolve inside
-    // srcdoc — strip it; the wrapper provides navigation instead.
-    page = page.replace(/<footer class="review-bar">[\s\S]*?<\/footer>/, "");
-    counter += 1;
-    return { slug, num: counter, title, blurb, srcdoc: escAttr(page) };
+    return {
+      slug,
+      num,
+      title,
+      blurb,
+      srcdoc: escAttr(stripBar(page)),
+      subpages: subpagesOf(slug, title),
+    };
   }),
 }));
 const sections = roundSections.flatMap((r) => r.sections);
@@ -121,7 +183,7 @@ const single = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rooted Light — lavender refinements</title>
+<title>Rooted Light — grounded mist</title>
 <style>
 *,*::before,*::after{box-sizing:border-box}*{margin:0}
 body{background:#faf8f4;color:#3d3a33;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;padding:1.5rem 1rem 3rem}
@@ -137,13 +199,15 @@ body{background:#faf8f4;color:#3d3a33;font-family:-apple-system,BlinkMacSystemFo
 .direction h2{font-family:Georgia,serif;color:#4a5544;font-size:1.15rem}
 .direction .blurb{font-size:.9rem;margin:.25rem 0 .7rem;opacity:.85}
 .direction iframe{width:100%;height:82vh;border:1px solid #ddd8ca;border-radius:10px;background:#fff}
+.direction h3.subpage{font-family:Georgia,serif;color:#4a5544;font-size:1rem;margin:1.1rem 0 .4rem}
+.direction .subpage-frame{height:70vh}
 .foot{text-align:center;font-size:.85rem;opacity:.8}
 </style>
 </head>
 <body>
 <header class="intro">
-<h1>Rooted Light — lavender refinements</h1>
-<p>The direction is chosen — soft lavender dusk, kept simple. Now the final look: the first ${roundSections[0].sections.length} are lavender variants (start there); the original ${roundSections[1]?.sections.length ?? 0} follow for reference. Each one scrolls inside its frame.</p>
+<h1>Rooted Light — grounded mist</h1>
+<p>Round 3: the first ${roundSections[0].sections.length} are grounded, multi-page takes on lavender mist — no gradient, real pages, and a different navigation style on each (start there). The earlier rounds follow for reference. Each page scrolls inside its frame.</p>
 <p>Reply with the number or name that feels right — or what you'd tweak. Numbers match everywhere.</p>
 <p>A note on type: the fonts are your device’s own, so they render truest on an iPhone or iPad.</p>
 </header>
@@ -159,7 +223,18 @@ ${r.sections
     (s) => `<section class="direction" id="${s.slug}">
 <h2>${s.num}. ${s.title}</h2>
 <p class="blurb">${s.blurb}</p>
-<iframe title="${escAttr(s.title)} mockup" loading="lazy" srcdoc="${s.srcdoc}"></iframe>
+${
+  s.subpages.length
+    ? `<p class="blurb">Multi-page — every page is framed below. (In this single file the links inside the frames don't navigate; in the zip and on the real site they do.)</p>`
+    : ""
+}
+<iframe title="${s.title} mockup" loading="lazy" srcdoc="${s.srcdoc}"></iframe>
+${s.subpages
+  .map(
+    (p) => `<h3 class="subpage">${s.num} · ${p.label} page</h3>
+<iframe class="subpage-frame" title="${s.title} — ${p.label} mockup" loading="lazy" srcdoc="${p.srcdoc}"></iframe>`,
+  )
+  .join("\n")}
 </section>`,
   )
   .join("\n")}`,
