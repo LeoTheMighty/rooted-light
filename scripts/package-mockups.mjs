@@ -68,14 +68,27 @@ mkdirSync(OUT_DIR, { recursive: true });
 // --- Artifact 1: single-file review HTML -------------------------------
 const index = readFileSync(join(MOCKUPS, "index.html"), "utf8");
 
-// Slug order + per-card copy come from the built index so the single
-// file can never disagree with it.
-const slugs = [...index.matchAll(/href="\.\/([^/"]+)\/index\.html"/g)].map(
-  (m) => m[1],
-);
-if (slugs.length < 6) {
+// Round structure, slug order, and per-card copy all come from the
+// built index so the single file can never disagree with it (round-2
+// framing, continuous numbering). Chunks split on the round headings.
+const roundChunks = index.split(/<h2 class="round-title">/).slice(1);
+if (roundChunks.length < 2) {
   console.error(
-    `package-mockups: only found ${slugs.length} direction links in the review index — expected ≥ 6`,
+    `package-mockups: review index has ${roundChunks.length} round section(s) — expected 2 (rounds restructure missing?)`,
+  );
+  process.exit(1);
+}
+const roundsMeta = roundChunks.map((chunk) => ({
+  title: (chunk.match(/^([^<]*)</) || [])[1] ?? "Directions",
+  note: (chunk.match(/<p class="round-note">([^<]*)</) || [])[1] ?? "",
+  slugs: [...chunk.matchAll(/href="\.\/([^/"]+)\/index\.html"/g)].map(
+    (m) => m[1],
+  ),
+}));
+const slugs = roundsMeta.flatMap((r) => r.slugs);
+if (slugs.length < 12 || new Set(slugs).size !== slugs.length) {
+  console.error(
+    `package-mockups: found ${slugs.length} direction links (${new Set(slugs).size} unique) in the review index — expected ≥ 12 unique (both rounds)`,
   );
   process.exit(1);
 }
@@ -88,21 +101,27 @@ const pageMeta = (html, name) => {
   return { title, blurb };
 };
 
-const sections = slugs.map((slug, i) => {
-  let page = readFileSync(join(MOCKUPS, slug, "index.html"), "utf8");
-  const { title, blurb } = pageMeta(page, slug);
-  // The review bar's "../index.html" link can't resolve inside srcdoc —
-  // strip it; the wrapper provides navigation instead.
-  page = page.replace(/<footer class="review-bar">[\s\S]*?<\/footer>/, "");
-  return { slug, i, title, blurb, srcdoc: escAttr(page) };
-});
+let counter = 0;
+const roundSections = roundsMeta.map((r) => ({
+  ...r,
+  sections: r.slugs.map((slug) => {
+    let page = readFileSync(join(MOCKUPS, slug, "index.html"), "utf8");
+    const { title, blurb } = pageMeta(page, slug);
+    // The review bar's "../index.html" link can't resolve inside
+    // srcdoc — strip it; the wrapper provides navigation instead.
+    page = page.replace(/<footer class="review-bar">[\s\S]*?<\/footer>/, "");
+    counter += 1;
+    return { slug, num: counter, title, blurb, srcdoc: escAttr(page) };
+  }),
+}));
+const sections = roundSections.flatMap((r) => r.sections);
 
 const single = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rooted Light — style directions</title>
+<title>Rooted Light — lavender refinements</title>
 <style>
 *,*::before,*::after{box-sizing:border-box}*{margin:0}
 body{background:#faf8f4;color:#3d3a33;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;padding:1.5rem 1rem 3rem}
@@ -111,6 +130,9 @@ body{background:#faf8f4;color:#3d3a33;font-family:-apple-system,BlinkMacSystemFo
 .intro p{margin-top:.7rem;font-size:.95rem}
 .jump{max-width:38rem;margin:0 auto 2rem;display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
 .jump a{background:#f1ede4;border-radius:999px;padding:.3rem .85rem;font-size:.82rem;text-decoration:none;color:#4a5544;font-weight:600}
+.round-head{max-width:38rem;margin:2.4rem auto .4rem;text-align:center}
+.round-head h2{font-family:Georgia,serif;color:#4a5544;font-size:1.25rem}
+.round-head p{font-size:.9rem;margin-top:.4rem;opacity:.85}
 .direction{max-width:60rem;margin:0 auto 2.4rem;scroll-margin-top:1rem}
 .direction h2{font-family:Georgia,serif;color:#4a5544;font-size:1.15rem}
 .direction .blurb{font-size:.9rem;margin:.25rem 0 .7rem;opacity:.85}
@@ -120,22 +142,27 @@ body{background:#faf8f4;color:#3d3a33;font-family:-apple-system,BlinkMacSystemFo
 </head>
 <body>
 <header class="intro">
-<h1>Rooted Light — style directions</h1>
-<p>${sections.length} looks for the home page, all showing the same words — only the feel changes. Each one scrolls inside its frame.</p>
-<p>Live with them for a bit, then reply with your favorite — or a blend of two (e.g. “colors of one, type of another”).</p>
+<h1>Rooted Light — lavender refinements</h1>
+<p>The direction is chosen — soft lavender dusk, kept simple. Now the final look: the first ${roundSections[0].sections.length} are lavender variants (start there); the original ${roundSections[1]?.sections.length ?? 0} follow for reference. Each one scrolls inside its frame.</p>
+<p>Reply with the number or name that feels right — or what you'd tweak. Numbers match everywhere.</p>
 <p>A note on type: the fonts are your device’s own, so they render truest on an iPhone or iPad.</p>
 </header>
 <nav class="jump" aria-label="Directions">
-${sections.map((s) => `<a href="#${s.slug}">${s.i + 1}. ${s.title}</a>`).join("\n")}
+${sections.map((s) => `<a href="#${s.slug}">${s.num}. ${s.title}</a>`).join("\n")}
 </nav>
 <main>
-${sections
+${roundSections
+  .map(
+    (r) => `<div class="round-head"><h2>${r.title}</h2><p>${r.note}</p></div>
+${r.sections
   .map(
     (s) => `<section class="direction" id="${s.slug}">
-<h2>${s.i + 1}. ${s.title}</h2>
+<h2>${s.num}. ${s.title}</h2>
 <p class="blurb">${s.blurb}</p>
 <iframe title="${escAttr(s.title)} mockup" loading="lazy" srcdoc="${s.srcdoc}"></iframe>
 </section>`,
+  )
+  .join("\n")}`,
   )
   .join("\n")}
 </main>

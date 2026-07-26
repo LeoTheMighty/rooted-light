@@ -1,0 +1,13 @@
+/* pack-lavender-ink — the deepest refinement: plum-ink headings and a
+   violet accent on a pale lilac ground. Literary, composed. */
+:root {
+  --color-bg: #f2f0f7;
+  --color-surface: #faf9fc;
+  --color-text-body: #38334e;
+  --color-text-heading: #2f2947;
+  --color-accent: #5c4a8a;
+  --font-heading: "Hoefler Text", "Iowan Old Style", Georgia, serif;
+  --font-body: "Charter", "Iowan Old Style", Georgia, serif;
+  /* pack extras */
+  --rule-ink: 1px solid #c9c3dc;
+}

@@ -1,0 +1,14 @@
+/* pack-lavender-mist — the lightest refinement: near-white with a
+   lavender breath. Brightness-first, minimal, quiet. */
+:root {
+  --color-bg: #f9f8fb;
+  --color-surface: #efedf6;
+  --color-text-body: #45414f;
+  --color-text-heading: #3f3a5c;
+  /* AA-checked: 5.28:1 vs bg, 4.82:1 vs surface */
+  --color-accent: #6f5e9c;
+  --font-heading: "Optima", "Gill Sans", "Segoe UI", sans-serif;
+  --font-body: "Helvetica Neue", -apple-system, "Segoe UI", sans-serif;
+  /* pack extras */
+  --hairline: 1px solid #ddd9e8;
+}

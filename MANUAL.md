@@ -9,6 +9,22 @@
 <!-- devx-empty-state-end -->
 
 
+## Lavender refinement package (rlw108)
+
+- [ ] **Send the round-2 (lavender refinement) package to Kylie**
+  Supersedes the rlw102 send below if it hasn't gone out yet — the new
+  package contains both rounds, refinements first, and every mockup now
+  carries the Modalities section. Run `npm run mockups:package` →
+  `.devx-cache/rooted-light-mockups.html` (send this single file; zip
+  is the desktop fallback). Steps:
+  1. Open the .html on your own phone; check the five lavender variants
+     render and scroll inside their frames.
+  2. Send to Kylie: "direction is lavender — which of these five is the
+     final look (or what would you tweak)?"
+  3. Record the answer in INTERVIEW.md ("Kylie's lavender refinement
+     pick") — rlw105 (theme promotion) is gated on it.
+  Filed: 2026-07-25 by /devx rlw108.
+
 ## Mockup review package (rlw102)
 
 - [ ] **Send the style-direction package to Kylie + verify on a phone**

@@ -4,10 +4,12 @@
 import site from "../../content/site.json";
 
 /** In-page anchors: the mockup package is browsed from a zip (file://),
- *  so nav never leaves the page. */
+ *  so nav never leaves the page. "Modalities" is the top-level section
+ *  Leo promoted on 2026-07-25 (FR-13/FR-14) — every mockup carries it. */
 export const nav = [
   { label: "Welcome", anchor: "#welcome" },
   { label: "Offerings", anchor: "#offerings" },
+  { label: "Modalities", anchor: "#modalities" },
   { label: "About", anchor: "#about" },
   { label: "Resources", anchor: "#resources" },
 ];
@@ -37,6 +39,20 @@ export const home = {
       title: "Therapy",
       blurb:
         "Licensed talk therapy, integrated with the same rooted, caring presence.",
+    },
+  ],
+  modalities: [
+    {
+      title: "Talk therapy",
+      blurb: "Steady, relational work at your own pace.",
+    },
+    {
+      title: "EMDR",
+      blurb: "Structured processing for what the body still carries.",
+    },
+    {
+      title: "Reiki-informed care",
+      blurb: "Energy work woven gently into the therapeutic space.",
     },
   ],
   about: [

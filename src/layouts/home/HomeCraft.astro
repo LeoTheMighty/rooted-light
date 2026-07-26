@@ -48,6 +48,18 @@ const { packCss, title, blurb } = Astro.props;
       </p>
     </section>
 
+    <section id="modalities">
+      <h2>Modalities</h2>
+      {
+        home.modalities.map((m) => (
+          <article class="paper">
+            <h3>{m.title}</h3>
+            <p>{m.blurb}</p>
+          </article>
+        ))
+      }
+    </section>
+
     <section id="about">
       <h2>About</h2>
       {

@@ -1,9 +1,9 @@
 ---
-// Botanical editorial: centered masthead, wide-tracked nav row between
-// thin rules, single centered column, leaf dividers, section rhythm
-// carried by rules and whitespace rather than surfaces.
+// Lavender sage: centered thin masthead with a leaf mark, sage
+// small-caps kickers over lavender headings, two-column grids at
+// desktop. Simple, botanical, fresh.
 import MockupShell from "./MockupShell.astro";
-import layoutCss from "./HomeEditorial.css?raw";
+import layoutCss from "./HomeLavSage.css?raw";
 import { home, nav } from "./_content";
 
 interface Props {
@@ -15,9 +15,15 @@ const { packCss, title, blurb } = Astro.props;
 ---
 
 <MockupShell packCss={packCss} layoutCss={layoutCss} title={title} blurb={blurb}>
-  <header class="masthead">
-    <p class="kicker">therapy · reiki · rest</p>
+  <header class="mast">
     <p class="brand">{home.name}</p>
+    <svg class="leaf" viewBox="0 0 80 24" aria-hidden="true">
+      <path
+        d="M4 12 C 24 2, 56 2, 76 12 C 56 22, 24 22, 4 12 Z M 40 4 L 40 20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.2"></path>
+    </svg>
     <nav aria-label="Main">
       <ul>
         {nav.map((n) => <li><a href={n.anchor}>{n.label}</a></li>)}
@@ -27,24 +33,15 @@ const { packCss, title, blurb } = Astro.props;
 
   <main>
     <section class="hero" id="welcome">
+      <p class="kicker">therapy · reiki · rest</p>
       <h1>{home.tagline}</h1>
       <p class="intention">{home.intention}</p>
-      <svg class="leaf" viewBox="0 0 80 24" aria-hidden="true">
-        <path
-          d="M4 12 C 24 2, 56 2, 76 12 C 56 22, 24 22, 4 12 Z M 40 4 L 40 20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.2"></path>
-      </svg>
+      <a class="cta" href={home.bookingUrl}>Book a session</a>
     </section>
 
-    <section class="words" aria-label="Intentions">
-      <p>{home.intentionWords.join(" · ")}</p>
-    </section>
-
-    <section class="ruled" id="offerings">
-      <h2>Offerings</h2>
-      <div class="columns">
+    <section class="patch" id="offerings">
+      <p class="kicker">Offerings</p>
+      <div class="duo">
         {
           home.offerings.map((o) => (
             <article>
@@ -54,14 +51,11 @@ const { packCss, title, blurb } = Astro.props;
           ))
         }
       </div>
-      <p class="cta-line">
-        <a class="cta" href={home.bookingUrl}>Book a session</a>
-      </p>
     </section>
 
-    <section class="ruled" id="modalities">
-      <h2>Modalities</h2>
-      <div class="columns">
+    <section class="patch" id="modalities">
+      <p class="kicker">Modalities</p>
+      <div class="duo">
         {
           home.modalities.map((m) => (
             <article>
@@ -73,9 +67,9 @@ const { packCss, title, blurb } = Astro.props;
       </div>
     </section>
 
-    <section class="ruled" id="about">
-      <h2>About</h2>
-      <div class="columns two">
+    <section class="patch" id="about">
+      <p class="kicker">About</p>
+      <div class="duo">
         {
           home.about.map((a) => (
             <article>
@@ -87,15 +81,13 @@ const { packCss, title, blurb } = Astro.props;
       </div>
     </section>
 
-    <section class="ruled" id="resources">
-      <h2>Resources</h2>
-      <p class="resource-line">
-        {home.resources.map((r) => r.title).join("  ·  ")}
-      </p>
+    <section class="patch" id="resources">
+      <p class="kicker">Resources</p>
+      <p>{home.resources.map((r) => r.title).join(" · ")}</p>
     </section>
   </main>
 
-  <footer class="colophon">
+  <footer class="foot">
     <p>{home.legalName} · {home.tagline}</p>
   </footer>
 </MockupShell>

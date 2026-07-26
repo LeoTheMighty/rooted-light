@@ -58,3 +58,33 @@ first, and re-package the share channel.
   (phase 2b), from Leo's 2026-07-25 decision: lavender pick + keep
   simple + Modalities top-level.
 - 2026-07-25T17:57:43-06:00 — claimed by /devx in session /devx-2026-07-25T1757-30209
+- 2026-07-25 — phase 2: spec ACs direct (v2 native); 6 ACs;
+  workstream=rooted-light-website; red-artifacts=E-7_lavender-refinement.mjs
+  — re-run in worktree, confirmed failing for the right reason (1
+  lavender pack, refinements missing).
+- 2026-07-25 — phase 3: implemented 5 lavender refinement packs (E-5:
+  36 pairings AA first pass), 5 simple structurally-distinct layouts,
+  Modalities section + nav added to _content.ts and ALL 7 round-1
+  layouts, registry gained round field (round 2 first), index
+  restructured into rounds, MANUAL round-2 entry. E-7 GREEN (6 lavender
+  packs, Modalities nav on all 12 mockups), E-1 GREEN (12 mockups),
+  E-5 GREEN. Build 20 pages; self-containment verified; package
+  regenerated (12 srcdocs).
+- 2026-07-25 — phase 4: 3-agent parallel adversarial review (Blind
+  Hunter / Edge Case Hunter / Acceptance Auditor); 11 unique findings
+  (1 HIGH, 2 MED, 6 LOW, 2 info/no-action); ALL actionable fixed
+  in-place — most load-bearing: the single-file share artifact still
+  carried round-1 framing ("reply with your favorite" over 12 flat
+  options) and diverging numbering; the generator now scrapes the round
+  structure from the built index (round-2-first sections, continuous
+  1–12 numbering that matches everywhere) with hardened guards (≥12
+  unique slugs, 2 rounds, zero-card round throws). Also fixed: sage
+  kicker/CTA + mist/linen/dawn accents darkened to ≥4.5:1 on bg AND
+  surface (computed, comments carry ratios), --band consumed by the
+  linen footer, Ink gained an editorial margin-label chapter grid to
+  separate it structurally from Mist. Re-review clean: rebuild + E-7/
+  E-1/E-5 green, single-file framing + numbering verified in output.
+- 2026-07-25 — phase 5: local gates green — npm run build exit 0
+  (20 pages), E-7 PASS (6 lavender packs, Modalities on all 12), E-1
+  PASS (12 mockups), E-5 PASS (36 pairings). Lint/coverage not
+  configured (honest no-ops); E-2/E-3/E-4 red by design (phase 3/6).

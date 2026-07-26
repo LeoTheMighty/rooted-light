@@ -1,0 +1,8 @@
+---
+import HomeLavSage from "../../layouts/home/HomeLavSage.astro";
+import packCss from "../../styles/tokens/pack-lavender-sage.css?raw";
+import { direction } from "./_directions";
+const d = direction("lavender-sage");
+---
+
+<HomeLavSage packCss={packCss} title={d.title} blurb={d.blurb} />
