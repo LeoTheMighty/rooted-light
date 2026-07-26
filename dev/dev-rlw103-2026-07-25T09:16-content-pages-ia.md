@@ -5,8 +5,8 @@ created: 2026-07-25T09:16:00-06:00
 title: Content pages & information architecture — all seven routes full
 from: _devx/workstreams/rooted-light-website/plan.md (phase 3)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-26T1537-70206
 branch: feat/dev-rlw103
 ---
 
@@ -54,3 +54,4 @@ note e.g. 988). Nav complete everywhere.
   sections; the four-field modality catalog moves to /modalities/ (with
   id anchors, FR-13); therapy page keeps a summary + link. See plan.md
   phase 3 (revised) + E-2/E-3 (revised).
+- 2026-07-26T15:37:26-06:00 — claimed by /devx in session /devx-2026-07-26T1537-70206
