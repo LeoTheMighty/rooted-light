@@ -43,3 +43,19 @@ options become temperature + type (mist/linen/sage/ink/dawn palettes).
 - 2026-07-25T18:25 — filed by /devx from Leo's instruction (fast
   follow; entered_at: execute).
 - 2026-07-25T20:54:32-06:00 — claimed by /devx in session /devx-2026-07-25T2054-40698
+- 2026-07-25 — phase 2: spec ACs direct; 4 ACs; convergence delta, no
+  new RED artifact (E-7/E-1/E-5 are the guardrails).
+- 2026-07-25 — phase 3: wash tokens (--wash-hero/--wash-foot/
+  --radius-soft) added to all 5 refinement packs (dawn's --wash-dawn
+  superseded), 5 mockup pages swapped to the HomeDusk skeleton, 10
+  bespoke HomeLav* files removed, blurbs + round-2 note rewritten for
+  the converged set. Build 20 pages; E-7/E-1/E-5 green.
+- 2026-07-25 — phase 4: clean single-pass adversarial review (diff 36
+  insertions / 914 deletions, under the 3-agent threshold): no dangling
+  HomeLav/--wash-dawn refs; every refinement page verified to carry its
+  own wash + the dusk float-nav; pill-CTA text (surface-on-accent)
+  re-checked against rlw108's computed ratios (>=4.82 all packs);
+  packs well-formed. 0 issues; re-verified via greps on built output.
+- 2026-07-25 — phase 5: local gates green — build exit 0, E-7 PASS,
+  E-1 PASS (12 mockups), E-5 PASS (36 pairings).
+

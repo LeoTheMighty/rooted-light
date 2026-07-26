@@ -10,4 +10,8 @@
   --font-body: "Charter", "Iowan Old Style", Georgia, serif;
   /* pack extras */
   --rule-ink: 1px solid #c9c3dc;
+  /* dusk-skeleton washes (rlw109 convergence) */
+  --wash-hero: linear-gradient(170deg, #d8d2e8 0%, #f2f0f7 60%);
+  --wash-foot: linear-gradient(0deg, #ddd7ec 0%, #f2f0f7 100%);
+  --radius-soft: 22px;
 }

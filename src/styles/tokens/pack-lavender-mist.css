@@ -11,4 +11,8 @@
   --font-body: "Helvetica Neue", -apple-system, "Segoe UI", sans-serif;
   /* pack extras */
   --hairline: 1px solid #ddd9e8;
+  /* dusk-skeleton washes (rlw109 convergence) */
+  --wash-hero: linear-gradient(170deg, #e4dff0 0%, #f9f8fb 55%);
+  --wash-foot: linear-gradient(0deg, #e9e4f3 0%, #f9f8fb 100%);
+  --radius-soft: 22px;
 }

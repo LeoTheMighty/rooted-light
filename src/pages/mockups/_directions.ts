@@ -17,7 +17,7 @@ export const directions: Direction[] = [
     pack: "pack-lavender-mist",
     title: "Lavender mist",
     blurb:
-      "The lightest one — near-white with a lavender breath, hairlines, one quiet column.",
+      "The palest take — near-white under the faintest lavender haze, smallest type.",
     round: 2,
   },
   {
@@ -25,7 +25,7 @@ export const directions: Direction[] = [
     pack: "pack-lavender-linen",
     title: "Lavender linen",
     blurb:
-      "Warm cream ground, flat lavender bands, nothing raised. Calm and homey.",
+      "Warm cream under the wash — the coziest temperature of the five.",
     round: 2,
   },
   {
@@ -33,7 +33,7 @@ export const directions: Direction[] = [
     pack: "pack-lavender-sage",
     title: "Lavender sage",
     blurb:
-      "Lavender led, sage seasoned — the bridge back to the earthy brief. Botanical and fresh.",
+      "The wash drifts from lavender into sage — the earthy tie-in.",
     round: 2,
   },
   {
@@ -41,7 +41,7 @@ export const directions: Direction[] = [
     pack: "pack-lavender-ink",
     title: "Lavender ink",
     blurb:
-      "The deepest one — plum-ink headings, violet accents, literary rules.",
+      "Deep plum-ink serif type under a pale wash — the most literary.",
     round: 2,
   },
   {
@@ -49,7 +49,7 @@ export const directions: Direction[] = [
     pack: "pack-lavender-dawn",
     title: "Lavender dawn",
     blurb:
-      "Dusk's gentler cousin — a short first-light wash, mauve warmth, soft panes.",
+      "Mauve-rose warmth — first light instead of dusk.",
     round: 2,
   },
   {

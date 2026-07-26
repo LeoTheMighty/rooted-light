@@ -10,5 +10,8 @@
   --font-heading: "Cochin", "Baskerville", "Palatino", serif;
   --font-body: "Optima", "Candara", "Segoe UI", sans-serif;
   /* pack extras */
-  --wash-dawn: linear-gradient(165deg, #ecdfe9 0%, #f7f2f6 60%);
+  /* dusk-skeleton washes (rlw109 convergence) */
+  --wash-hero: linear-gradient(170deg, #e8d8e4 0%, #f7f2f6 60%);
+  --wash-foot: linear-gradient(0deg, #ecdee8 0%, #f7f2f6 100%);
+  --radius-soft: 22px;
 }

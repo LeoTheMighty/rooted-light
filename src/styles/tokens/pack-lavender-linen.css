@@ -11,4 +11,8 @@
   --font-body: "Seravek", "Segoe UI", -apple-system, sans-serif;
   /* pack extras */
   --band: #efe7dc;
+  /* dusk-skeleton washes (rlw109 convergence) */
+  --wash-hero: linear-gradient(170deg, #e2d8ea 0%, #f7f3ec 60%);
+  --wash-foot: linear-gradient(0deg, #e7ddec 0%, #f7f3ec 100%);
+  --radius-soft: 22px;
 }
