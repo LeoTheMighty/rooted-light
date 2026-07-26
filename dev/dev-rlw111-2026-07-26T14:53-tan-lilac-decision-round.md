@@ -5,7 +5,7 @@ created: 2026-07-26T14:53:00-06:00
 title: Tan & lilac decision round — #13 skeleton, Kylie on front page, quote spaces
 from: user instruction 2026-07-26 (fast follow to rlw110; Kylie feedback + anchorsaweighcounseling.com reference)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-26T1453-64413
 entered_at: execute
 ---
@@ -85,3 +85,4 @@ Parts Work, and the mockups gain spaces for favorite quotes.
 - 2026-07-26 — phase 7: PR https://github.com/LeoTheMighty/rooted-light/pull/7 opened (base main).
 - 2026-07-26 — phase 7.5: tour published — https://htmlpreview.github.io/?https://raw.githubusercontent.com/LeoTheMighty/rooted-light/devx-tours/tours/rlw111/tour.html; PR body updated.
 - 2026-07-26 — phase 7: devx-ci run 30220804990 SUCCESS; check-hold clean; merge-gate {"merge":true}.
+- 2026-07-26 — phase 8: merged via PR #7 (squash → 1a8a0d6); worktree + local branch removed.
