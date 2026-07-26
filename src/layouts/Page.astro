@@ -4,6 +4,11 @@
 // `title` and start their own headings at h2).
 import site from "../content/site.json";
 import "../styles/base.css";
+// The promoted theme (rlw105): Leo's pick — round-4 "Warm sand & lilac"
+// (rlw111). Imported after base.css so the pack's :root tokens override
+// the neutral defaults on every real-site route. Mockup routes keep
+// their own self-contained packs (_shared.css), untouched.
+import "../styles/tokens/pack-sand-lilac.css";
 
 interface Props {
   title: string;

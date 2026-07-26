@@ -1,16 +1,27 @@
 ---
-// Home stub (FR-2 shape): hero area placeholder, name + intention line,
-// clear paths into About, Offerings, Resources. The final home is themed
-// in the theme-promotion phase; mockup variants land in /mockups/.
+// Home (FR-2 shape), themed by rlw105: hero carries Kylie's name (rlw111
+// locked decision "Kylie on front page") and a favorite-quote band in the
+// picked mockup's treatment. Placeholder quote is the round-4 mockup's —
+// Kylie swaps in her own favorite later.
 import Page from "../layouts/Page.astro";
 import site from "../content/site.json";
 ---
 
 <Page title={site.name} bareTitle>
-  <section class="card">
+  <section class="card hero">
     <!-- TODO(kylie): hero photo/imagery -->
     <h1>{site.name}</h1>
+    <p class="owner-line">{site.owner_line}</p>
     <p>{site.intention}</p>
+  </section>
+  <section class="quote-band">
+    <!-- TODO(kylie): swap in your favorite quote + attribution -->
+    <figure>
+      <blockquote>
+        <p>The wound is the place where the Light enters you.</p>
+      </blockquote>
+      <figcaption>— Rumi</figcaption>
+    </figure>
   </section>
   <section>
     <h2>Begin where you are</h2>
