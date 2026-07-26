@@ -1,0 +1,14 @@
+---
+// The stable booking affordance (E-3/E-4 selector contract): every
+// booking link site-wide renders through this component so the
+// [data-cta="booking"] hook lives in exactly one place. Hrefs come from
+// the site.json booking seams — placeholder until rlw106 wires the
+// chosen provider. Never render this on the therapy page (inquiry-only).
+interface Props {
+  href: string;
+  label: string;
+}
+const { href, label } = Astro.props;
+---
+
+<a class="booking-cta" data-cta="booking" href={href}>{label}</a>

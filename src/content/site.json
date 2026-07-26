@@ -9,6 +9,7 @@
     { "label": "Home", "href": "/" },
     { "label": "About Me", "href": "/about-me/" },
     { "label": "About You", "href": "/about-you/" },
+    { "label": "Modalities", "href": "/modalities/" },
     { "label": "Offerings", "href": "/offerings/" },
     { "label": "Resources", "href": "/resources/" }
   ],
@@ -17,7 +18,7 @@
     "training_url": "#booking-tbd"
   },
   "contact": {
-    "form_action": "#booking-tbd",
-    "psychology_today_url": "#TODO(kylie)-psychology-today-url"
+    "form_action": "#inquiry-tbd",
+    "psychology_today_url": "https://www.psychologytoday.com/us/therapists"
   }
 }

@@ -1,0 +1,54 @@
+---
+// One modality entry in the top-level catalog (FR-13): a native
+// <details> carrying the four contractual fields ([data-field=...])
+// and a stable id anchor so About You / Therapy can deep-link
+// /modalities/#<id>. E-3 asserts this exact DOM shape — data-modality
+// and id must sit on the same element. Rendered open: fragment
+// navigation to the <details> element itself does not auto-expand it
+// (the ancestor-revealing algorithm only opens *ancestor* details),
+// so with zero client JS, open-by-default is what keeps deep-linked
+// content visible. The h2 in <summary> keeps the modality name in the
+// document outline (h1 → h2 → h3 fields).
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  modality: CollectionEntry<"modalities">;
+}
+const { modality } = Astro.props;
+const { title, what_it_is, who_benefits, resources, certifications } =
+  modality.data;
+---
+
+<details class="card" data-modality={modality.id} id={modality.id} open>
+  <summary><h2>{title}</h2></summary>
+  <div class="flow accordion-body">
+    <section data-field="what-it-is">
+      <h3>What it is</h3>
+      <p>{what_it_is}</p>
+    </section>
+    <section data-field="who-benefits">
+      <h3>Who tends to benefit</h3>
+      <ul>
+        {who_benefits.map((w) => <li>{w}</li>)}
+      </ul>
+    </section>
+    <section data-field="resources">
+      <h3>Learn more</h3>
+      <ul>
+        {
+          resources.map((r) => (
+            <li>
+              <a href={r.url}>{r.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+    <section data-field="certifications">
+      <h3>Training &amp; certifications</h3>
+      <ul>
+        {certifications.map((c) => <li>{c}</li>)}
+      </ul>
+    </section>
+  </div>
+</details>

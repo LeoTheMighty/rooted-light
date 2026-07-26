@@ -1,0 +1,26 @@
+---
+// One explainer card on the Resources index: title linking to the full
+// explainer page, summary, and any outbound reference links (ICRT etc.).
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  resource: CollectionEntry<"resources">;
+}
+const { resource } = Astro.props;
+---
+
+<article class="card">
+  <h2><a href={`/resources/${resource.id}/`}>{resource.data.title}</a></h2>
+  <p>{resource.data.summary}</p>
+  {
+    resource.data.links.length > 0 && (
+      <ul>
+        {resource.data.links.map((l) => (
+          <li>
+            <a href={l.url}>{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</article>

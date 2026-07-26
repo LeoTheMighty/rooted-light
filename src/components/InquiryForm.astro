@@ -1,0 +1,43 @@
+---
+// Therapy inquiry form — inquiry-only contract; this is NOT a booking
+// affordance and must never carry [data-cta="booking"]. Posts to the
+// contact.form_action seam in site.json; rlw106 swaps the placeholder
+// action for the chosen form provider endpoint.
+import site from "../content/site.json";
+---
+
+<form class="card flow" method="post" action={site.contact.form_action}>
+  <p>
+    <label for="inquiry-name">Your name</label>
+    <input
+      id="inquiry-name"
+      name="name"
+      type="text"
+      autocomplete="name"
+      required
+    />
+  </p>
+  <p>
+    <label for="inquiry-email">Email</label>
+    <input
+      id="inquiry-email"
+      name="email"
+      type="email"
+      autocomplete="email"
+      required
+    />
+  </p>
+  <p>
+    <label for="inquiry-message">What brings you here?</label>
+    <textarea id="inquiry-message" name="message" rows="5" required></textarea>
+  </p>
+  <p>
+    <button type="submit">Send inquiry</button>
+    <span class="small-note">(form delivery goes live soon)</span>
+  </p>
+  <p class="form-note">
+    Please don't share urgent or crisis details here — this inbox is read on
+    business days. If you need help right now, call or text
+    <strong>988</strong>.
+  </p>
+</form>
