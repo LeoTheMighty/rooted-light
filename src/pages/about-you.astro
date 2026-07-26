@@ -1,6 +1,7 @@
 ---
-// About You: who-benefits narrative + modality map generated from the
-// modalities collection's who_benefits[] fields (design.md Architecture).
+// About You (T3.1): who-benefits narrative + modality map generated from
+// the modalities collection's who_benefits[] fields, deep-linking each
+// entry into the top-level /modalities/ catalog anchors.
 import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
 import { Content, frontmatter } from "../content/about-you.md";
@@ -21,7 +22,14 @@ const modalities = (await getCollection("modalities")).sort(
             <li>{w}</li>
           ))}
         </ul>
+        <p>
+          <a href={`/modalities/#${m.id}`}>What {m.data.title} is →</a>
+        </p>
       </section>
     ))
   }
+  <p>
+    When you're ready, the <a href="/offerings/">offerings</a> page shows
+    the ways to begin.
+  </p>
 </Page>

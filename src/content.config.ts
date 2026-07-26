@@ -10,9 +10,14 @@ const modalities = defineCollection({
     title: z.string(),
     summary: z.string(),
     what_it_is: z.string(),
-    who_benefits: z.array(z.string()),
-    resources: z.array(z.object({ label: z.string(), url: z.string() })),
-    certifications: z.array(z.string()),
+    // nonempty: the modality catalog renders all four field sections
+    // unconditionally (E-3 contract) — an empty array would ship a
+    // heading over an empty list, so fail the build instead.
+    who_benefits: z.array(z.string()).nonempty(),
+    resources: z
+      .array(z.object({ label: z.string(), url: z.string() }))
+      .nonempty(),
+    certifications: z.array(z.string()).nonempty(),
     order: z.number(),
   }),
 });

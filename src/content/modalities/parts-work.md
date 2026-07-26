@@ -6,8 +6,8 @@ who_benefits:
   - "People who feel pulled in different directions inside"
   - "Those carrying inner critics or protective patterns that once helped"
 resources:
-  - label: "Parts work explainer (placeholder)"
-    url: "#todo-kylie-resource-link"
+  - label: "What are modalities? — plain-language explainer"
+    url: "/resources/what-are-modalities/" # TODO(kylie): swap for a modality-specific link
 certifications:
   - "Placeholder: parts-work / IFS training" # TODO(kylie)
 order: 3

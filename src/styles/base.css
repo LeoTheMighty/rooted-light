@@ -159,3 +159,69 @@ main {
 .card + .card {
   margin-top: var(--space-2);
 }
+
+/* --- Booking CTA (the [data-cta="booking"] affordance) --- */
+.booking-cta {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius);
+}
+
+.booking-cta:hover,
+.booking-cta:focus-visible {
+  filter: brightness(1.08);
+}
+
+/* --- Modality accordion (native <details>) --- */
+details.card > summary {
+  cursor: pointer;
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  font-size: 1.1rem;
+}
+
+/* Keep the outline heading inline beside the disclosure marker. */
+details.card > summary > h2 {
+  display: inline;
+  font-size: 1.1rem;
+}
+
+details.card .accordion-body {
+  margin-top: var(--space-2);
+}
+
+/* --- Forms (inquiry form) --- */
+form label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  background: var(--color-bg);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: var(--space-1);
+}
+
+form button {
+  font: inherit;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border: 0;
+  border-radius: var(--radius);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+}
+
+.form-note,
+.small-note {
+  font-size: 0.9rem;
+}

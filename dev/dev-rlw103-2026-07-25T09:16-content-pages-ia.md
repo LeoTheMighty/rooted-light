@@ -54,4 +54,42 @@ note e.g. 988). Nav complete everywhere.
   sections; the four-field modality catalog moves to /modalities/ (with
   id anchors, FR-13); therapy page keeps a summary + link. See plan.md
   phase 3 (revised) + E-2/E-3 (revised).
+- 2026-07-26 — phase 2: spec ACs direct (v2 native); 5 ACs;
+  workstream=rooted-light-website; red-artifacts=E-2,E-3,E-4 — all
+  three re-run in worktree and watched fail (E-2: /modalities missing;
+  E-4: no booking CTA in 3 clicks; E-3: no [data-cta="booking"] on
+  reiki). Context: Leo's theme pick (sand-lilac) landed same day;
+  this item stays theme-neutral per its own notes — rlw105 promotes.
+- 2026-07-26 — phase 3: four components (BookingCTA carrying
+  data-cta="booking", ModalityAccordion carrying data-modality + id +
+  four data-field sections, InquiryForm posting to contact.form_action,
+  ResourceCard); new top-level /modalities/ route + nav entry (six
+  sections); resources detail pages ([slug].astro); reiki gains
+  session-shape section + two BookingCTAs on the site.json seams;
+  therapy gains modality summaries deep-linking /modalities/#id,
+  InquiryForm, Psychology Today link (directory URL until Kylie's
+  profile — TODO marked in-page), 988 note kept, zero booking
+  affordances; about-you map deep-links anchors; base.css gains
+  theme-neutral CTA/accordion/form primitives. Build 64 pages;
+  E-2, E-3 (--allow-placeholder), E-4 all flipped GREEN; E-1/E-5/E-7
+  guardrails still green.
+- 2026-07-26 — phase 4: 3-agent parallel adversarial review (Blind
+  Hunter / Edge Case Hunter / Acceptance Auditor); auditor: all 5 ACs +
+  every Goal clause MET; 7 deduped findings (2 MED, 5 LOW); ALL fixed
+  in-place — MEDs: deep links landed on closed <details> (fragment
+  targeting the details element does not auto-expand; now rendered
+  open) and h1→h3 outline skip on /modalities/ (modality names now h2
+  inside <summary>); LOWs: reiki CTAs regained "(opens soon)" honesty
+  notes, contact.form_action renamed #booking-tbd → #inquiry-tbd so no
+  booking-ish literal ships on the therapy page, inquiry form gained a
+  "delivery goes live soon" note, modality resources[] dead
+  #todo-kylie anchors now point at the live /resources/what-are-
+  modalities/ explainer (TODO(kylie) kept for specific links), schema
+  arrays tightened .nonempty() so an empty certifications list fails
+  the build instead of rendering a bare heading, PT copy reworded to
+  "(profile link coming soon)". Re-review of fix hunks in dist clean.
+- 2026-07-26 — phase 5: local gates green — build exit 0 (64 pages);
+  E-2/E-3(--allow-placeholder)/E-4 target evals PASS; E-1/E-5/E-7
+  mockup guardrails PASS; no lint/coverage runners configured
+  (YOLO: informational only).
 - 2026-07-26T15:37:26-06:00 — claimed by /devx in session /devx-2026-07-26T1537-70206

@@ -6,8 +6,8 @@ who_benefits:
   - "People navigating questions of meaning, purpose, or spirituality"
   - "Those whose inner life feels bigger than everyday language"
 resources:
-  - label: "Transpersonal psychology explainer (placeholder)"
-    url: "#todo-kylie-resource-link"
+  - label: "What are modalities? — plain-language explainer"
+    url: "/resources/what-are-modalities/" # TODO(kylie): swap for a modality-specific link
 certifications:
   - "Placeholder: transpersonal training / certification" # TODO(kylie)
 order: 2
