@@ -5,7 +5,7 @@ created: 2026-07-25T18:25:00-06:00
 title: Dusk convergence — all refinement mockups adopt the dusk skeleton + lavender gradient
 from: user instruction 2026-07-25 (fast follow to rlw108)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-25T2054-40698
 branch: feat/dev-rlw109
 entered_at: execute
@@ -58,4 +58,6 @@ options become temperature + type (mist/linen/sage/ink/dawn palettes).
   packs well-formed. 0 issues; re-verified via greps on built output.
 - 2026-07-25 — phase 5: local gates green — build exit 0, E-7 PASS,
   E-1 PASS (12 mockups), E-5 PASS (36 pairings).
-
+- 2026-07-25 — phase 7/7.5/8: PR #5 + tour published; devx-ci run
+  30185341880 SUCCESS; check-hold clean; merge-gate {"merge":true};
+  merged via PR #5 (squash → dbe6df5).
