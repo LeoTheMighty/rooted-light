@@ -5,7 +5,7 @@ created: 2026-07-25T17:45:00-06:00
 title: Lavender refinement round — ≥5 simple variants + Modalities section in all mockups
 from: _devx/workstreams/rooted-light-website/plan.md (phase 2b)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-25T1757-30209
 branch: feat/dev-rlw108
 entered_at: execute
@@ -88,3 +88,11 @@ first, and re-package the share channel.
   (20 pages), E-7 PASS (6 lavender packs, Modalities on all 12), E-1
   PASS (12 mockups), E-5 PASS (36 pairings). Lint/coverage not
   configured (honest no-ops); E-2/E-3/E-4 red by design (phase 3/6).
+- 2026-07-25 — phase 7: pushed feat/dev-rlw108 (0951019); PR #4 opened
+  → https://github.com/LeoTheMighty/rooted-light/pull/4; remote CI
+  devx-ci run 30180822429 SUCCESS.
+- 2026-07-25 — phase 7.5: tour built (6 stops, 2 grep-verified trails,
+  5-entry decision ledger) + published to devx-tours; PR body updated
+  with tour link.
+- 2026-07-25 — phase 8: check-hold clean, merge-gate {"merge":true};
+  merged via PR #4 (squash → 34ff6ce).
