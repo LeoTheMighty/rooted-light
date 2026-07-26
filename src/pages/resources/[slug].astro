@@ -3,6 +3,7 @@
 // markdown is the explainer; frontmatter links render as references.
 import { getCollection, render } from "astro:content";
 import Page from "../../layouts/Page.astro";
+import { withBase } from "../../lib/paths";
 
 export async function getStaticPaths() {
   const resources = await getCollection("resources");
@@ -25,12 +26,12 @@ const { Content } = await render(resource);
         <ul>
           {resource.data.links.map((l) => (
             <li>
-              <a href={l.url}>{l.label}</a>
+              <a href={withBase(l.url)}>{l.label}</a>
             </li>
           ))}
         </ul>
       </section>
     )
   }
-  <p><a href="/resources/">← All resources</a></p>
+  <p><a href={withBase("/resources/")}>← All resources</a></p>
 </Page>

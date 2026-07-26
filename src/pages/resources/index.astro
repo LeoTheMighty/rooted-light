@@ -5,6 +5,7 @@
 import { getCollection } from "astro:content";
 import Page from "../../layouts/Page.astro";
 import ResourceCard from "../../components/ResourceCard.astro";
+import { withBase } from "../../lib/paths";
 
 const resources = (await getCollection("resources")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -22,6 +23,6 @@ const resources = (await getCollection("resources")).sort(
   {resources.map((r) => <ResourceCard resource={r} />)}
   <p>
     Looking for the ways of working themselves? They live in the
-    <a href="/modalities/">modality catalog</a>.
+    <a href={withBase("/modalities/")}>modality catalog</a>.
   </p>
 </Page>

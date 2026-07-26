@@ -10,6 +10,7 @@
 // content visible. The h2 in <summary> keeps the modality name in the
 // document outline (h1 → h2 → h3 fields).
 import type { CollectionEntry } from "astro:content";
+import { withBase } from "../lib/paths";
 
 interface Props {
   modality: CollectionEntry<"modalities">;
@@ -38,7 +39,7 @@ const { title, what_it_is, who_benefits, resources, certifications } =
         {
           resources.map((r) => (
             <li>
-              <a href={r.url}>{r.label}</a>
+              <a href={withBase(r.url)}>{r.label}</a>
             </li>
           ))
         }

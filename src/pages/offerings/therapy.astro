@@ -8,6 +8,7 @@ import { getCollection } from "astro:content";
 import Page from "../../layouts/Page.astro";
 import InquiryForm from "../../components/InquiryForm.astro";
 import site from "../../content/site.json";
+import { withBase } from "../../lib/paths";
 
 const modalities = (await getCollection("modalities")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -28,7 +29,7 @@ const modalities = (await getCollection("modalities")).sort(
     <p>
       Sessions draw on a few ways of working, met where you are. Each is
       described in plain language in the
-      <a href="/modalities/">modality catalog</a>.
+      <a href={withBase("/modalities/")}>modality catalog</a>.
     </p>
     {
       modalities.map((m) => (
@@ -36,7 +37,7 @@ const modalities = (await getCollection("modalities")).sort(
           <h3>{m.data.title}</h3>
           <p>{m.data.summary}</p>
           <p>
-            <a href={`/modalities/#${m.id}`}>More about {m.data.title} →</a>
+            <a href={withBase(`/modalities/#${m.id}`)}>More about {m.data.title} →</a>
           </p>
         </article>
       ))

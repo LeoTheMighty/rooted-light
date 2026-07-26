@@ -4,6 +4,7 @@
 // phase 6's concern.
 import { getCollection } from "astro:content";
 import Page from "../../layouts/Page.astro";
+import { withBase } from "../../lib/paths";
 
 const offerings = (await getCollection("offerings")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -12,7 +13,7 @@ const offerings = (await getCollection("offerings")).sort(
 
 <Page title="Offerings">
   <article class="card">
-    <h2><a href="/offerings/reiki/">Reiki</a></h2>
+    <h2><a href={withBase("/offerings/reiki/")}>Reiki</a></h2>
     <ul>
       {
         offerings.map((o) => (
@@ -24,7 +25,7 @@ const offerings = (await getCollection("offerings")).sort(
     </ul>
   </article>
   <article class="card">
-    <h2><a href="/offerings/therapy/">Therapy</a></h2>
+    <h2><a href={withBase("/offerings/therapy/")}>Therapy</a></h2>
     <p>
       Talk therapy with Kylie — reach out by inquiry; scheduling and intake
       happen after we connect. <!-- TODO(kylie): voice pass -->
