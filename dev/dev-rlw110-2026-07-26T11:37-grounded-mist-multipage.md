@@ -7,7 +7,7 @@ from: user instruction 2026-07-26 (fast follow to rlw109)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
 status: in-progress
 owner: /devx-2026-07-26T1137-50993
-branch: null
+branch: feat/dev-rlw110
 entered_at: execute
 ---
 
@@ -83,3 +83,5 @@ not the vague "Book a session".
 - 2026-07-26 — phase 5: local gates green — build exit 0 (36 pages),
   E-7 PASS (16 mockups), E-1 PASS, E-5 PASS; E-2/3/4 RED expected
   (rlw103 artifacts, waived in CI). Share package regenerated.
+- 2026-07-26 — phase 7: PR https://github.com/LeoTheMighty/rooted-light/pull/6 opened (base main).
+- 2026-07-26 — phase 7.5: tour published — https://htmlpreview.github.io/?https://raw.githubusercontent.com/LeoTheMighty/rooted-light/devx-tours/tours/rlw110/tour.html; PR body updated.
