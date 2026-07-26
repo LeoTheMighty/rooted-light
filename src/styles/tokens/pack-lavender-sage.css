@@ -12,4 +12,8 @@
   /* pack extras */
   /* AA-checked: 4.94:1 vs bg — kickers render at 0.75rem */
   --color-secondary: #5f7050;
+  /* dusk-skeleton washes (rlw109 convergence) */
+  --wash-hero: linear-gradient(165deg, #dcd6ea 0%, #f6f5f9 55%, #e9eee2 100%);
+  --wash-foot: linear-gradient(0deg, #e2e7da 0%, #f6f5f9 100%);
+  --radius-soft: 22px;
 }
