@@ -16,6 +16,8 @@ export const nav = [
 
 export const home = {
   name: site.name,
+  /** Round 4 (rlw111): Kylie's name goes right on the front page. */
+  ownerLine: site.owner_line,
   tagline: site.tagline,
   intention: site.intention,
   intentionWords: site.intention_words,
@@ -41,18 +43,20 @@ export const home = {
         "Licensed talk therapy, integrated with the same rooted, caring presence.",
     },
   ],
+  // Modalities per Leo's 2026-07-26 instruction (rlw111): Somatic,
+  // Transpersonal, and Parts Work.
   modalities: [
     {
-      title: "Talk therapy",
-      blurb: "Steady, relational work at your own pace.",
+      title: "Somatic",
+      blurb: "Body-led work — listening to what words alone can't reach.",
     },
     {
-      title: "EMDR",
-      blurb: "Structured processing for what the body still carries.",
+      title: "Transpersonal",
+      blurb: "Therapy that makes room for spirit, meaning, and mystery.",
     },
     {
-      title: "Reiki-informed care",
-      blurb: "Energy work woven gently into the therapeutic space.",
+      title: "Parts Work",
+      blurb: "Meeting every part of you with curiosity and care.",
     },
   ],
   about: [
@@ -70,6 +74,19 @@ export const home = {
     { title: "What are modalities?" },
     { title: "Types of reiki" },
   ],
+};
+
+/** Round-4 (rlw111) favorite-quote spaces: placeholder quotes that show
+ *  the treatment — Kylie swaps in her own favorites later. TODO(kylie) */
+export const quotes = {
+  home: {
+    text: "The wound is the place where the Light enters you.",
+    attribution: "Rumi",
+  },
+  modalities: {
+    text: "What is to give light must endure burning.",
+    attribution: "Viktor Frankl",
+  },
 };
 
 /** Round-3 (rlw110) multi-page content: the grounded variants render
@@ -116,19 +133,19 @@ export const pages = {
       "The ways of working that shape a session — used on their own or woven together, depending on what you need.",
     items: [
       {
-        id: "talk-therapy",
-        title: "Talk therapy",
-        body: "Steady, relational work at your own pace. No agenda pushed onto you — just consistent, attentive presence and the room to say what's true.",
+        id: "somatic",
+        title: "Somatic",
+        body: "Body-led work — listening to what words alone can't reach. We slow down and notice what the body is holding, and let it move at its own pace.",
       },
       {
-        id: "emdr",
-        title: "EMDR",
-        body: "Structured processing for what the body still carries. A well-researched approach for moving through stuck, overwhelming memories with support.",
+        id: "transpersonal",
+        title: "Transpersonal",
+        body: "Therapy that makes room for spirit, meaning, and mystery. Whatever your beliefs, the parts of life that feel bigger than words are welcome here.",
       },
       {
-        id: "reiki-informed-care",
-        title: "Reiki-informed care",
-        body: "Energy work woven gently into the therapeutic space — for clients who want both, in whatever balance feels right.",
+        id: "parts-work",
+        title: "Parts Work",
+        body: "Meeting every part of you with curiosity and care — even the ones that protect, resist, or carry old pain. Nothing about you is a problem to fix.",
       },
     ],
   },

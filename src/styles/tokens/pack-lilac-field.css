@@ -1,0 +1,21 @@
+/* pack-lilac-field (round 4, rlw111) — LILAC PRIMARY, tan secondary.
+   Pale lilac pages warmed by honey-tan bands; deep lilac accent.
+   Explores the inverse of the reference composition: the lilac family
+   takes the base-neutral role, tan takes the quote-band role
+   (decisions/2026-07-26-anchorsaweigh-design-analysis.md). Baskerville
+   headings — the literary voice. */
+:root {
+  --color-bg: #f6f3fa;
+  --color-surface: #e7e0f1;
+  /* honey tan — the second family, worn by quote bands */
+  --color-secondary: #eee2ca;
+  --color-text-body: #46414d;
+  --color-text-heading: #43395c;
+  /* AA-checked: 5.56:1 vs bg; surface text on accent 4.75:1 */
+  --color-accent: #6d5794;
+  --font-heading: "Baskerville", "Palatino", Georgia, serif;
+  --font-body: "Seravek", "Avenir Next", "Segoe UI", sans-serif;
+  /* pack extras */
+  --hairline: 1px solid #dcd4e8;
+  --radius-soft: 22px;
+}

@@ -1,0 +1,20 @@
+/* pack-almond-veil (round 4, rlw111) — TAN PRIMARY, lilac secondary,
+   one shade deeper than sand-lilac: almond and taupe under a plum-lilac
+   accent. Keeps #13's Optima so the tan question is answered without
+   also changing the type. Shade family: the darker end of the
+   reference site's cream/greige neutrals (decisions/2026-07-26-
+   anchorsaweigh-design-analysis.md). */
+:root {
+  --color-bg: #f3ead9;
+  --color-surface: #e5d7bf;
+  --color-secondary: #ded4ea;
+  --color-text-body: #4a4136;
+  --color-text-heading: #4f4258;
+  /* AA-checked: 5.83:1 vs bg; surface text on accent 4.91:1 */
+  --color-accent: #66507e;
+  --font-heading: "Optima", "Gill Sans", "Segoe UI", sans-serif;
+  --font-body: "Helvetica Neue", -apple-system, "Segoe UI", sans-serif;
+  /* pack extras */
+  --hairline: 1px solid #d9cbae;
+  --radius-soft: 22px;
+}

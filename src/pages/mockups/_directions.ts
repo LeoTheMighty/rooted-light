@@ -11,9 +11,12 @@ export interface Direction {
   pack: string;
   title: string;
   blurb: string;
-  round: 1 | 2 | 3;
-  /** round-3 only: which navigation treatment the variant demonstrates */
+  round: 1 | 2 | 3 | 4;
+  /** rounds 3–4: which navigation treatment the variant demonstrates */
   nav?: "classic" | "centered" | "rail" | "compact";
+  /** round-4 only: the primary-vs-secondary makeup this variant argues
+   *  for — shown on the card and in the on-page decision sheet */
+  makeup?: string;
 }
 
 export const directions: Direction[] = [
@@ -148,6 +151,72 @@ export const directions: Direction[] = [
       "The quietest bar — one Menu button holds everything, with Modalities as its own labeled group inside.",
     round: 3,
     nav: "compact",
+  },
+  // Round 4 (rlw111, the decision round): #13's classic skeleton with
+  // tan + lilac palettes inspired by anchorsaweighcounseling.com (see
+  // _devx/workstreams/rooted-light-website/decisions/). Every variant
+  // is one concrete answer to the three open decisions — font pairing,
+  // exact lilac/tan shades, and primary-vs-secondary makeup — and each
+  // page carries a decision sheet stating its exact hexes and fonts.
+  {
+    slug: "sand-lilac",
+    pack: "pack-sand-lilac",
+    title: "Warm sand & lilac",
+    blurb:
+      "Tan leads — warm sand pages with lilac as the accent voice. Classic serif headings.",
+    round: 4,
+    nav: "classic",
+    makeup: "Tan primary · lilac secondary",
+  },
+  {
+    slug: "almond-veil",
+    pack: "pack-almond-veil",
+    title: "Almond veil",
+    blurb:
+      "Tan leads, deeper — almond and taupe under a plum-lilac accent, with #13's Optima type kept.",
+    round: 4,
+    nav: "classic",
+    makeup: "Tan primary · lilac secondary",
+  },
+  {
+    slug: "lilac-field",
+    pack: "pack-lilac-field",
+    title: "Lilac field",
+    blurb:
+      "Lilac leads — pale lilac pages warmed by honey-tan bands. The most literary serif.",
+    round: 4,
+    nav: "classic",
+    makeup: "Lilac primary · tan secondary",
+  },
+  {
+    slug: "mauve-clay",
+    pack: "pack-mauve-clay",
+    title: "Mauve & clay",
+    blurb:
+      "Lilac leads, dustier — mauve surfaces against soft clay tan, rounded modern sans headings.",
+    round: 4,
+    nav: "classic",
+    makeup: "Lilac primary · tan secondary",
+  },
+  {
+    slug: "linen-bloom",
+    pack: "pack-linen-bloom",
+    title: "Linen bloom",
+    blurb:
+      "Neither leads — warm linen white base where tan and lilac take turns as section bands.",
+    round: 4,
+    nav: "classic",
+    makeup: "Neutral base · tan + lilac share",
+  },
+  {
+    slug: "porcelain-lilac",
+    pack: "pack-porcelain-lilac",
+    title: "Porcelain & lilac",
+    blurb:
+      "Neither leads, cooler — porcelain white with oat and lilac as quiet equals. Optima's calm kept.",
+    round: 4,
+    nav: "classic",
+    makeup: "Neutral base · tan + lilac share",
   },
 ];
 

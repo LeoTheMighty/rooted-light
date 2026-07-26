@@ -1,0 +1,23 @@
+/* pack-sand-lilac (round 4, rlw111) — TAN PRIMARY, lilac secondary.
+   Warm sand pages with lilac as the accent voice. Explores the
+   anchorsaweigh takeaway "light warm neutral base, accent used
+   sparingly" with lilac in the accent role and the aubergine heading
+   dark (see decisions/2026-07-26-anchorsaweigh-design-analysis.md).
+   Heading face is Didot — the thin high-contrast serif closest to the
+   reference site's Adonis. */
+:root {
+  --color-bg: #f7f1e8;
+  --color-surface: #e8ded0;
+  /* the second family: pale lilac, worn by quote bands */
+  --color-secondary: #ded5ea;
+  --color-text-body: #4b4339;
+  /* aubergine — the lilac-world analog of the reference dark */
+  --color-text-heading: #4a4155;
+  /* AA-checked: 5.60:1 vs bg; surface text on accent 4.73:1 */
+  --color-accent: #6c5590;
+  --font-heading: "Didot", "Bodoni 72", Georgia, serif;
+  --font-body: "Avenir Next", "Avenir", "Segoe UI", sans-serif;
+  /* pack extras */
+  --hairline: 1px solid #ddd2c2;
+  --radius-soft: 22px;
+}

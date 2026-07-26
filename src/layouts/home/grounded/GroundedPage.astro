@@ -1,22 +1,103 @@
 ---
-// Grounded mist (round 3, rlw110): the lavender-mist look with the
-// gradient removed — flat color, hairlines, solid tint bands — split
-// into real pages (Home / Offerings / Modalities / About). One skeleton
-// renders all four nav variants; `variant.nav` picks the treatment.
+// Grounded skeleton (round 3, rlw110; extended round 4, rlw111): flat
+// color, hairlines, solid tint bands — split into real pages (Home /
+// Offerings / Modalities / About). One skeleton renders all four nav
+// variants; `variant.nav` picks the treatment. Round 4 renders through
+// the same skeleton with its own tan+lilac token pack per variant, puts
+// Kylie Fustini in the hero, adds favorite-quote spaces, and closes
+// every page with a decision sheet (exact hexes + fonts) so the round
+// can settle fonts, shades, and primary-vs-secondary makeup.
 // Every page is self-contained (inline CSS) and every internal link is
 // an explicit ./…/index.html so the zip works over file:// at any depth.
-import packCss from "../../../styles/tokens/pack-lavender-mist.css?raw";
 import shared from "../_shared.css?raw";
 import layoutCss from "./Grounded.css?raw";
-import { home, pages } from "../_content";
+import { home, pages, quotes } from "../_content";
 import type { Direction } from "../../../pages/mockups/_directions";
+
+const packSources = import.meta.glob("../../../styles/tokens/pack-*.css", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
 
 interface Props {
   variant: Direction;
   page: "home" | "offerings" | "modalities" | "about";
 }
 const { variant, page } = Astro.props;
-if (!variant.nav) throw new Error(`${variant.slug}: round-3 variant missing nav kind`);
+if (!variant.nav) throw new Error(`${variant.slug}: grounded variant missing nav kind`);
+
+// The "/" anchor keeps a pack name that happens to be a suffix of
+// another from resolving to the wrong file.
+const packEntry = Object.entries(packSources).find(([path]) =>
+  path.endsWith(`/${variant.pack}.css`),
+);
+if (!packEntry) throw new Error(`${variant.slug}: no token pack ${variant.pack}`);
+const packCss = packEntry[1];
+
+// Decision-sheet data (round 4): parsed from the pack source at build
+// time — same comment-stripping rule as the review index, so a
+// commented-out declaration can never drive a chip, and a missing token
+// fails the build loudly.
+const isR4 = variant.round === 4;
+if (isR4 && variant.nav !== "classic")
+  throw new Error(
+    `${variant.slug}: round-4 variants use the classic nav only (the #13 skeleton; other navs don't place the spec sheet)`,
+  );
+if (isR4 && !variant.makeup)
+  throw new Error(`${variant.slug}: round-4 variant missing makeup label`);
+const strippedPack = packCss.replace(/\/\*[\s\S]*?\*\//g, "");
+const token = (name: string) => {
+  const v = (strippedPack.match(new RegExp(`${name}\\s*:\\s*([^;]+);`)) ||
+    [])[1]?.trim();
+  if (!v)
+    throw new Error(`${variant.pack}: token ${name} missing or unparseable`);
+  return v;
+};
+const fontName = (raw: string) => raw.split(",")[0]?.replace(/"/g, "").trim();
+// The sheet must state what the page actually SHOWS. Tinted bands and
+// the quote band render color-mix() results, not raw tokens — so those
+// chips carry the same srgb mix, computed here (color-mix in srgb is a
+// straight per-channel interpolation of the sRGB coordinates).
+const hexRgb = (s: string) => {
+  const m = s.trim().match(/^#([0-9a-f]{6})$/i);
+  if (!m)
+    throw new Error(`${variant.pack}: expected a 6-digit hex, got "${s}"`);
+  return [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16));
+};
+const mix = (a: string, b: string, weightA: number) => {
+  const [A, B] = [hexRgb(a), hexRgb(b)];
+  return (
+    "#" +
+    A.map((c, i) =>
+      Math.round(c * weightA + B[i] * (1 - weightA))
+        .toString(16)
+        .padStart(2, "0"),
+    ).join("")
+  );
+};
+const sheet = isR4
+  ? {
+      makeup: variant.makeup ?? "",
+      chips: [
+        { label: "Page", hex: token("--color-bg") },
+        // matches Grounded.css --tint: color-mix(surface 55%, bg)
+        {
+          label: "Section tint",
+          hex: mix(token("--color-surface"), token("--color-bg"), 0.55),
+        },
+        // matches Grounded.css .quote-band: color-mix(secondary 42%, bg)
+        {
+          label: "Quote band",
+          hex: mix(token("--color-secondary"), token("--color-bg"), 0.42),
+        },
+        { label: "Accent", hex: token("--color-accent") },
+        { label: "Headings", hex: token("--color-text-heading") },
+      ],
+      headingFont: fontName(token("--font-heading")),
+      bodyFont: fontName(token("--font-body")),
+    }
+  : null;
 
 const depth = page === "home" ? 0 : 1;
 const base = depth ? "../" : "./";
@@ -141,6 +222,7 @@ const modalityLinks = pages.modalities.items.map((m) => ({
             <section class="hero">
               <div class="hero-inner">
                 <h1>{home.name}</h1>
+                {isR4 && <p class="owner-line">{home.ownerLine}</p>}
                 <p class="tagline">{home.tagline}</p>
                 <p class="intention">{home.intention}</p>
                 <div class="offer-row">
@@ -167,6 +249,19 @@ const modalityLinks = pages.modalities.items.map((m) => ({
                 </div>
               </div>
             </section>
+            {isR4 && (
+              <section class="band quote-band">
+                <div class="band-inner quote">
+                  <figure>
+                    <blockquote>
+                      <p>{quotes.home.text}</p>
+                    </blockquote>
+                    <figcaption>— {quotes.home.attribution}</figcaption>
+                  </figure>
+                  <p class="quote-slot">a space for a favorite quote</p>
+                </div>
+              </section>
+            )}
             <section class="band tint">
               <div class="band-inner">
                 <h2>Modalities</h2>
@@ -231,6 +326,19 @@ const modalityLinks = pages.modalities.items.map((m) => ({
                 </div>
               </section>
             ))}
+            {isR4 && (
+              <section class="entry">
+                <div class="band-inner quote inline-quote">
+                  <figure>
+                    <blockquote>
+                      <p>{quotes.modalities.text}</p>
+                    </blockquote>
+                    <figcaption>— {quotes.modalities.attribution}</figcaption>
+                  </figure>
+                  <p class="quote-slot">a space for a favorite quote</p>
+                </div>
+              </section>
+            )}
             <section class="entry">
               <div class="band-inner">
                 <p class="body">
@@ -264,6 +372,29 @@ const modalityLinks = pages.modalities.items.map((m) => ({
       }
     </main>
 
+    {
+      sheet && (
+        <aside class="spec-sheet" aria-label="Design decision sheet">
+          <div class="band-inner">
+            <p class="sheet-title">Decision sheet — {variant.title}</p>
+            <p class="sheet-makeup">{sheet.makeup}</p>
+            <div class="sheet-chips">
+              {sheet.chips.map((c) => (
+                <div class="chip">
+                  <span class="chip-swatch" style={`background:${c.hex}`} />
+                  <span class="chip-label">{c.label}</span>
+                  <code class="chip-hex">{c.hex}</code>
+                </div>
+              ))}
+            </div>
+            <p class="sheet-fonts">
+              Headings: <strong>{sheet.headingFont}</strong> · Body:{" "}
+              <strong>{sheet.bodyFont}</strong>
+            </p>
+          </div>
+        </aside>
+      )
+    }
     <footer class="ground-foot">
       <p class="foot-resources">{home.resources.map((r) => r.title).join(" · ")}</p>
       <p>{home.intentionWords.join(" · ")}</p>

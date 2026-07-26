@@ -455,6 +455,135 @@ main > :last-child {
   border-bottom: none;
 }
 
+/* — round 4 (rlw111): owner line, quote spaces, decision sheet — */
+
+/* Kylie's name right on the front page: heading voice, sized between
+   the h1 and the tagline so it reads as part of the identity. */
+.owner-line {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-size: 1.18rem;
+  letter-spacing: 0.015em;
+  margin-top: 0.55rem;
+}
+
+/* Favorite-quote spaces. The home band wears the pack's SECOND color
+   family so every round-4 page shows primary and secondary together —
+   the makeup is visible, not described. */
+.quote-band {
+  background: color-mix(
+    in srgb,
+    var(--color-secondary, var(--color-surface)) 42%,
+    var(--color-bg)
+  );
+  text-align: center;
+}
+
+.quote blockquote p {
+  font-family: var(--font-heading);
+  /* italic display serif — the reference site's quote-band treatment */
+  font-style: italic;
+  color: var(--color-text-heading);
+  font-size: clamp(1.25rem, 3vw, 1.55rem);
+  line-height: 1.45;
+  max-width: 30rem;
+  margin-inline: auto;
+}
+
+.quote blockquote::before {
+  content: "\201C";
+  display: block;
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  font-size: 2.6rem;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.quote figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text-heading);
+}
+
+.quote .quote-slot {
+  margin-top: 0.9rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.55;
+}
+
+/* the modalities page carries the quieter, left-aligned treatment */
+.inline-quote {
+  text-align: left;
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1.15rem;
+}
+
+.inline-quote blockquote p {
+  font-size: 1.12rem;
+  margin-inline: 0;
+}
+
+.inline-quote blockquote::before {
+  content: none;
+}
+
+/* Decision sheet: the round-4 contract — every page states its exact
+   shades and fonts so choosing is concrete, not vibes. */
+.spec-sheet {
+  border-top: var(--line);
+  background: var(--color-bg);
+  padding: 1.6rem 1.3rem 1.8rem;
+  font-size: 0.85rem;
+}
+
+.spec-sheet .sheet-title {
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-heading);
+}
+
+.spec-sheet .sheet-makeup {
+  margin-top: 0.25rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.sheet-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.3rem;
+  margin-top: 0.8rem;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.chip-swatch {
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50%;
+  border: var(--line);
+  flex: none;
+}
+
+.chip-hex {
+  opacity: 0.75;
+  font-size: 0.78rem;
+}
+
+.spec-sheet .sheet-fonts {
+  margin-top: 0.75rem;
+}
+
 /* — footer — */
 .ground-foot {
   background: var(--tint);

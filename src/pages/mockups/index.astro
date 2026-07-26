@@ -28,7 +28,7 @@ const token = (css: string, pack: string, name: string) => {
 // the single-file share artifact, which numbers in the same order.
 const cards = directions.map((d, idx) => {
   const entry = Object.entries(packSources).find(([path]) =>
-    path.endsWith(`${d.pack}.css`),
+    path.endsWith(`/${d.pack}.css`),
   );
   if (!entry) throw new Error(`no token pack found for ${d.pack}`);
   const css = entry[1];
@@ -47,9 +47,15 @@ const cards = directions.map((d, idx) => {
 
 const rounds = [
   {
+    key: 4,
+    title: "Round 4 — tan & lilac, the decision round (start here)",
+    note: "No. 13's layout with tan and lilac, inspired by the site you shared. Each one is a full mockup (tap through its pages) AND a concrete proposal: two lead with tan, two lead with lilac, two keep a neutral base where both share. Kylie's name is on every front page, and each has a favorite-quote space. The decision sheet at the bottom of every page lists its exact shades and fonts — reply with a number, and feel free to mix (\"19's colors with 17's fonts\").",
+    cards: cards.filter((c) => c.round === 4),
+  },
+  {
     key: 3,
-    title: "Round 3 — grounded mist, multi-page (start here)",
-    note: "Lavender mist won the vibe — these keep its type and palette, drop the gradient, and split into real pages (Home · Offerings · Modalities · About). What differs is the navigation, including where Modalities lives. The offerings are the main buttons now. Reply with the number that feels right (or a tweak).",
+    title: "Round 3 — grounded mist, multi-page (for reference)",
+    note: "Lavender mist's type and palette, no gradient, real pages. These varied the navigation — no. 13's classic bar won and is the skeleton round 4 builds on.",
     cards: cards.filter((c) => c.round === 3),
   },
   {
@@ -180,6 +186,13 @@ for (const r of rounds) {
         font-size: 0.9rem;
         margin-top: 0.5rem;
       }
+      .card p.makeup {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #5a6b4e;
+        margin-top: 0.3rem;
+      }
       .card .open {
         display: inline-block;
         margin-top: 0.7rem;
@@ -197,12 +210,14 @@ for (const r of rounds) {
   </head>
   <body>
     <header class="intro">
-      <h1>{site.name} — grounded mist</h1>
+      <h1>{site.name} — tan &amp; lilac</h1>
       <p>
-        Round 3: lavender mist's type and palette, no more gradient,
-        and real pages instead of one long scroll. The four up top
-        differ in how the navigation works — tap through the pages on
-        each one. Earlier rounds follow for reference.
+        Round 4, the decision round: no. 13's layout dressed in tans and
+        lilacs, inspired by the site you shared. The six up top each
+        answer three questions — which fonts, which exact shades, and
+        whether tan or lilac leads. Pick favorites for each (they don't
+        have to come from the same mockup). Earlier rounds follow for
+        reference.
       </p>
       <p class="how">
         A note on type: the fonts are your device’s own, so they render
@@ -233,6 +248,7 @@ for (const r of rounds) {
                     <p class="font" style={`font-family:${c.font}`}>
                       {c.fontName}
                     </p>
+                    {c.makeup && <p class="makeup">{c.makeup}</p>}
                     <p class="blurb">{c.blurb}</p>
                     <span class="open">Open this direction →</span>
                   </div>

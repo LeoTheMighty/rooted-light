@@ -1,5 +1,5 @@
 ---
-// Round-3 subpages: Offerings / Modalities / About per grounded
+// Rounds 3–4 subpages: Offerings / Modalities / About per grounded
 // variant (dist/mockups/<slug>/<page>/index.html). The route list IS
 // the `pages` content object — a new page added there ships everywhere
 // at once. E-7 only scans direct children of dist/mockups/, but these
@@ -11,7 +11,7 @@ import { directions, direction } from "../_directions";
 
 export function getStaticPaths() {
   return directions
-    .filter((d) => d.round === 3)
+    .filter((d) => d.round >= 3)
     .flatMap((d) =>
       Object.keys(pages).map((page) => ({
         params: { variant: d.slug, page },
