@@ -23,7 +23,10 @@ const token = (css: string, pack: string, name: string) => {
   return v;
 };
 
-const cards = directions.map((d) => {
+// Numbering is CONTINUOUS across rounds (1–5 refinements, 6–12
+// originals) so a "number N" reply means the same mockup here and in
+// the single-file share artifact, which numbers in the same order.
+const cards = directions.map((d, idx) => {
   const entry = Object.entries(packSources).find(([path]) =>
     path.endsWith(`${d.pack}.css`),
   );
@@ -32,6 +35,7 @@ const cards = directions.map((d) => {
   const fontRaw = token(css, d.pack, "--font-heading");
   return {
     ...d,
+    num: idx + 1,
     bg: token(css, d.pack, "--color-bg"),
     surface: token(css, d.pack, "--color-surface"),
     accent: token(css, d.pack, "--color-accent"),
@@ -40,6 +44,26 @@ const cards = directions.map((d) => {
     fontName: fontRaw.split(",")[0]?.replace(/"/g, "").trim(),
   };
 });
+
+const rounds = [
+  {
+    key: 2,
+    title: "Round 2 — lavender refinements (start here)",
+    note: "The direction is picked: soft lavender dusk, kept simple. These five narrow it to a final look — every one now carries the new Modalities section. Reply with the one that feels right (or a tweak).",
+    cards: cards.filter((c) => c.round === 2),
+  },
+  {
+    key: 1,
+    title: "Round 1 — the original directions (for reference)",
+    note: "The first exploration, kept for comparison. Soft lavender dusk (no. 8) was the winner.",
+    cards: cards.filter((c) => c.round === 1),
+  },
+];
+
+for (const r of rounds) {
+  if (!r.cards.length)
+    throw new Error(`review index round ${r.key} has zero cards — registry filter broke`);
+}
 ---
 
 <!doctype html>
@@ -88,11 +112,25 @@ const cards = directions.map((d) => {
         padding: 0.8rem 1rem;
         font-size: 0.92rem;
       }
+      .round {
+        max-width: 60rem;
+        margin: 0 auto 2.6rem;
+      }
+      .round-title {
+        font-family: Georgia, serif;
+        color: #4a5544;
+        font-size: 1.25rem;
+        text-align: center;
+      }
+      .round-note {
+        text-align: center;
+        max-width: 40rem;
+        margin: 0.5rem auto 1.2rem;
+        font-size: 0.92rem;
+      }
       .grid {
         display: grid;
         gap: 1.1rem;
-        max-width: 60rem;
-        margin-inline: auto;
       }
       @media (min-width: 640px) {
         .grid {
@@ -123,7 +161,7 @@ const cards = directions.map((d) => {
       .card .body {
         padding: 0.9rem 1rem 1.1rem;
       }
-      .card h2 {
+      .card h3 {
         font-size: 1.05rem;
         color: #4a5544;
       }
@@ -153,15 +191,11 @@ const cards = directions.map((d) => {
   </head>
   <body>
     <header class="intro">
-      <h1>{site.name} — style directions</h1>
+      <h1>{site.name} — lavender refinements</h1>
       <p>
-        {cards.length} looks for the home page, all showing the same words —
-        only the feel changes. Best browsed on your phone.
-      </p>
-      <p class="how">
-        Tap each one, live with them for a bit, then reply with your
-        favorite — or a blend of two (e.g. “colors of one, type of
-        another”). Nothing is final; this only picks a direction.
+        The direction is chosen — soft lavender dusk, kept simple. Now
+        the final look: five lavender variants up top, the original
+        seven below for reference. Best browsed on your phone.
       </p>
       <p class="how">
         A note on type: the fonts are your device’s own, so they render
@@ -170,27 +204,35 @@ const cards = directions.map((d) => {
       </p>
     </header>
 
-    <main class="grid">
+    <main>
       {
-        cards.map((c, i) => (
-          <a class="card" href={`./${c.slug}/index.html`}>
-            <span class="swatch" aria-hidden="true">
-              <span style={`background:${c.bg}`} />
-              <span style={`background:${c.surface}`} />
-              <span style={`background:${c.accent}`} />
-              <span style={`background:${c.heading}`} />
-            </span>
-            <div class="body">
-              <h2>
-                {i + 1}. {c.title}
-              </h2>
-              <p class="font" style={`font-family:${c.font}`}>
-                {c.fontName}
-              </p>
-              <p class="blurb">{c.blurb}</p>
-              <span class="open">Open this direction →</span>
+        rounds.map((r) => (
+          <section class="round">
+            <h2 class="round-title">{r.title}</h2>
+            <p class="round-note">{r.note}</p>
+            <div class="grid">
+              {r.cards.map((c) => (
+                <a class="card" href={`./${c.slug}/index.html`}>
+                  <span class="swatch" aria-hidden="true">
+                    <span style={`background:${c.bg}`} />
+                    <span style={`background:${c.surface}`} />
+                    <span style={`background:${c.accent}`} />
+                    <span style={`background:${c.heading}`} />
+                  </span>
+                  <div class="body">
+                    <h3>
+                      {c.num}. {c.title}
+                    </h3>
+                    <p class="font" style={`font-family:${c.font}`}>
+                      {c.fontName}
+                    </p>
+                    <p class="blurb">{c.blurb}</p>
+                    <span class="open">Open this direction →</span>
+                  </div>
+                </a>
+              ))}
             </div>
-          </a>
+          </section>
         ))
       }
     </main>

@@ -1,0 +1,14 @@
+/* pack-lavender-linen — warm cream ground with lavender-tinted
+   surfaces: the earthy-tan tie-in, softened. Calm and homey. */
+:root {
+  --color-bg: #f7f3ec;
+  --color-surface: #eee8f2;
+  --color-text-body: #46404a;
+  --color-text-heading: #55476b;
+  /* AA-checked: 5.50:1 vs bg, 5.05:1 vs surface */
+  --color-accent: #715693;
+  --font-heading: "Baskerville", "Palatino", Georgia, serif;
+  --font-body: "Seravek", "Segoe UI", -apple-system, sans-serif;
+  /* pack extras */
+  --band: #efe7dc;
+}

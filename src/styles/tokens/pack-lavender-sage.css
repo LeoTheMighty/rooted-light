@@ -1,0 +1,15 @@
+/* pack-lavender-sage — lavender-led with a sage secondary: the bridge
+   back to the original earthy brief. Fresh, botanical, gentle. */
+:root {
+  --color-bg: #f6f5f9;
+  --color-surface: #eaeef0;
+  --color-text-body: #3f4442;
+  --color-text-heading: #4c4470;
+  /* AA-checked: 5.75:1 vs bg, 5.34:1 vs surface (small-text safe) */
+  --color-accent: #6b5691;
+  --font-heading: "Iowan Old Style", "Palatino", Georgia, serif;
+  --font-body: "Avenir Next", "Avenir", "Segoe UI", sans-serif;
+  /* pack extras */
+  /* AA-checked: 4.94:1 vs bg — kickers render at 0.75rem */
+  --color-secondary: #5f7050;
+}

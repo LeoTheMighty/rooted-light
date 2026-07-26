@@ -1,0 +1,14 @@
+/* pack-lavender-dawn — the warmest refinement: mauve-rose lavender,
+   first-light softness. A gentler cousin of dusk. */
+:root {
+  --color-bg: #f7f2f6;
+  --color-surface: #efe6ee;
+  --color-text-body: #4a3f4c;
+  --color-text-heading: #5d4462;
+  /* AA-checked: 5.49:1 vs bg, 4.98:1 vs surface */
+  --color-accent: #83527b;
+  --font-heading: "Cochin", "Baskerville", "Palatino", serif;
+  --font-body: "Optima", "Candara", "Segoe UI", sans-serif;
+  /* pack extras */
+  --wash-dawn: linear-gradient(165deg, #ecdfe9 0%, #f7f2f6 60%);
+}

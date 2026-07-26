@@ -1,0 +1,8 @@
+---
+import HomeLavInk from "../../layouts/home/HomeLavInk.astro";
+import packCss from "../../styles/tokens/pack-lavender-ink.css?raw";
+import { direction } from "./_directions";
+const d = direction("lavender-ink");
+---
+
+<HomeLavInk packCss={packCss} title={d.title} blurb={d.blurb} />

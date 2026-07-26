@@ -1,0 +1,8 @@
+---
+import HomeLavLinen from "../../layouts/home/HomeLavLinen.astro";
+import packCss from "../../styles/tokens/pack-lavender-linen.css?raw";
+import { direction } from "./_directions";
+const d = direction("lavender-linen");
+---
+
+<HomeLavLinen packCss={packCss} title={d.title} blurb={d.blurb} />

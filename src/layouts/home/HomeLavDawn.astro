@@ -1,9 +1,8 @@
 ---
-// Quiet minimal light: tiny small-caps nav, one narrow text column,
-// hairline dividers, no cards or surfaces at all. Brightness-first;
-// the type carries everything.
+// Lavender dawn: a short soft gradient hero (dusk's gentler cousin),
+// nav row directly beneath it, then flat rounded surface cards.
 import MockupShell from "./MockupShell.astro";
-import layoutCss from "./HomeMinimal.css?raw";
+import layoutCss from "./HomeLavDawn.css?raw";
 import { home, nav } from "./_content";
 
 interface Props {
@@ -15,22 +14,22 @@ const { packCss, title, blurb } = Astro.props;
 ---
 
 <MockupShell packCss={packCss} layoutCss={layoutCss} title={title} blurb={blurb}>
-  <header class="whisper">
-    <span class="brand">{home.name}</span>
-    <nav aria-label="Main">
-      <ul>
-        {nav.map((n) => <li><a href={n.anchor}>{n.label}</a></li>)}
-      </ul>
-    </nav>
-  </header>
+  <section class="dawn" id="welcome">
+    <h1>{home.name}</h1>
+    <p class="tagline">{home.tagline}</p>
+    <a class="cta" href={home.bookingUrl}>Book a session</a>
+  </section>
+
+  <nav class="ribbon" aria-label="Main">
+    <ul>
+      {nav.map((n) => <li><a href={n.anchor}>{n.label}</a></li>)}
+    </ul>
+  </nav>
 
   <main>
-    <section class="hero" id="welcome">
-      <h1>{home.tagline}</h1>
-      <p class="intention">{home.intention}</p>
-    </section>
+    <p class="intention">{home.intention}</p>
 
-    <section class="quiet" id="offerings">
+    <section class="pane" id="offerings">
       <h2>Offerings</h2>
       {
         home.offerings.map((o) => (
@@ -40,12 +39,9 @@ const { packCss, title, blurb } = Astro.props;
           </article>
         ))
       }
-      <p class="cta-line">
-        <a href={home.bookingUrl}>Book a session →</a>
-      </p>
     </section>
 
-    <section class="quiet" id="modalities">
+    <section class="pane" id="modalities">
       <h2>Modalities</h2>
       {
         home.modalities.map((m) => (
@@ -57,7 +53,7 @@ const { packCss, title, blurb } = Astro.props;
       }
     </section>
 
-    <section class="quiet" id="about">
+    <section class="pane" id="about">
       <h2>About</h2>
       {
         home.about.map((a) => (
@@ -69,14 +65,14 @@ const { packCss, title, blurb } = Astro.props;
       }
     </section>
 
-    <section class="quiet" id="resources">
+    <section class="pane" id="resources">
       <h2>Resources</h2>
       <p>{home.resources.map((r) => r.title).join(" · ")}</p>
-      <p class="words">{home.intentionWords.join("  ·  ")}</p>
+      <p class="words">{home.intentionWords.join(" · ")}</p>
     </section>
   </main>
 
-  <footer class="whisper-foot">
+  <footer class="foot">
     <p>{home.legalName} · {home.tagline}</p>
   </footer>
 </MockupShell>
