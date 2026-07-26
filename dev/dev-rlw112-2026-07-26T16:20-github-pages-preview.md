@@ -5,7 +5,7 @@ created: 2026-07-26T16:20:00-06:00
 title: Temporary GitHub Pages preview deploy (pre-domain)
 from: user instruction 2026-07-26 (Leo — temporary hosting while name/domain are decided; repo flipped public by Leo's choice)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-26T1620-73496
 branch: feat/dev-rlw112
 entered_at: execute
@@ -83,3 +83,7 @@ behavior).
 - 2026-07-26 — phase 5: local gates green — default build exit 0 (64
   pages); E-1/E-2/E-3(--allow-placeholder)/E-4/E-5/E-7 PASS; base
   build exit 0 with prefix/leak/noindex checks clean.
+- 2026-07-26 — phase 7: PR https://github.com/LeoTheMighty/rooted-light/pull/10 opened (base main); devx-ci run 30223069323 SUCCESS.
+- 2026-07-26 — phase 7.5: tour published — https://htmlpreview.github.io/?https://raw.githubusercontent.com/LeoTheMighty/rooted-light/devx-tours/tours/rlw112/tour.html; PR body updated.
+- 2026-07-26 — phase 8: check-hold clean; merge-gate {"merge":true}; merged via PR #10 (squash → 43b55a9). AC-5 verified live: deploy-pages run 30223160095 SUCCESS; https://leothemighty.github.io/rooted-light/ → 200, themed title, noindex meta, prefixed nav; /offerings/therapy/ → 200; /modalities/ carries data-modality markers. Worktree + local branch removed.
+- 2026-07-26 — NOTE (drift, surfaced to Leo): a concurrent re-plan session's uncommitted INTERVIEW.md edits reference "rlw112 (Calendly runbook)" + "rlw113" — hash rlw112 was already taken by THIS spec (filed d30c1dc). The concurrent session's items need fresh hashes before filing.
