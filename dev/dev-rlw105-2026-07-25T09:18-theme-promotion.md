@@ -5,8 +5,8 @@ created: 2026-07-25T09:18:00-06:00
 title: Theme promotion — apply Kylie's chosen style pack site-wide
 from: _devx/workstreams/rooted-light-website/plan.md (phase 5)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-26T1554-64692
 branch: feat/dev-rlw105
 ---
 
@@ -44,3 +44,4 @@ profile prunes them.
 - 2026-07-26 — UNBLOCKED: final pick recorded (Leo) — round-4 "Warm
   sand & lilac" (`pack-sand-lilac`, rlw111). Promotion applies this
   pack site-wide. Status → ready.
+- 2026-07-26T15:54:53-06:00 — claimed by /devx in session /devx-2026-07-26T1554-64692

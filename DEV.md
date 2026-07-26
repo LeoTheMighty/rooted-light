@@ -19,7 +19,7 @@
 - [x] `dev/dev-rlw111-2026-07-26T14:53-tan-lilac-decision-round.md` — Tan & lilac decision round — #13 skeleton, Kylie on front page, Somatic/Transpersonal/Parts Work, quote spaces, font+shade+composition axes (fast follow, depends: rlw110) — PR: https://github.com/LeoTheMighty/rooted-light/pull/7 (merged 1a8a0d6)
 - [x] `dev/dev-rlw103-2026-07-25T09:16-content-pages-ia.md` — Content pages & information architecture — all EIGHT routes full incl. /modalities/ (depends: rlw101; scope revised 2026-07-25) — PR: https://github.com/LeoTheMighty/rooted-light/pull/8 (merged 50d4671)
 - [x] `dev/dev-rlw104-2026-07-25T09:17-booking-provider-comparison.md` — Booking-provider comparison — research doc + decision entry (parallel-safe) — PR: https://github.com/LeoTheMighty/rooted-light/pull/2 (merged 426dae4)
-- [ ] `dev/dev-rlw105-2026-07-25T09:18-theme-promotion.md` — Theme promotion — apply the chosen warm-sand-&-lilac pack (`pack-sand-lilac`, rlw111) site-wide (unblocked 2026-07-26: Leo's pick recorded in INTERVIEW.md)
+- [/] `dev/dev-rlw105-2026-07-25T09:18-theme-promotion.md` — Theme promotion — apply the chosen warm-sand-&-lilac pack (`pack-sand-lilac`, rlw111) site-wide (unblocked 2026-07-26: Leo's pick recorded in INTERVIEW.md)
 - [-] `dev/dev-rlw106-2026-07-25T09:19-booking-form-wiring.md` — Booking & form wiring — live provider integration (blocked: rlw103 + rlw104 decisions)
 - [-] `dev/dev-rlw107-2026-07-25T09:20-deploy-s3-cloudfront.md` — Deploy — S3 + CloudFront + domain, production build profile (blocked: rlw105, rlw106)
 - [ ] `dev/dev-rlwret-2026-07-25T09:15-retro-rooted-light-website.md` — Retro + LEARN.md updates (interim retro discipline). Status: ready. Blocked-by: rlw101, rlw102, rlw103, rlw104, rlw105, rlw106, rlw107.
