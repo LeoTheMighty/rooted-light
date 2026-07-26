@@ -1,0 +1,17 @@
+---
+// Round-3 variant home pages: one route per grounded direction
+// (dist/mockups/<slug>/index.html — same shape rounds 1–2 build to,
+// so E-1/E-7 pick them up identically).
+import GroundedPage from "../../../layouts/home/grounded/GroundedPage.astro";
+import { directions, direction } from "../_directions";
+
+export function getStaticPaths() {
+  return directions
+    .filter((d) => d.round === 3)
+    .map((d) => ({ params: { variant: d.slug } }));
+}
+
+const d = direction(Astro.params.variant as string);
+---
+
+<GroundedPage variant={d} page="home" />

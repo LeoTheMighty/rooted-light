@@ -7,7 +7,7 @@ from: user instruction 2026-07-26 (fast follow to rlw109)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
 status: in-progress
 owner: /devx-2026-07-26T1137-50993
-branch: null
+branch: feat/dev-rlw110
 entered_at: execute
 ---
 
@@ -65,3 +65,23 @@ not the vague "Book a session".
 - 2026-07-26T11:37 — filed by /devx from Leo's instruction (fast
   follow to rlw109; entered_at: execute).
 - 2026-07-26T11:37:53-06:00 — claimed by /devx in session /devx-2026-07-26T1137-50993
+- 2026-07-26 — phase 2: spec ACs direct (v2 native); 6 ACs; workstream=rooted-light-website; red-artifacts=none (E-1/E-5/E-7 are the guardrails)
+- 2026-07-26 — phase 3: 4 grounded variants (classic/centered/rail/
+  compact nav) × 4 pages each on the mist pack via one GroundedPage
+  skeleton + 2 dynamic routes; registry round 3 (nums 13-16, displayed
+  first); packager embeds subpage srcdoc frames and parses numbering
+  from the built index. Build 36 pages; E-1/E-5/E-7 green.
+- 2026-07-26 — phase 4: 3-agent parallel adversarial review (Blind
+  Hunter / Edge Case Hunter / Acceptance Auditor); 13 deduped findings
+  (4 MED, 9 LOW); ALL fixed in-place — most load-bearing: classic
+  dropdown overflowed the viewport at phone widths (now unfolds
+  in-flow ≤560px) and the packager card regex could silently mispair
+  slug/number (now per-card parse, loud failure, ≥16 guard); 2
+  findings closed as no-change-needed (share-drift covered by the
+  staleness guard; stale dist artifacts already wiped). Re-review of
+  fix hunks clean; all ACs audited MET.
+- 2026-07-26 — phase 5: local gates green — build exit 0 (36 pages),
+  E-7 PASS (16 mockups), E-1 PASS, E-5 PASS; E-2/3/4 RED expected
+  (rlw103 artifacts, waived in CI). Share package regenerated.
+- 2026-07-26 — phase 7: PR https://github.com/LeoTheMighty/rooted-light/pull/6 opened (base main).
+- 2026-07-26 — phase 7.5: tour published — https://htmlpreview.github.io/?https://raw.githubusercontent.com/LeoTheMighty/rooted-light/devx-tours/tours/rlw110/tour.html; PR body updated.

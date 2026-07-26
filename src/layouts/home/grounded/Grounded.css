@@ -1,0 +1,475 @@
+/* Grounded mist (round 3) — the mist palette with the gradient gone:
+   flat background, hairline rules, solid tint bands, anchored cards
+   (borders, not floating shadows). Nav personality lives under the
+   body.v-* classes; everything below the header is shared. */
+
+:root {
+  /* fallback derives from body text, never duplicating the pack value */
+  --line: var(
+    --hairline,
+    1px solid color-mix(in srgb, var(--color-text-body) 18%, transparent)
+  );
+  --tint: color-mix(in srgb, var(--color-surface) 55%, var(--color-bg));
+}
+
+/* — shared nav pieces — */
+.brand {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  text-decoration: none;
+  font-size: 1.15rem;
+}
+
+.site-nav a,
+.rail a,
+.panel a {
+  color: var(--color-text-heading);
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.site-nav [aria-current="page"],
+.rail [aria-current="page"],
+.panel [aria-current="page"],
+.site-nav .is-here {
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 1px;
+}
+
+.panel [aria-current="page"] {
+  align-self: flex-start;
+}
+
+summary {
+  list-style: none;
+  cursor: pointer;
+  color: var(--color-text-heading);
+  font-size: 0.92rem;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.dd summary::after {
+  content: " ▾";
+  font-size: 0.72em;
+  opacity: 0.7;
+}
+
+.dd[open] summary::after {
+  content: " ▴";
+}
+
+/* — classic + compact: hairline top bar — */
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.3rem;
+  border-bottom: var(--line);
+  background: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.site-nav {
+  display: flex;
+  align-items: baseline;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+
+.dd {
+  position: relative;
+}
+
+.dd .panel {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background: var(--color-bg);
+  border: var(--line);
+  border-radius: 10px;
+  padding: 0.75rem 0.95rem;
+  min-width: 12.5rem;
+  max-width: calc(100vw - 2rem);
+  /* the one allowed shadow: just enough lift to read as a menu */
+  box-shadow: 0 6px 18px rgba(63, 58, 92, 0.08);
+  z-index: 10;
+}
+
+.panel .panel-all {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  margin-top: 0.2rem;
+}
+
+.panel .group-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.65;
+  color: var(--color-text-heading);
+  margin-top: 0.45rem;
+}
+
+.panel .grouped {
+  padding-left: 0.85rem;
+}
+
+/* narrow screens: the classic dropdown unfolds in place instead of
+   floating — a centered absolute panel would overflow the viewport */
+@media (max-width: 560px) {
+  .v-classic .dd {
+    position: static;
+  }
+  .v-classic .dd .panel {
+    position: static;
+    transform: none;
+    border: none;
+    box-shadow: none;
+    border-top: var(--line);
+    border-radius: 0;
+    min-width: 0;
+    margin-top: 0.4rem;
+    padding: 0.5rem 0 0;
+  }
+}
+
+/* compact: the menu hangs off the right edge of the bar */
+.dd.menu .panel {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.dd.menu summary {
+  border: var(--line);
+  border-radius: 10px;
+  padding: 0.35rem 0.9rem;
+}
+
+/* — centered: stacked masthead; dropdown unfolds in place — */
+.masthead {
+  text-align: center;
+  padding: 1.5rem 1.3rem 1rem;
+  border-bottom: var(--line);
+  background: var(--color-bg);
+}
+
+.masthead .brand {
+  font-size: 1.45rem;
+}
+
+.masthead .site-nav {
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+
+.v-centered .dd {
+  position: static;
+}
+
+.v-centered .dd .panel {
+  position: static;
+  transform: none;
+  border: none;
+  box-shadow: none;
+  border-top: var(--line);
+  border-radius: 0;
+  min-width: 0;
+  margin-top: 0.4rem;
+  padding: 0.5rem 0 0;
+  align-items: center;
+}
+
+/* — rail: the whole site in one glance — */
+.rail {
+  padding: 1.3rem 1.15rem;
+  background: var(--tint);
+  border-bottom: var(--line);
+}
+
+.rail nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+}
+
+.rail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: -0.1rem 0 0.25rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid
+    color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+.rail-group a {
+  font-size: 0.85rem;
+  opacity: 0.92;
+}
+
+@media (min-width: 880px) {
+  body.v-rail {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    /* main takes the stretch: the rail's 100dvh spans rows 1-3, and
+       without a 1fr first row it would inflate the footer/note bands
+       on short pages */
+    grid-template-rows: 1fr auto auto auto;
+  }
+  .rail {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100dvh;
+    overflow: auto;
+    border-bottom: none;
+    border-right: var(--line);
+  }
+  .v-rail main,
+  .v-rail .ground-foot,
+  .v-rail .booking-note {
+    grid-column: 2;
+  }
+  .v-rail .review-bar {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 879.98px) {
+  .rail nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1rem;
+  }
+  .rail-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    padding-left: 0;
+    margin: 0;
+    gap: 0.4rem 0.8rem;
+  }
+}
+
+/* — hero (home) — */
+.hero {
+  padding: 4rem 1.3rem 3rem;
+  border-bottom: var(--line);
+}
+
+.hero-inner {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  font-weight: 500;
+}
+
+.hero .tagline {
+  margin-top: 0.7rem;
+  font-size: 1.06rem;
+  color: var(--color-text-heading);
+}
+
+.hero .intention {
+  margin-top: 0.9rem;
+  max-width: 34rem;
+}
+
+.offer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.7rem;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--color-surface);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.62rem 1.25rem;
+  border-radius: 10px;
+}
+
+.offer-hint {
+  margin-top: 0.95rem;
+  font-size: 0.9rem;
+}
+
+.quiet-link {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* — bands (home sections) — */
+.band {
+  padding: 2.6rem 1.3rem;
+  border-bottom: var(--line);
+}
+
+.band.tint {
+  background: var(--tint);
+}
+
+.band-inner {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.band h2 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-bottom: 0.9rem;
+}
+
+.cards {
+  display: grid;
+  gap: 0.9rem;
+}
+
+@media (min-width: 680px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cards.two {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* under the rail the content column is ~15rem narrower than the
+   viewport — hold single-column until the column itself has room */
+@media (min-width: 880px) and (max-width: 1099.98px) {
+  .v-rail .cards,
+  .v-rail .cards.two {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: block;
+  background: var(--tint);
+  border: var(--line);
+  border-radius: 12px;
+  padding: 1.1rem 1.15rem;
+  text-decoration: none;
+  color: var(--color-text-body);
+}
+
+.tint .card {
+  background: var(--color-bg);
+}
+
+.card h3 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.card p {
+  font-size: 0.92rem;
+}
+
+.card .more {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.mod-line {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  font-size: 1.05rem;
+  margin: 0.5rem 0 0.8rem;
+}
+
+/* — inner pages — */
+.page-head {
+  padding: 3rem 1.3rem 1.7rem;
+  border-bottom: var(--line);
+  background: var(--tint);
+}
+
+.page-head h1 {
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  font-weight: 500;
+}
+
+.page-head p {
+  margin-top: 0.6rem;
+  max-width: 36rem;
+}
+
+.entry {
+  padding: 2.2rem 1.3rem;
+  border-bottom: var(--line);
+  /* anchor targets land clear of the sticky bar */
+  scroll-margin-top: 4.5rem;
+}
+
+.entry h2 {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.entry .meta {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  opacity: 0.75;
+  margin-top: 0.15rem;
+}
+
+.entry .body {
+  margin-top: 0.7rem;
+  max-width: 38rem;
+}
+
+.entry .btn {
+  margin-top: 1.1rem;
+}
+
+/* the footer's own hairline handles the seam */
+main > :last-child {
+  border-bottom: none;
+}
+
+/* — footer — */
+.ground-foot {
+  background: var(--tint);
+  border-top: var(--line);
+  text-align: center;
+  padding: 2.1rem 1.3rem;
+  font-size: 0.85rem;
+}
+
+.ground-foot p + p {
+  margin-top: 0.4rem;
+}
+
+.foot-resources {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  font-size: 0.95rem;
+}
