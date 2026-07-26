@@ -5,7 +5,7 @@ created: 2026-07-25T09:18:00-06:00
 title: Theme promotion — apply Kylie's chosen style pack site-wide
 from: _devx/workstreams/rooted-light-website/plan.md (phase 5)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-26T1554-64692
 branch: feat/dev-rlw105
 ---
@@ -70,3 +70,6 @@ profile prunes them.
 - 2026-07-26 — phase 5: local gates green — build exit 0 (64 pages);
   E-1/E-2/E-4/E-5 (the AC guardrails) PASS + E-3(--allow-placeholder)/
   E-7 PASS; no lint/coverage runners configured (YOLO informational).
+- 2026-07-26 — phase 7: PR https://github.com/LeoTheMighty/rooted-light/pull/9 opened (base main); devx-ci run 30222170512 SUCCESS.
+- 2026-07-26 — phase 7.5: tour published — https://htmlpreview.github.io/?https://raw.githubusercontent.com/LeoTheMighty/rooted-light/devx-tours/tours/rlw105/tour.html; PR body updated.
+- 2026-07-26 — phase 8: check-hold clean; merge-gate {"merge":true}; merged via PR #9 (squash → 7e10735); worktree + local branch removed. AC-3 human side-by-side filed in MANUAL.md.

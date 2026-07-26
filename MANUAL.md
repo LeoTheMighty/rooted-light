@@ -75,3 +75,12 @@
   interactive `/devx-init` flow (or see docs/SETUP.md). Until then,
   `devx manage` / `devx loop` run only while you start them yourself.
   Filed: 2026-07-25T14:42:53.932Z  <!-- devx:init-failure:supervisor-install-deferred -->
+
+- [ ] **rlw105: side-by-side theme check (AC-3)** — Compare the promoted
+  site against the picked mockup: run `npm run dev`, open `/` (and any
+  other route) next to `/mockups/sand-lilac/` and confirm the promoted
+  theme matches the Warm sand & lilac variant (bg #f7f1e8, lilac accent
+  #6c5590, Didot headings, quote band). Log the result as a status-log
+  line in `dev/dev-rlw105-2026-07-25T09:18-theme-promotion.md`.
+  PR: https://github.com/LeoTheMighty/rooted-light/pull/9
+  Filed: 2026-07-26 by /devx (YOLO merged without blocking on the human check)
