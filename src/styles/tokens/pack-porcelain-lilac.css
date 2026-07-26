@@ -1,0 +1,20 @@
+/* pack-porcelain-lilac (round 4, rlw111) — NEUTRAL BASE, cooler:
+   porcelain white with oat and soft lilac as quiet equals. The
+   lightest round-4 take — closest in temperature to #13's mist, with
+   the tan family present but whisper-quiet (decisions/2026-07-26-
+   anchorsaweigh-design-analysis.md). Optima kept from #13. */
+:root {
+  --color-bg: #f9f8f6;
+  /* oat — the tan family as the section tint */
+  --color-surface: #eae7e0;
+  --color-secondary: #e4def0;
+  --color-text-body: #45434b;
+  --color-text-heading: #474060;
+  /* AA-checked: 5.78:1 vs bg; surface text on accent 4.97:1 */
+  --color-accent: #665a8f;
+  --font-heading: "Optima", "Gill Sans", "Segoe UI", sans-serif;
+  --font-body: "Seravek", "Avenir Next", "Segoe UI", sans-serif;
+  /* pack extras */
+  --hairline: 1px solid #e0dcd2;
+  --radius-soft: 22px;
+}

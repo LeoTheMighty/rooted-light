@@ -1,0 +1,22 @@
+/* pack-linen-bloom (round 4, rlw111) — NEUTRAL BASE: warm linen white
+   where tan and lilac take turns as section bands (tan = section tint,
+   lilac = quote band), neither owning the page. The reference site's
+   50/40/10 band rhythm with the dark role softened to hairlines
+   (decisions/2026-07-26-anchorsaweigh-design-analysis.md). Iowan Old
+   Style headings — the warm reading serif. */
+:root {
+  --color-bg: #faf7f1;
+  --color-surface: #efe7d8;
+  --color-secondary: #e6ddf0;
+  --color-text-body: #474239;
+  --color-text-heading: #453d50;
+  /* AA-checked: 6.80:1 vs bg; surface text on accent 5.92:1.
+     Deep plum — kept well clear of lavender-sage's #6b5691 so the two
+     packs stay perceptually distinct, not just distinct to E-1. */
+  --color-accent: #5f4d85;
+  --font-heading: "Iowan Old Style", "Palatino", Georgia, serif;
+  --font-body: "Avenir Next", "Avenir", "Segoe UI", sans-serif;
+  /* pack extras */
+  --hairline: 1px solid #e2d9c8;
+  --radius-soft: 22px;
+}

@@ -52,7 +52,14 @@ const newestMtime = (dir) => {
   }
   return newest;
 };
-const srcDirs = ["src/styles/tokens", "src/layouts/home", "src/pages/mockups"]
+// src/content is a mockup input since round 4 (owner_line, modality
+// copy flow into every grounded page via _content.ts).
+const srcDirs = [
+  "src/styles/tokens",
+  "src/layouts/home",
+  "src/pages/mockups",
+  "src/content",
+]
   .map((d) => join(ROOT, d))
   .filter(existsSync);
 const builtAt = statSync(join(MOCKUPS, "index.html")).mtimeMs;
@@ -72,9 +79,9 @@ const index = readFileSync(join(MOCKUPS, "index.html"), "utf8");
 // built index so the single file can never disagree with it (round-2
 // framing, continuous numbering). Chunks split on the round headings.
 const roundChunks = index.split(/<h2 class="round-title">/).slice(1);
-if (roundChunks.length < 3) {
+if (roundChunks.length < 4) {
   console.error(
-    `package-mockups: review index has ${roundChunks.length} round section(s) — expected 3 (rounds restructure missing?)`,
+    `package-mockups: review index has ${roundChunks.length} round section(s) — expected 4 (rounds restructure missing?)`,
   );
   process.exit(1);
 }
@@ -102,12 +109,12 @@ const roundsMeta = roundChunks.map((chunk) => ({
 const slugs = roundsMeta.flatMap((r) => r.cards.map((c) => c.slug));
 const nums = roundsMeta.flatMap((r) => r.cards.map((c) => c.num));
 if (
-  slugs.length < 16 ||
+  slugs.length < 22 ||
   new Set(slugs).size !== slugs.length ||
   new Set(nums).size !== nums.length
 ) {
   console.error(
-    `package-mockups: found ${slugs.length} numbered direction cards (${new Set(slugs).size} unique slugs, ${new Set(nums).size} unique numbers) in the review index — expected ≥ 16, all unique (all three rounds)`,
+    `package-mockups: found ${slugs.length} numbered direction cards (${new Set(slugs).size} unique slugs, ${new Set(nums).size} unique numbers) in the review index — expected ≥ 22, all unique (all four rounds)`,
   );
   process.exit(1);
 }
@@ -183,7 +190,7 @@ const single = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rooted Light — grounded mist</title>
+<title>Rooted Light — tan &amp; lilac</title>
 <style>
 *,*::before,*::after{box-sizing:border-box}*{margin:0}
 body{background:#faf8f4;color:#3d3a33;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;padding:1.5rem 1rem 3rem}
@@ -206,9 +213,9 @@ body{background:#faf8f4;color:#3d3a33;font-family:-apple-system,BlinkMacSystemFo
 </head>
 <body>
 <header class="intro">
-<h1>Rooted Light — grounded mist</h1>
-<p>Round 3: the first ${roundSections[0].sections.length} are grounded, multi-page takes on lavender mist — no gradient, real pages, and a different navigation style on each (start there). The earlier rounds follow for reference. Each page scrolls inside its frame.</p>
-<p>Reply with the number or name that feels right — or what you'd tweak. Numbers match everywhere.</p>
+<h1>Rooted Light — tan &amp; lilac</h1>
+<p>Round 4, the decision round: the first ${roundSections[0].sections.length} are no. 13's layout dressed in tans and lilacs, inspired by the site you shared — some lead with tan, some with lilac, some keep a neutral base where both share. Kylie's name is on every front page, each has a favorite-quote space, and the decision sheet at the bottom of every page lists its exact shades and fonts. Earlier rounds follow for reference. Each page scrolls inside its frame.</p>
+<p>Reply with what feels right for each choice — fonts, shades, and which color leads. Mixing is welcome ("19's colors with 17's fonts"). Numbers match everywhere.</p>
 <p>A note on type: the fonts are your device’s own, so they render truest on an iPhone or iPad.</p>
 </header>
 <nav class="jump" aria-label="Directions">

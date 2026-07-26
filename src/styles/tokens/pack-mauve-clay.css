@@ -1,0 +1,21 @@
+/* pack-mauve-clay (round 4, rlw111) — LILAC PRIMARY with the CLAY-TAN
+   accent: dusty mauve surfaces, buttons in deep clay. The direct
+   "variant B" from the anchorsaweigh analysis — its terracotta accent
+   (#D4967D family) deepened for AA and set against lilac-grey bands
+   (decisions/2026-07-26-anchorsaweigh-design-analysis.md). Rounded
+   modern sans headings over a serif body. */
+:root {
+  --color-bg: #f2eef5;
+  --color-surface: #ddd5e4;
+  /* clay cream — the tan family, worn by quote bands */
+  --color-secondary: #e9d9c5;
+  --color-text-body: #4a4450;
+  --color-text-heading: #514960;
+  /* deep clay tan — AA-checked: 5.83:1 vs bg; surface text on accent 4.68:1 */
+  --color-accent: #7e5233;
+  --font-heading: "Avenir Next", "Avenir", "Futura", sans-serif;
+  --font-body: Georgia, "Iowan Old Style", serif;
+  /* pack extras */
+  --hairline: 1px solid #d3c9dc;
+  --radius-soft: 22px;
+}
