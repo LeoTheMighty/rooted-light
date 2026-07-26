@@ -5,6 +5,7 @@
 // Kylie swaps in her own favorite later.
 import Page from "../layouts/Page.astro";
 import site from "../content/site.json";
+import { withBase } from "../lib/paths";
 ---
 
 <Page title={site.name} bareTitle>
@@ -26,11 +27,11 @@ import site from "../content/site.json";
   <section>
     <h2>Begin where you are</h2>
     <ul>
-      <li><a href="/about-me/">About Me</a> — who I am and how I work</li>
-      <li><a href="/about-you/">About You</a> — who this practice serves</li>
-      <li><a href="/modalities/">Modalities</a> — the ways of working, in plain language</li>
-      <li><a href="/offerings/">Offerings</a> — reiki sessions, training, and therapy</li>
-      <li><a href="/resources/">Resources</a> — plain-language explainers</li>
+      <li><a href={withBase("/about-me/")}>About Me</a> — who I am and how I work</li>
+      <li><a href={withBase("/about-you/")}>About You</a> — who this practice serves</li>
+      <li><a href={withBase("/modalities/")}>Modalities</a> — the ways of working, in plain language</li>
+      <li><a href={withBase("/offerings/")}>Offerings</a> — reiki sessions, training, and therapy</li>
+      <li><a href={withBase("/resources/")}>Resources</a> — plain-language explainers</li>
     </ul>
   </section>
 </Page>

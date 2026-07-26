@@ -5,6 +5,7 @@
 import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
 import ModalityAccordion from "../components/ModalityAccordion.astro";
+import { withBase } from "../lib/paths";
 
 const modalities = (await getCollection("modalities")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -23,7 +24,7 @@ const modalities = (await getCollection("modalities")).sort(
   {modalities.map((m) => <ModalityAccordion modality={m} />)}
   <p>
     Curious how these fit together in a session? Start with
-    <a href="/offerings/therapy/">therapy</a> or browse the
-    <a href="/resources/">resources</a>.
+    <a href={withBase("/offerings/therapy/")}>therapy</a> or browse the
+    <a href={withBase("/resources/")}>resources</a>.
   </p>
 </Page>

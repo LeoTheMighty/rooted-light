@@ -60,3 +60,26 @@ behavior).
   Pages preview; repo→public + Pages enablement done pre-claim with
   Leo's explicit choice via AskUserQuestion; entered_at: execute).
 - 2026-07-26T16:20:44-06:00 — claimed by /devx in session /devx-2026-07-26T1620-73496
+- 2026-07-26 — phase 2: spec ACs direct (v2 native); 5 ACs;
+  workstream=rooted-light-website; red-artifacts=none (infra item;
+  E-1..E-5/E-7 are regression guardrails on the default profile).
+- 2026-07-26 — phase 3: withBase() helper (src/lib/paths.ts, identity
+  under default base); astro.config reads DEPLOY_SITE/DEPLOY_BASE;
+  Page.astro nav/brand/aria-current base-aware + DEPLOY_NOINDEX robots
+  meta; all root-relative hrefs across 9 pages/components wrapped
+  (incl. frontmatter-driven modality/resource urls — withBase passes
+  external URLs through); .github/workflows/deploy-pages.yml (push
+  main + dispatch, configure-pages → upload-pages-artifact →
+  deploy-pages, devx-ci untouched). Pre-claim setup: repo flipped
+  public + Pages enabled build_type=workflow (Leo's explicit choice).
+- 2026-07-26 — phase 4: clean review (0 issues; re-ran with stricter
+  framing — confirmed clean). Single rigorous pass over 100% of
+  changed lines (sweep was regex-driven, so output verified
+  empirically in BOTH build profiles): default build → all 6 evals
+  PASS, links byte-identical, no robots tag; base build → zero
+  unprefixed internal hrefs across all 8 routes, deep links
+  /rooted-light/modalities/#id correct, aria-current still renders,
+  form action untouched, noindex present.
+- 2026-07-26 — phase 5: local gates green — default build exit 0 (64
+  pages); E-1/E-2/E-3(--allow-placeholder)/E-4/E-5/E-7 PASS; base
+  build exit 0 with prefix/leak/noindex checks clean.

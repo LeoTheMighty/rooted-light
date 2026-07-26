@@ -5,6 +5,7 @@
 import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
 import { Content, frontmatter } from "../content/about-you.md";
+import { withBase } from "../lib/paths";
 
 const modalities = (await getCollection("modalities")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -23,13 +24,13 @@ const modalities = (await getCollection("modalities")).sort(
           ))}
         </ul>
         <p>
-          <a href={`/modalities/#${m.id}`}>What {m.data.title} is →</a>
+          <a href={withBase(`/modalities/#${m.id}`)}>What {m.data.title} is →</a>
         </p>
       </section>
     ))
   }
   <p>
-    When you're ready, the <a href="/offerings/">offerings</a> page shows
+    When you're ready, the <a href={withBase("/offerings/")}>offerings</a> page shows
     the ways to begin.
   </p>
 </Page>

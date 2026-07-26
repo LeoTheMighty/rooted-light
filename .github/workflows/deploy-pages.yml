@@ -1,0 +1,52 @@
+# Temporary GitHub Pages preview (rlw112) — serves the site at
+# https://leothemighty.github.io/rooted-light/ while the business name +
+# domain are decided. DELETE this workflow when rlw107's real deploy
+# (S3 + CloudFront + domain) lands; DEPLOY_* env vars go with it.
+# Separate from devx-ci.yml on purpose: CI gates PRs, this only ships
+# main. DEPLOY_NOINDEX keeps the temporary URL out of search indexes.
+name: deploy-pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build with Pages base
+        run: npm run build
+        env:
+          DEPLOY_SITE: https://leothemighty.github.io
+          DEPLOY_BASE: /rooted-light
+          DEPLOY_NOINDEX: "1"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -9,6 +9,7 @@ import "../styles/base.css";
 // the neutral defaults on every real-site route. Mockup routes keep
 // their own self-contained packs (_shared.css), untouched.
 import "../styles/tokens/pack-sand-lilac.css";
+import { withBase } from "../lib/paths";
 
 interface Props {
   title: string;
@@ -20,9 +21,14 @@ interface Props {
 
 const { title, bareTitle = false, description = site.intention } = Astro.props;
 const docTitle = title === site.name ? site.name : `${title} · ${site.name}`;
+// Astro.url.pathname includes the configured base, so hrefs are
+// base-prefixed via withBase() before comparing.
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isCurrent = (href: string) =>
-  (href.replace(/\/$/, "") || "/") === currentPath;
+  (withBase(href).replace(/\/$/, "") || "/") === currentPath;
+// Temporary-preview deploys (rlw112) must not get indexed; the flag is
+// only set by the Pages workflow, never by the default build.
+const noindex = Boolean(process.env.DEPLOY_NOINDEX);
 ---
 
 <!doctype html>
@@ -32,18 +38,19 @@ const isCurrent = (href: string) =>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{docTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
   </head>
   <body>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href="/">{site.name}</a>
+        <a class="brand" href={withBase("/")}>{site.name}</a>
         <nav class="site-nav" aria-label="Main">
           <ul>
             {
               site.nav.map((item) => (
                 <li>
                   <a
-                    href={item.href}
+                    href={withBase(item.href)}
                     aria-current={isCurrent(item.href) ? "page" : undefined}
                   >
                     {item.label}
