@@ -45,3 +45,28 @@ profile prunes them.
   sand & lilac" (`pack-sand-lilac`, rlw111). Promotion applies this
   pack site-wide. Status → ready.
 - 2026-07-26T15:54:53-06:00 — claimed by /devx in session /devx-2026-07-26T1554-64692
+- 2026-07-26 — phase 2: spec ACs direct (v2 native); 3 ACs;
+  workstream=rooted-light-website; red-artifacts=none (E-1/E-2/E-4/E-5
+  are the guardrails, all green pre-change). Promotion target:
+  pack-sand-lilac (Leo's pick). Scope note: restyle adopts the picked
+  mockup's hero owner-line and home quote band (rlw111 locked
+  decisions "Kylie on front page" + "quote spaces") using the pack's
+  --color-secondary treatment; mockup surfaces untouched (mockups are
+  self-contained via _shared.css, not base.css). AC-3 (human
+  side-by-side) will be filed in MANUAL.md — YOLO doesn't block on it.
+- 2026-07-26 — phase 3: pack-sand-lilac imported in Page.astro after
+  base.css (cascade-verified in dist: pack token #f7f1e8 overrides
+  default #faf8f4); home hero gains owner-line (Kylie Fustini) + quote
+  band in the picked mockup's exact treatment (secondary 42% mix,
+  Didot italic, big quote glyph, attribution slot, TODO(kylie) swap
+  comment); cards adopt --radius-soft with --radius fallback. Build 64
+  pages; theme confirmed on home AND therapy (site-wide via layout).
+- 2026-07-26 — phase 4: clean review (0 issues; re-ran with stricter
+  framing — confirmed clean). Single rigorous pass (small non-marker
+  diff, threshold rule): cascade order verified in dist, owner_line
+  source field exists, figure>blockquote+figcaption valid, booking-cta
+  bg-on-accent = pack's AA-checked 5.60:1, --color-secondary has
+  surface fallback, mockups isolated (self-contained _shared.css).
+- 2026-07-26 — phase 5: local gates green — build exit 0 (64 pages);
+  E-1/E-2/E-4/E-5 (the AC guardrails) PASS + E-3(--allow-placeholder)/
+  E-7 PASS; no lint/coverage runners configured (YOLO informational).
