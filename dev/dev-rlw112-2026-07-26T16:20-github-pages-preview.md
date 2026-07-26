@@ -5,8 +5,8 @@ created: 2026-07-26T16:20:00-06:00
 title: Temporary GitHub Pages preview deploy (pre-domain)
 from: user instruction 2026-07-26 (Leo — temporary hosting while name/domain are decided; repo flipped public by Leo's choice)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-26T1620-73496
 branch: feat/dev-rlw112
 entered_at: execute
 ---
@@ -59,3 +59,4 @@ behavior).
 - 2026-07-26T16:20 — filed by /devx from Leo's instruction (temporary
   Pages preview; repo→public + Pages enablement done pre-claim with
   Leo's explicit choice via AskUserQuestion; entered_at: execute).
+- 2026-07-26T16:20:44-06:00 — claimed by /devx in session /devx-2026-07-26T1620-73496
