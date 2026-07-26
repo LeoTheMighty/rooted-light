@@ -5,7 +5,7 @@ created: 2026-07-26T11:37:00-06:00
 title: Grounded mist — multi-page mockups, nav options, offerings-first CTA
 from: user instruction 2026-07-26 (fast follow to rlw109)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-26T1137-50993
 branch: feat/dev-rlw110
 entered_at: execute
@@ -85,3 +85,5 @@ not the vague "Book a session".
   (rlw103 artifacts, waived in CI). Share package regenerated.
 - 2026-07-26 — phase 7: PR https://github.com/LeoTheMighty/rooted-light/pull/6 opened (base main).
 - 2026-07-26 — phase 7.5: tour published — https://htmlpreview.github.io/?https://raw.githubusercontent.com/LeoTheMighty/rooted-light/devx-tours/tours/rlw110/tour.html; PR body updated.
+- 2026-07-26 — phase 7: devx-ci run 30214007525 SUCCESS; check-hold clean; merge-gate {"merge":true}.
+- 2026-07-26 — phase 8: merged via PR #6 (squash → fad7e31); worktree + local branch removed.

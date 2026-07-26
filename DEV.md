@@ -15,7 +15,7 @@
 - [x] `dev/dev-rlw102-2026-07-25T09:15-mockup-exploration.md` — Mockup exploration — 6+ style packs + review index for Kylie (depends: rlw101) — PR: https://github.com/LeoTheMighty/rooted-light/pull/3 (merged 478203b)
 - [x] `dev/dev-rlw108-2026-07-25T17:45-lavender-refinement-round.md` — Lavender refinement round — ≥5 simple variants + Modalities section in all mockups (depends: rlw102; added 2026-07-25 revision) — PR: https://github.com/LeoTheMighty/rooted-light/pull/4 (merged 34ff6ce)
 - [x] `dev/dev-rlw109-2026-07-25T18:25-dusk-convergence.md` — Dusk convergence — refinement mockups adopt the dusk skeleton + gradient (fast follow, depends: rlw108) — PR: https://github.com/LeoTheMighty/rooted-light/pull/5 (merged dbe6df5)
-- [/] `dev/dev-rlw110-2026-07-26T11:37-grounded-mist-multipage.md` — Grounded mist — multi-page mockups + nav options + offerings-first CTA, no gradient (fast follow, depends: rlw109)
+- [x] `dev/dev-rlw110-2026-07-26T11:37-grounded-mist-multipage.md` — Grounded mist — multi-page mockups + nav options + offerings-first CTA, no gradient (fast follow, depends: rlw109) — PR: https://github.com/LeoTheMighty/rooted-light/pull/6 (merged fad7e31)
 - [ ] `dev/dev-rlw103-2026-07-25T09:16-content-pages-ia.md` — Content pages & information architecture — all EIGHT routes full incl. /modalities/ (depends: rlw101; scope revised 2026-07-25)
 - [x] `dev/dev-rlw104-2026-07-25T09:17-booking-provider-comparison.md` — Booking-provider comparison — research doc + decision entry (parallel-safe) — PR: https://github.com/LeoTheMighty/rooted-light/pull/2 (merged 426dae4)
 - [-] `dev/dev-rlw105-2026-07-25T09:18-theme-promotion.md` — Theme promotion — apply the chosen lavender variant site-wide (blocked: refinement pick via rlw108; rewired 2026-07-25)
