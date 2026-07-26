@@ -5,7 +5,7 @@ created: 2026-07-25T09:18:00-06:00
 title: Theme promotion — apply Kylie's chosen style pack site-wide
 from: _devx/workstreams/rooted-light-website/plan.md (phase 5)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: blocked
+status: ready
 owner: null
 branch: feat/dev-rlw105
 ---
@@ -41,3 +41,6 @@ profile prunes them.
   (soft lavender dusk, keep simple); the block is now Kylie's/Leo's
   FINAL refinement pick via rlw108 (INTERVIEW.md "lavender refinement
   pick" entry). Promotion applies the picked lavender variant.
+- 2026-07-26 — UNBLOCKED: final pick recorded (Leo) — round-4 "Warm
+  sand & lilac" (`pack-sand-lilac`, rlw111). Promotion applies this
+  pack site-wide. Status → ready.

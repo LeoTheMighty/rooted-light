@@ -130,7 +130,12 @@ Round 2: simple lavender variants (all including the new top-level
 Modalities section) behind /mockups/. rlw105 (theme promotion) is gated
 on this answer.
 
-- [ ] Record the final lavender variant (or tweak request) here.
+- [x] **ANSWERED 2026-07-26 (Leo): Warm sand & lilac** (round-4 variant
+  `sand-lilac`, token pack `pack-sand-lilac` from rlw111 — tan primary,
+  lilac secondary, Didot headings / Avenir body). "Out of the mockups,
+  the warm sand and lilac looks the best." Build the base site with it;
+  everything except the external Calendly connections (rlw106 stays
+  gated on the provider sit-down above). rlw105 unblocked.
 
 ## (from /devx-plan cdea58) Content Kylie needs to supply (tracking)
 
