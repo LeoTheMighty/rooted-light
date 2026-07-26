@@ -195,6 +195,18 @@ public/               # images (placeholders until Kylie's photos)
   `booking.url` (and optional `booking.embed`) — one config value to
   flip when the FR-10 decision lands. Until then it points at a
   placeholder `#booking-tbd` anchor so E-3/E-4 stay honestly RED.
+  (Revised 2026-07-26 — provider decided: **Calendly Standard**. Two
+  seams now carried: `booking.url` = Reiki Session event-type link,
+  `booking.training_url` = Reiki Training group event-type link. Hand-off
+  mode is **link-out**, not the inline embed: the site's zero-client-JS
+  principle holds (Calendly's inline widget is a third-party JS bundle),
+  the hosted Calendly page is mobile-polished, and G-5's ≤ 3 clicks is
+  measured to the CTA, which link-out satisfies. Switching to the inline
+  embed later is a one-component change on the reiki page if Kylie wants
+  booking to feel on-site. Payment: PayPal collect-at-booking inside
+  Calendly — the site never touches payment. Account/event-type
+  provisioning is human work, driven by a runbook: `docs/CALENDLY-SETUP.md`
+  + MANUAL.md chain, phase 6a.)
 - **Therapy inquiry form**: static `<form>` posting to the chosen form
   provider endpoint (or `mailto:` fallback), also a single config value
   (`contact.form_action`).
@@ -206,8 +218,9 @@ public/               # images (placeholders until Kylie's photos)
   routes are part of the same output under `/mockups/` (E-1's subject).
 - Modality content schema (frontmatter): `title`, `summary`,
   `what_it_is`, `who_benefits[]`, `resources[]` (label+url),
-  `certifications[]`, `order`. The therapy page renders the collection
-  as an accordion (`<details>/<summary>` — clean, no-JS) in `order`.
+  `certifications[]`, `order`. The top-level `/modalities/` page renders
+  the collection as an accordion (`<details>/<summary>` — clean, no-JS)
+  in `order`; the therapy page keeps a short summary + deep links.
 - Eval scripts (node, zero-dep): run against `dist/` as
   `node _devx/workstreams/rooted-light-website/evals/E-*.mjs`.
 - Responsive/accessibility baseline (FR-12): `base.css` is mobile-first —
@@ -249,14 +262,19 @@ phase, so the public site never ships the review index.)
   clean" bar; falls back trivially if Kylie prefers a flat list.
 - Where does the booking provider plug in? → single `booking.url` /
   optional embed slot in `content/site.json` (decided here).
+- Which booking provider, and embed or link-out? → **Calendly Standard,
+  link-out** to two event-type links (session + training), PayPal
+  collect-at-booking (Leo, 2026-07-26; rationale in the Booking
+  integration point above).
 - Hosting shape? → S3 + CloudFront static, per Leo (execution deferred
   to deploy phase).
 
 ## Unresolved design questions
 
-- Booking/payment provider — resolved by FR-10 comparison + Kylie's
-  choice. Does not block Gate 2: the integration point is designed
-  (config value + CTA), only the URL is pending.
+- ~~Booking/payment provider~~ — **resolved 2026-07-26: Calendly**
+  (moved to Resolved above). Remaining pends are human provisioning
+  (accounts, PayPal connection, Kylie's availability + pricing), tracked
+  in MANUAL.md / INTERVIEW.md — no further design impact.
 - Form provider vs `mailto:` for therapy inquiries — resolved alongside
   FR-10 research; same single-config shape either way.
 - Domain name — Kylie/Leo before deploy phase; no design impact.

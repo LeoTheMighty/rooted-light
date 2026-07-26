@@ -1,12 +1,12 @@
 ---
 gate: WAIVED
-status_reason: 'Mid-flight revision replay (devx revise cdea58, 2026-07-25): every UNSHIPPED expectation is RED for the right reason — E-2 (8-route revision), E-3 (modalities-page revision), E-4, and the newly authored E-7 (1 lavender pack, phase 2b missing). E-1/E-5/E-6 are green because their phases (rlw102, rlw104) already merged — shipped-green, not gate-defeating. gate evals has no mid-flight deferral; defect filed in the devx repo DEBUG.md.'
-reviewer: 'devx gate evals + /devx session (hand-waived, D-9)'
-updated: 2026-07-25
-waiver: { active: true, approver: 'Leo Belyi (standing YOLO autonomy; 2026-07-25 instruction to proceed with the lavender refinement round)', reason: 'RED requirement is satisfiable only by unshipped expectations; E-1/E-5/E-6 green solely because rlw102/rlw104 merged. All four open expectations verified RED for the right reason.' }
+status_reason: 'Mid-flight revision replay (devx revise cdea58, 2026-07-26 — Calendly decision): the only open expectation, E-3 (revised: session + training CTAs with live off-site hrefs), is RED for the right reason — reiki booking CTA href is #booking-tbd, booking not wired (phase 6b missing); the training-CTA assertion sits behind the same missing feature. E-1/E-2/E-4/E-5/E-6/E-7 are green because their phases (rlw102/rlw108–111, rlw103, rlw104, rlw105) already merged — shipped-green, not gate-defeating. Same mid-flight-awareness defect as the 2026-07-25 waiver (filed in devx repo DEBUG.md).'
+reviewer: 'devx gate evals + /devx-plan session (hand-waived, D-9)'
+updated: 2026-07-26
+waiver: { active: true, approver: 'Leo Belyi (standing YOLO autonomy; 2026-07-26 instruction to plan the Calendly setup)', reason: 'RED requirement is satisfiable only by unshipped expectations; six of seven evals green solely because their phases merged. The single open expectation E-3 verified RED for the right reason (feature missing, not wiring error).' }
 ---
 
-# RED report — _devx/workstreams/rooted-light-website — 2026-07-25
+# RED report — _devx/workstreams/rooted-light-website — 2026-07-26
 
 ## Runs
 
@@ -17,7 +17,7 @@ waiver: { active: true, approver: 'Leo Belyi (standing YOLO autonomy; 2026-07-25
 - **Exit code**: 0
 - **Failure quote**:
   ```
-  E-1 PASS: 7 mockups + index, 7 distinct packs
+  E-1 PASS: 22 mockups + index, 18 distinct packs
   ```
 - **RED verdict**: not-red
 
@@ -25,12 +25,12 @@ waiver: { active: true, approver: 'Leo Belyi (standing YOLO autonomy; 2026-07-25
 
 - **Artifact**: _devx/workstreams/rooted-light-website/evals/E-2_site-routes.mjs
 - **Command**: `node E-2_site-routes.mjs`
-- **Exit code**: 1
+- **Exit code**: 0
 - **Failure quote**:
   ```
-  RED E-2: missing route(s) in dist/: /modalities
+  E-2 PASS: 8 routes present, nav complete on every page
   ```
-- **RED verdict**: right-reason
+- **RED verdict**: not-red
 
 ### E-3: Offering-page contracts (P1)
 
@@ -39,7 +39,7 @@ waiver: { active: true, approver: 'Leo Belyi (standing YOLO autonomy; 2026-07-25
 - **Exit code**: 1
 - **Failure quote**:
   ```
-  RED E-3: reiki page has no [data-cta="booking"] element (selector contract, plan.md T3.3)
+  RED E-3: reiki booking CTA href is not off-site (#booking-tbd, #booking-tbd) and no provider embed found — booking not wired (phase 6b)
   ```
 - **RED verdict**: right-reason
 
@@ -47,12 +47,12 @@ waiver: { active: true, approver: 'Leo Belyi (standing YOLO autonomy; 2026-07-25
 
 - **Artifact**: _devx/workstreams/rooted-light-website/evals/E-4_click-depth.mjs
 - **Command**: `node E-4_click-depth.mjs`
-- **Exit code**: 1
+- **Exit code**: 0
 - **Failure quote**:
   ```
-  RED E-4: no page containing [data-cta="booking"] reachable within 3 clicks of home (booking CTA missing or buried)
+  E-4 PASS: booking CTA reachable at /offerings/reiki/ in 2 click(s)
   ```
-- **RED verdict**: right-reason
+- **RED verdict**: not-red
 
 ### E-5: Palette accessibility (P2)
 
@@ -61,7 +61,7 @@ waiver: { active: true, approver: 'Leo Belyi (standing YOLO autonomy; 2026-07-25
 - **Exit code**: 0
 - **Failure quote**:
   ```
-  E-5 PASS: 7 pack(s), 21 pairings AA-clean
+  E-5 PASS: 18 pack(s), 54 pairings AA-clean
   ```
 - **RED verdict**: not-red
 
@@ -80,12 +80,12 @@ waiver: { active: true, approver: 'Leo Belyi (standing YOLO autonomy; 2026-07-25
 
 - **Artifact**: _devx/workstreams/rooted-light-website/evals/E-7_lavender-refinement.mjs
 - **Command**: `node E-7_lavender-refinement.mjs`
-- **Exit code**: 1
+- **Exit code**: 0
 - **Failure quote**:
   ```
-  RED E-7: only 1 pack-lavender-*.css pack(s) — need ≥ 6 (original dusk + ≥ 5 refinements; feature missing: phase 2b not landed)
+  E-7 PASS: 6 lavender packs (5 refinements), 18 distinct identities, Modalities nav on all 22 mockups
   ```
-- **RED verdict**: right-reason
+- **RED verdict**: not-red
 
 ## Deferred stubs
 

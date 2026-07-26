@@ -109,6 +109,9 @@ page). A lavender-only refinement round follows before theme promotion.
 - **CAP-2**: External booking + payment integration point for reiki
   (embed or link-out; provider selected by a comparison in the design
   stage — Calendly and SimplePractice-native are the seed candidates).
+  (Decided 2026-07-26: **Calendly Standard** with PayPal
+  collect-at-booking — two event types, Reiki Session + Reiki Training;
+  Kylie owns availability in Calendly; site hands off via link-out.)
 - **CAP-3**: Email inquiry form for therapy (form service or mailto-based;
   no booking widget), plus a small Psychology Today link.
 - **CAP-4**: Modality catalog: a content structure where each therapy
@@ -165,6 +168,12 @@ session looks like, describe training offerings, and present a booking
 call-to-action that hands off to the chosen external booking/payment
 provider (where Kylie controls her schedule — e.g. "typically on
 Fridays"). Reaching this CTA from Home SHALL take ≤ 3 clicks.
+(Revised 2026-07-26: the provider is **Calendly**, which models sessions
+and group trainings as separate event types — the page SHALL therefore
+present **two** hand-off CTAs: one for booking a reiki session and one
+for signing up for a reiki training, each resolving to its Calendly
+event-type link. Only these two services are bookable; therapy remains
+inquiry-only per FR-7.)
 
 ### FR-7: Therapy offering page
 
@@ -245,19 +254,28 @@ first).
   nav → runnable check on packs + build output.
 - Full-site build now = eight routes / six top-level nav sections
   (Modalities added) → E-2 revision.
+- Reiki page carries BOTH a session booking CTA and a training signup
+  CTA, each with an off-site (Calendly) href; therapy still has zero
+  booking affordances → E-3 revision (2026-07-26).
 
 ## Open questions
 
-- Booking/payment provider choice — owner: research (FR-10 phase), then
-  Kylie decides. Seed candidates: Calendly (+PayPal?), SimplePractice
-  native scheduling, Acuity.
+- ~~Booking/payment provider choice~~ — **RESOLVED 2026-07-26 (Leo):
+  Calendly Standard** ($12/mo monthly / $10/mo annual) with PayPal
+  collect-at-booking, per the FR-10 comparison's recommendation.
+- Calendly event-type numbers (session price/duration; training
+  price/format/seat cap) — owner: Kylie (INTERVIEW.md entry filed
+  2026-07-26). Blocks publishing the event types, not the runbook or
+  account setup.
 - Domain name (rootedlight.com vs rootedlightllc.com vs …) — owner: user
   (Kylie/Leo). Needed before deploy phase only.
 - Photography / imagery from Kylie — owner: user. Mockups use tasteful
   placeholders until then.
 - Real "Experiences" copy — owner: user. Placeholder-marked in build.
-- Reiki payment timing (pay at booking vs pay in person) — owner: user;
-  affects provider choice (whiteboard left this open).
+- ~~Reiki payment timing (pay at booking vs pay in person)~~ —
+  **RESOLVED 2026-07-26 (by implication of the Calendly pick + "she can
+  get paid"): full payment at booking via PayPal** (Calendly's only
+  mode — no deposits, no charge-later).
 
 ## Reference links
 

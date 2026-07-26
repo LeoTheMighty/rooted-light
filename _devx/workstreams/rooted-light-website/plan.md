@@ -16,7 +16,7 @@ artifacts exist: `_devx/workstreams/rooted-light-website/{prd.md,
 expectations.md,design.md}`. Brainstorm whiteboard captured in the PRD.
 No domain, no hosting, no booking provider chosen.
 
-**Eval authorship**: the six eval scripts (E-1..E-6) are authored at the
+**Eval authorship**: the eval scripts (E-1..E-7) are authored at the
 RED stage of this workstream — *before* phase 1 executes — at the exact
 Verified-by paths in expectations.md, each failing for the right reason
 (feature missing). Phases below do not write evals; they turn them
@@ -27,20 +27,20 @@ through `devx revise`.
 except E-5, which reads `src/styles/tokens/pack-*.css` source files
 directly (token-level contrast can't survive CSS bundling/minification —
 documented exception to the dist convention). Two build profiles exist
-from phase 6 onward: **full** (includes `/mockups/` — E-1 and E-5 target
+from phase 6b onward: **full** (includes `/mockups/` — E-1 and E-5 target
 this) and **production** (mockups excluded — E-2/E-3/E-4 target this;
 E-3 always flagless/strict in production).
 
 ## Desired state
 
 An Astro static site in-repo: shared content source (`src/content/`),
-mobile-first `base.css` + token-driven style packs, all seven routes
+mobile-first `base.css` + token-driven style packs, all eight routes
 built with placeholder-marked copy, ≥ 6 distinct home-page mockups behind
 `/mockups/` for Kylie's review (delivered to her by 2026-08-08), a
 written booking-provider comparison with a recommendation, booking/form
 integration wired to the chosen providers, and a repeatable static
 deploy to S3 + CloudFront on the chosen domain by 2026-09-30. Evals
-E-1..E-6 green under their respective profiles.
+E-1..E-7 green under their respective profiles.
 
 ## What we're NOT doing
 
@@ -61,7 +61,7 @@ E-1..E-6 green under their respective profiles.
 |---|---|---|---|---|---|
 | E-1 | P0 | 2 | tests-first | _devx/workstreams/rooted-light-website/evals/E-1_mockup-package.mjs | full |
 | E-2 | P0 | 3 | tests-first | _devx/workstreams/rooted-light-website/evals/E-2_site-routes.mjs | full |
-| E-3 | P1 | 6 | tests-first | _devx/workstreams/rooted-light-website/evals/E-3_offering-contracts.mjs | full |
+| E-3 | P1 | 6b | tests-first | _devx/workstreams/rooted-light-website/evals/E-3_offering-contracts.mjs | full |
 | E-4 | P1 | 3 | tests-first | _devx/workstreams/rooted-light-website/evals/E-4_click-depth.mjs | full |
 | E-5 | P2 | 2 | tests-first | _devx/workstreams/rooted-light-website/evals/E-5_contrast.mjs | full |
 | E-6 | P2 | 4 | tests-first | _devx/workstreams/rooted-light-website/evals/E-6_provider-comparison.mjs | full |
@@ -71,21 +71,29 @@ Notes: E-4's threshold is click depth to the booking CTA element
 (selector contract `data-cta="booking"`), independent of href liveness —
 fully verifiable in phase 3. Href liveness is E-3's concern: phase 3
 runs E-3 with `--allow-placeholder` (which hard-errors if pointed at a
-production build), phase 6 and the deploy workflow run it flagless.
+production build), phase 6b and the deploy workflow run it flagless.
+E-3 revised 2026-07-26: also requires a training signup CTA
+(`data-cta="booking-training"`) with a live off-site href — Calendly
+models trainings as a separate group event type. E-3's therapy-side
+assertions are DOM-presence only (form element, PT link, no booking
+affordances) — form-action *liveness* is human-verified in phase 6c,
+so E-3 goes fully green at 6b.
 
 ## Phase checklist
 
 Target dates track G-1 (mockups to Kylie 2026-08-08) and G-3 (launch
 2026-09-30); phases 3–4 run during Kylie's review window.
 
-- [x] Phase 1: Scaffold & foundation — by 2026-08-01 (dev spec: rlw101, merged 2026-07-25)
-- [x] Phase 2: Mockup exploration — 6+ style packs + review index — delivered by 2026-08-06 (dev spec: rlw102, merged 2026-07-25; **picked: soft lavender dusk**)
-- [ ] Phase 2b: Lavender refinement round — ≥5 simple lavender variants + Modalities section in all mockups — by 2026-08-13 (dev spec: rlw108) *(added 2026-07-25)*
-- [ ] Phase 3: Content pages & information architecture — all EIGHT routes incl. /modalities/ — by 2026-08-22 (dev spec: rlw103)
-- [x] Phase 4: Booking-provider comparison — by 2026-08-15 (dev spec: rlw104, merged 2026-07-25)
-- [ ] Phase 5: Theme promotion — by 2026-09-05 (gated: Kylie's **refinement** pick via rlw108) (dev spec: rlw105)
-- [ ] Phase 6: Booking & form wiring — by 2026-09-12 (gated: provider choice) (dev spec: rlw106)
-- [ ] Phase 7: Deploy — S3 + CloudFront + domain — by 2026-09-23 (buffer to 09-30) (dev spec: rlw107)
+- [x] Phase 1: Scaffold & foundation — by 2026-08-01 (dev spec: rlw101) — merged 2026-07-25
+- [x] Phase 2: Mockup exploration — 6+ style packs + review index — delivered by 2026-08-06 (dev spec: rlw102) — merged 2026-07-25; **picked: soft lavender dusk**
+- [x] Phase 2b: Lavender refinement round — ≥5 simple lavender variants + Modalities section in all mockups (dev spec: rlw108) — merged 2026-07-25; follow-ups rlw109/110/111 merged 2026-07-26; **picked: warm sand & lilac**
+- [x] Phase 3: Content pages & information architecture — all EIGHT routes incl. /modalities/ (dev spec: rlw103) — merged 2026-07-26
+- [x] Phase 4: Booking-provider comparison — by 2026-08-15 (dev spec: rlw104) — merged 2026-07-25; **picked 2026-07-26: Calendly**
+- [x] Phase 5: Theme promotion (dev spec: rlw105) — merged 2026-07-26, warm sand & lilac site-wide
+- [ ] Phase 6a: Calendly setup runbook + manual connection chain — by 2026-08-01 (ready now, parallel-safe) (dev spec: rlw114) *(added 2026-07-26)*
+- [ ] Phase 6b: Reiki session + training booking wiring — by 2026-09-12 (gated: MANUAL.md Calendly chain complete — real event-type links exist) (dev spec: rlw106) *(scope revised 2026-07-26)*
+- [ ] Phase 6c: Therapy inquiry form wiring — by 2026-09-12 (gated: form-provider confirmation in INTERVIEW.md) (dev spec: rlw113) *(split from old phase 6, 2026-07-26)*
+- [ ] Phase 7: Deploy — S3 + CloudFront + domain — by 2026-09-23 (buffer to 09-30) (gated: 6b + 6c) (dev spec: rlw107)
 
 ## Phases
 
@@ -302,7 +310,8 @@ everywhere (six sections).
 **Verification plan**:
 - Type: tests-first
 - Success criteria:
-  - `node …/evals/E-2_site-routes.mjs` passes (all 7 routes + full nav).
+  - `node …/evals/E-2_site-routes.mjs` passes (all 8 routes + 6-section
+    nav — revised threshold).
   - `node …/evals/E-4_click-depth.mjs` passes (click depth to the CTA
     element; href liveness not in scope).
   - `node …/evals/E-3_offering-contracts.mjs --allow-placeholder`
@@ -396,42 +405,141 @@ until the deploy phase's production profile excludes them.
 - [ ] T5.2 Re-run evals + visual check vs chosen mockup — files: none
       (results logged in spec status log)
 
-### 6. Phase: Booking & form wiring
+### 6a. Phase: Calendly setup runbook + manual connection chain (added 2026-07-26)
 
-**Overview**: Gated only on the provider + payment-timing + form
-decisions (INTERVIEW, from phase 4). Set `booking.url` (+
-`booking.training_url` if the provider splits session vs class event
-types), wire the inquiry form action, verify the provider's embed or
-link-out flow end-to-end manually. Parallel-safe with phase 5 (theme
-touches styles/layouts; this touches config + offering pages).
+**Overview**: Provider decided — Calendly Standard, PayPal
+collect-at-booking, link-out (design.md Booking integration point). The
+account provisioning is entirely human work (Kylie's accounts, her
+money), so the deliverable is a **runbook** — `docs/CALENDLY-SETUP.md`,
+researched against Calendly's and PayPal's *current* signup/config
+flows — plus the MANUAL.md action chain that walks Leo/Kylie through it.
+Docs-only PR; touches no site code; parallel-safe with everything.
+Ready now.
 
 **Files**:
-- `src/content/site.json` — live `booking.url`,
-  `booking.training_url`, `contact.form_action`.
-- `src/pages/offerings/{reiki,therapy}.astro` — final CTA/embed +
-  form wiring.
+- `docs/CALENDLY-SETUP.md` — click-by-click runbook, seven sections:
+  1. Calendly account + Standard plan ($12/mo monthly, $10/mo annual —
+     annual recommended).
+  2. PayPal **Business** account for Kylie (the long pole — identity
+     verification can take days; start first).
+  3. Connect PayPal to Calendly (Integrations → PayPal).
+  4. Event type "Reiki Session" — 1:1, duration/price from INTERVIEW.md
+     (`TODO(kylie)` placeholders until answered), PayPal collection ON.
+  5. Event type "Reiki Training" — **group** event type, seat cap /
+     price / format from INTERVIEW.md, PayPal collection ON.
+  6. Availability: Kylie sets her own recurring schedule (typically
+     Fridays), min-notice, booking horizon, buffers — hers to pick in
+     one screen; the runbook shows where.
+  7. Scoping + capture: only these two event types public (therapy is
+     never bookable); copy the two event-type links → they become
+     `booking.url` / `booking.training_url` in phase 6b. Includes the
+     paid end-to-end test script (book, pay via PayPal, confirm funds
+     land, cancel/refund — refunds are manual in PayPal) used by 6b's
+     human AC.
+- `MANUAL.md` — the ordered action chain pointing at runbook sections.
+
+**Context**:
+- Wrap-don't-duplicate: the comparison doc
+  (`decisions/booking-provider-comparison.md`) already holds the
+  pricing/caveat facts — the runbook links to it rather than restating
+  research.
+- Calendly caveats to surface verbatim in the runbook: no deposits
+  (full amount only), refunds manual in PayPal, no promo codes with
+  PayPal, bookings auto-confirm (no approval step).
+
+**Verification plan**:
+- Type: human
+- Success criteria:
+  - Runbook exists with all seven sections, each grounded in the
+    provider's current UI (web-researched, not from memory).
+  - MANUAL.md chain filed in dependency order with the PayPal-first
+    note; INTERVIEW.md pricing entry cross-linked.
+  - `npm run build` still green (docs-only — no site surface touched).
+
+**Tasks**:
+- [ ] T6a.1 Research current Calendly Standard + PayPal Business setup
+      flows (web) — files: none (feeds T6a.2)
+- [ ] T6a.2 Author `docs/CALENDLY-SETUP.md` (7 sections above) — files:
+      `docs/CALENDLY-SETUP.md`
+- [ ] T6a.3 File the MANUAL.md action chain + cross-link INTERVIEW.md
+      pricing entry — files: `MANUAL.md`
+
+### 6b. Phase: Reiki session + training booking wiring (was phase 6; scope revised 2026-07-26)
+
+**Overview**: Once the MANUAL chain has produced the two real Calendly
+event-type links: set `booking.url` (Reiki Session) and
+`booking.training_url` (Reiki Training) in `site.json`, render the
+session CTA (`data-cta="booking"`, existing) and the training signup CTA
+(`data-cta="booking-training"`, new E-3 contract) on the reiki page as
+link-outs, and verify the full paid flow end-to-end. Therapy form moved
+to phase 6c. Gated on: rlw114 merged + MANUAL.md Calendly chain complete
+(links captured) — a human gate, like rlw105's pick.
+
+**Files**:
+- `src/content/site.json` — live `booking.url`, `booking.training_url`.
+- `src/pages/offerings/reiki.astro`, `src/components/BookingCTA.astro`
+  — training CTA added; both CTAs link out to Calendly.
 
 **Context**:
 - E-3 runs **flagless** from this phase on — `--allow-placeholder` is
-  dead after this phase and hard-errors against a production build.
+  dead and hard-errors against a production build.
+- Link-out, not inline embed (design.md rationale: zero-client-JS
+  principle; embed is a one-component switch later if wanted).
 
 **Verification plan**:
 - Type: tests-first
 - Success criteria:
   - `node …/evals/E-3_offering-contracts.mjs` (no flags) fully green:
-    external booking href live; therapy form + PT link + zero booking
-    affordances; modality fields complete.
+    session AND training CTAs with live off-site hrefs; therapy contract
+    clean; modality fields complete.
   - `node …/evals/E-4_click-depth.mjs` green against the live CTA.
-  - Human: Leo books + cancels a test reiki slot; submits a test
-    therapy inquiry and confirms it reaches Kylie's email — files:
-    `MANUAL.md` log.
+  - Human (runbook §7 script, logged in MANUAL.md): book + pay a test
+    session slot AND a test training seat via PayPal; confirm the money
+    lands in Kylie's PayPal; cancel + refund both.
 
 **Tasks**:
-- [ ] T6.1 Wire booking URL/embed + training CTA — files:
-      `src/content/site.json`, `src/pages/offerings/reiki.astro`
-- [ ] T6.2 Wire inquiry form provider + test delivery — files:
-      `src/pages/offerings/therapy.astro`
-- [ ] T6.3 End-to-end human test of both paths — files: `MANUAL.md`
+- [ ] T6b.1 Wire the two live Calendly links into `site.json` — files:
+      `src/content/site.json`
+- [ ] T6b.2 Training signup CTA on the reiki page
+      (`data-cta="booking-training"`) + confirm both CTAs link out —
+      files: `src/pages/offerings/reiki.astro`, `src/components/`
+- [ ] T6b.3 Paid end-to-end human test (session + training, pay →
+      confirm → refund) — files: `MANUAL.md` log
+
+### 6c. Phase: Therapy inquiry form wiring (split from old phase 6, 2026-07-26)
+
+**Overview**: The other half of old phase 6, unchanged in scope: wire
+`contact.form_action` to the chosen form provider (Web3Forms
+recommended; INTERVIEW.md confirmation still open), add the same-domain
+thank-you page, verify a test submission reaches Kylie's email. Gated
+only on the form-provider confirmation; parallel-safe with 6a/6b.
+
+**Files**:
+- `src/content/site.json` — live `contact.form_action`.
+- `src/pages/offerings/therapy.astro` — form posts to the provider;
+  keep fields minimal (name, email, message — privacy note in the
+  comparison doc addendum).
+- `src/pages/thanks.astro` — thank-you page (Web3Forms same-domain
+  redirect target).
+
+**Context**:
+- E-3's therapy assertions (form present, PT link, zero booking
+  affordances) are already enforced and stay green; form-action
+  liveness is human-verified — no eval change.
+
+**Verification plan**:
+- Type: human
+- Success criteria:
+  - Test submission from the built site reaches Kylie's email
+    (logged in MANUAL.md); thank-you page renders.
+  - E-3 (flagless if 6b has landed, else `--allow-placeholder`) and
+    E-2 still green.
+
+**Tasks**:
+- [ ] T6c.1 Wire form action + thank-you page — files:
+      `src/content/site.json`, `src/pages/offerings/therapy.astro`,
+      `src/pages/thanks.astro`
+- [ ] T6c.2 Human delivery test → MANUAL.md log — files: `MANUAL.md`
 
 ### 7. Phase: Deploy — S3 + CloudFront + domain
 

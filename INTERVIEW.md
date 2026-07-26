@@ -87,8 +87,14 @@ form, $0 at 250 submissions/mo, own thank-you page, email hidden);
 Formspree free as runner-up; mailto rejected (silent failures + address
 scraping). Addendum section of the same doc.
 
-- [ ] Pick booking provider (with payment timing below + domain above).
-- [ ] Confirm form provider for the therapy inquiry form.
+- [x] **ANSWERED 2026-07-26 (Leo): Calendly** — "I think Calendly is the
+  way to go." Calendly Standard ($12/mo monthly or $10/mo annual), PayPal
+  collect-at-booking. Setup + wiring re-planned as rlw114 (runbook +
+  manual steps) → rlw106 (site wiring, revised scope). Payment timing
+  resolved by implication — see the entry below.
+- [ ] Confirm form provider for the therapy inquiry form (Web3Forms
+  recommended — still open; split out of rlw106 into rlw113, which
+  stays gated on this answer).
 
 ## (from /devx-plan cdea58) Reiki payment timing
 
@@ -104,7 +110,33 @@ left it open: "People pay before/after (to book?)".
 **Recommendation:** Kylie's call — phase 4's comparison will present
 what each provider supports either way.
 
-- [ ] Kylie decides payment timing for reiki sessions/trainings.
+- [x] **ANSWERED 2026-07-26 (by implication): pay at booking, full
+  amount, via PayPal.** Leo picked Calendly with the goal "she can get
+  paid for her reiki and reiki trainings" — Calendly's only payment mode
+  is full payment collected during booking (no deposits, no
+  charge-later), so choosing Calendly + wanting payment settles this.
+  If Kylie later prefers deposits or pay-in-person, that reopens the
+  provider choice (deposit → Acuity; pay-in-person → Square Free).
+
+## (from /devx-plan cdea58 rev 2026-07-26) Calendly event-type details — Kylie's numbers
+
+Provider is decided (Calendly, above). Before the two event types can go
+live with payment, Kylie needs to supply the numbers. The rlw114 runbook
+uses `TODO(kylie)` placeholders for these; the MANUAL.md setup chain
+stops at "publish event types" until they're answered. **Not blocking**
+rlw114 (runbook authoring) or the account/PayPal creation steps — those
+can start now.
+
+**Needed:**
+1. **Reiki session** — price ($) and duration (60 min? 90?). Buffer
+   between sessions, if any.
+2. **Reiki training** — price ($), duration/format (single day? multi-
+   session series?), and max seats per training.
+3. **Schedule** — she picks her recurring availability directly in
+   Calendly (whiteboard said "typically Fridays"); min-notice and
+   how far out clients may book are hers to set in the same screen.
+
+- [ ] Kylie supplies session price/duration, training price/format/seats.
 
 ## (from /devx rlw102) Kylie's style-direction pick
 

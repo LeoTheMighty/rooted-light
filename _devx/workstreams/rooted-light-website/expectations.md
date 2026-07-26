@@ -42,19 +42,26 @@
 
 <!-- Revised 2026-07-25: the four-field modality contract moved to the
      top-level Modalities page (FR-13); therapy keeps form/PT/no-booking
-     and must link to /modalities/. -->
+     and must link to /modalities/.
+     Revised 2026-07-26: Calendly decided — sessions and trainings are
+     separate event types, so the reiki page must carry BOTH a session
+     booking CTA and a training signup CTA (UC-2 was previously
+     unenforced). -->
 
 - **Priority:** P1
-- **Covers:** UC-1, UC-3, CAP-2, CAP-3, CAP-4, FR-6, FR-7, FR-13
+- **Covers:** UC-1, UC-2, UC-3, CAP-2, CAP-3, CAP-4, FR-6, FR-7, FR-13
 - **Trigger:** the built reiki, therapy, and modalities pages are inspected
 - **Expectation (EARS):** When the built reiki, therapy, and modalities
   pages are inspected, the system SHALL show an external booking
-  call-to-action on the reiki page; on the therapy page an email inquiry
-  form, a Psychology Today link, a link to the Modalities page, and no
-  booking widget; and on the modalities page every modality with
-  description / who-benefits / resources / certifications, each under a
-  stable anchor.
-- **Threshold:** reiki page: ≥ 1 booking CTA whose href resolves
+  call-to-action for reiki sessions AND an external signup
+  call-to-action for reiki trainings on the reiki page; on the therapy
+  page an email inquiry form, a Psychology Today link, a link to the
+  Modalities page, and no booking widget; and on the modalities page
+  every modality with description / who-benefits / resources /
+  certifications, each under a stable anchor.
+- **Threshold:** reiki page: ≥ 1 session booking CTA
+  (`[data-cta="booking"]`) AND ≥ 1 training signup CTA
+  (`[data-cta="booking-training"]`), each with an href resolving
   off-site (or to the provider embed); therapy page: form element
   present, "psychologytoday.com" link present, ≥ 1 link to /modalities/,
   0 booking embeds/links; modalities page: every listed modality has the

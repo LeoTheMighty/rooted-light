@@ -35,12 +35,17 @@ wired inside the existing `.github/workflows/devx-deploy.yml` markers
 
 ## Technical notes
 
-- Blocked-by: rlw105 + rlw106 (launch needs theme + live booking);
-  domain decision from INTERVIEW.md at the DNS step only — bucket +
-  distribution can precede it.
+- Blocked-by: rlw105 (done 2026-07-26) + rlw106 + rlw113 (launch needs
+  theme + live booking + live therapy form — E-3 runs flagless in the
+  deploy workflow and the form action must be real); domain decision
+  from INTERVIEW.md at the DNS step only — bucket + distribution can
+  precede it.
 - G-4: S3+CloudFront at this traffic is cents/month.
 
 ## Status log
 
 - 2026-07-25T09:20 — emitted by /devx-plan from workstream cdea58
   (rooted-light-website), phase 7. Blocked on rlw105/rlw106.
+- 2026-07-26 — gating updated by /devx-plan (cdea58 revision): rlw105
+  done; old phase 6 split — now blocked on rlw106 (booking) + rlw113
+  (therapy form).
