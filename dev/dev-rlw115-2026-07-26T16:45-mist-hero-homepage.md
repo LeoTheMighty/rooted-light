@@ -5,7 +5,7 @@ created: 2026-07-26T16:45:00-06:00
 title: Home page — Lavender-mist hero skeleton with sand-lilac accents
 from: user instruction 2026-07-26 (Leo — "front page like the lavender mist home page (round 2, #1) with the new accents; full screen on desktop and phone; less busy; keep all content")
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-26T2009-84135
 branch: feat/dev-rlw115
 entered_at: execute
@@ -89,3 +89,5 @@ untouched.
 - 2026-07-26 — phase 5: local gates green — default build exit 0;
   E-1/E-2/E-4/E-5/E-7 PASS (E-3 expected-RED per note above); Pages
   base build: zero unprefixed hrefs on home, pill CTA prefixed.
+- 2026-07-26 — phase 7: devx-ci run 30231703489 SUCCESS.
+- 2026-07-26 — phase 8: check-hold clean; merge-gate {"merge":true}; merged via PR #12 (squash → 4b09ce8). Deploy-pages run 30231789501 SUCCESS; live preview verified (hero markup, prefixed pill CTA, owner line, quote band, soft cards, noindex all present at https://leothemighty.github.io/rooted-light/). Worktree + local branch removed.
