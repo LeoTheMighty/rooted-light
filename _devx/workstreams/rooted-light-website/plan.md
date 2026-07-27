@@ -34,7 +34,10 @@ E-3 always flagless/strict in production).
 ## Desired state
 
 An Astro static site in-repo: shared content source (`src/content/`),
-mobile-first `base.css` + token-driven style packs, all eight routes
+mobile-first `base.css` + token-driven style packs, **one scrollable
+page** (revised 2026-07-26, rlw116: hero → quote → About → Services →
+Modalities → Resources anchor sections as "Rooted Light Healing";
+resource explainer detail pages standalone; former routes redirecting)
 built with placeholder-marked copy, ≥ 6 distinct home-page mockups behind
 `/mockups/` for Kylie's review (delivered to her by 2026-08-08), a
 written booking-provider comparison with a recommendation, booking/form
@@ -60,9 +63,9 @@ E-1..E-7 green under their respective profiles.
 | E-id | Priority | Verified in phase | Validation type | Eval artifact | Coverage |
 |---|---|---|---|---|---|
 | E-1 | P0 | 2 | tests-first | _devx/workstreams/rooted-light-website/evals/E-1_mockup-package.mjs | full |
-| E-2 | P0 | 3 | tests-first | _devx/workstreams/rooted-light-website/evals/E-2_site-routes.mjs | full |
+| E-2 | P0 | 3, 5b (single-page revision) | tests-first | _devx/workstreams/rooted-light-website/evals/E-2_site-routes.mjs | full |
 | E-3 | P1 | 6b | tests-first | _devx/workstreams/rooted-light-website/evals/E-3_offering-contracts.mjs | full |
-| E-4 | P1 | 3 | tests-first | _devx/workstreams/rooted-light-website/evals/E-4_click-depth.mjs | full |
+| E-4 | P1 | 3, 5b (single-page revision) | tests-first | _devx/workstreams/rooted-light-website/evals/E-4_click-depth.mjs | full |
 | E-5 | P2 | 2 | tests-first | _devx/workstreams/rooted-light-website/evals/E-5_contrast.mjs | full |
 | E-6 | P2 | 4 | tests-first | _devx/workstreams/rooted-light-website/evals/E-6_provider-comparison.mjs | full |
 | E-7 | P0 | 2b | tests-first | _devx/workstreams/rooted-light-website/evals/E-7_lavender-refinement.mjs | full |
@@ -78,6 +81,11 @@ models trainings as a separate group event type. E-3's therapy-side
 assertions are DOM-presence only (form element, PT link, no booking
 affordances) — form-action *liveness* is human-verified in phase 6c,
 so E-3 goes fully green at 6b.
+Revised 2026-07-26 (rlw116, phase 5b): E-2 and E-4 are rewritten for
+the single-page IA (sections/anchors instead of routes) and re-verified
+in 5b; E-3's selector contracts carry over scoped to the one-pager's
+sections — its RED cause (booking not wired) and its 6b green-up are
+unchanged.
 
 ## Phase checklist
 
@@ -90,6 +98,7 @@ Target dates track G-1 (mockups to Kylie 2026-08-08) and G-3 (launch
 - [x] Phase 3: Content pages & information architecture — all EIGHT routes incl. /modalities/ (dev spec: rlw103) — merged 2026-07-26
 - [x] Phase 4: Booking-provider comparison — by 2026-08-15 (dev spec: rlw104) — merged 2026-07-25; **picked 2026-07-26: Calendly**
 - [x] Phase 5: Theme promotion (dev spec: rlw105) — merged 2026-07-26, warm sand & lilac site-wide
+- [/] Phase 5b: Single-page IA + renames + "Rooted Light Healing" (dev spec: rlw116) *(added 2026-07-26 from Kylie's direction)*
 - [ ] Phase 6a: Calendly setup runbook + manual connection chain — by 2026-08-01 (ready now, parallel-safe) (dev spec: rlw114) *(added 2026-07-26)*
 - [ ] Phase 6b: Reiki session + training booking wiring — by 2026-09-12 (gated: MANUAL.md Calendly chain complete — real event-type links exist) (dev spec: rlw106) *(scope revised 2026-07-26)*
 - [ ] Phase 6c: Therapy inquiry form wiring — by 2026-09-12 (gated: form-provider confirmation in INTERVIEW.md) (dev spec: rlw113) *(split from old phase 6, 2026-07-26)*
@@ -405,6 +414,61 @@ until the deploy phase's production profile excludes them.
 - [ ] T5.2 Re-run evals + visual check vs chosen mockup — files: none
       (results logged in spec status log)
 
+### 5b. Phase: Single-page IA + renames + "Rooted Light Healing" (added 2026-07-26)
+
+**Overview**: Kylie's direction after seeing the live preview: ONE
+scrollable page. Fold About / Services (reiki + therapy) / Modalities /
+Resources into `index.astro` as anchor sections below the mist hero +
+quote band; remove About You entirely; rename About Me → About and
+Offerings → Services; site name becomes "Rooted Light Healing"
+(legal name unchanged); hero de-cluttered (owner line
+`Kylie Fustini · Therapist · Reiki Master/Teacher`, new intention line,
+tagline dropped from hero). Former routes redirect to section anchors;
+resource explainer detail pages stay standalone. E-2/E-4 rewritten for
+the single-page IA (this phase's RED artifacts); E-3 re-scoped to the
+one-pager's sections without changing its RED cause.
+
+**Files**:
+- `src/pages/index.astro` — the one-pager (hero + quote + 4 sections).
+- `src/content/site.json` — name, owner_line, intention, anchor nav.
+- `src/pages/{about-me,about-you,modalities}.astro`,
+  `src/pages/offerings/*` , `src/pages/resources/index.astro` — deleted;
+  `astro.config.mjs` redirects take over the routes.
+- `src/content/about-you.md` — deleted.
+- `src/components/{ModalityAccordion,ResourceCard}.astro`, `base.css` —
+  heading-level demotions for the single-document outline.
+- Evals E-2/E-3/E-4 + prd/design/plan/expectations (this revision).
+
+**Context**:
+- BookingCTA + InquiryForm components and the site.json booking/contact
+  seams stay exactly where rlw106 (6b) and rlw113 (6c) expect them —
+  those phases now target the Services section of `index.astro`.
+- Mockup routes untouched (rlw107 prunes them); E-1/E-5/E-7 untouched.
+- 988 note and `TODO(kylie)` markers survive the fold-in.
+
+**Verification plan**:
+- Type: tests-first (revised E-2 observed RED against the multi-page
+  build before the fold-in; E-4 stays shipped-green — its revision is
+  anchor-awareness, not a new failure mode)
+- Success criteria:
+  - `node …/evals/E-2_site-routes.mjs` green: sections/anchors/nav/
+    name/redirect assertions per revised expectations.md.
+  - `node …/evals/E-4_click-depth.mjs` green (CTA at depth 0).
+  - `node …/evals/E-3_offering-contracts.mjs --allow-placeholder`
+    RED only for the unchanged 6b reason (booking-training CTA +
+    live hrefs missing) — the re-scope introduces no new RED.
+  - `npm run build` green; Pages preview renders the one-pager.
+
+**Tasks**:
+- [ ] T5b.1 Revise prd/expectations/design/plan + rewrite E-2/E-4,
+      re-scope E-3 (devx revise cdea58) — files: workstream artifacts
+- [ ] T5b.2 site.json: name/owner_line/intention/anchor nav — files:
+      `src/content/site.json`
+- [ ] T5b.3 Fold sections into index.astro; delete old pages +
+      about-you content; redirects — files: `src/pages/`,
+      `astro.config.mjs`
+- [ ] T5b.4 Re-run evals + build; verify preview — files: none
+
 ### 6a. Phase: Calendly setup runbook + manual connection chain (added 2026-07-26)
 
 **Overview**: Provider decided — Calendly Standard, PayPal
@@ -477,8 +541,10 @@ to phase 6c. Gated on: rlw114 merged + MANUAL.md Calendly chain complete
 
 **Files**:
 - `src/content/site.json` — live `booking.url`, `booking.training_url`.
-- `src/pages/offerings/reiki.astro`, `src/components/BookingCTA.astro`
-  — training CTA added; both CTAs link out to Calendly.
+- `src/pages/index.astro` (reiki block of the Services section — was
+  `src/pages/offerings/reiki.astro` before rlw116),
+  `src/components/BookingCTA.astro` — training CTA added; both CTAs
+  link out to Calendly.
 
 **Context**:
 - E-3 runs **flagless** from this phase on — `--allow-placeholder` is
@@ -500,9 +566,9 @@ to phase 6c. Gated on: rlw114 merged + MANUAL.md Calendly chain complete
 **Tasks**:
 - [ ] T6b.1 Wire the two live Calendly links into `site.json` — files:
       `src/content/site.json`
-- [ ] T6b.2 Training signup CTA on the reiki page
+- [ ] T6b.2 Training signup CTA in the reiki block
       (`data-cta="booking-training"`) + confirm both CTAs link out —
-      files: `src/pages/offerings/reiki.astro`, `src/components/`
+      files: `src/pages/index.astro`, `src/components/`
 - [ ] T6b.3 Paid end-to-end human test (session + training, pay →
       confirm → refund) — files: `MANUAL.md` log
 
@@ -516,9 +582,10 @@ only on the form-provider confirmation; parallel-safe with 6a/6b.
 
 **Files**:
 - `src/content/site.json` — live `contact.form_action`.
-- `src/pages/offerings/therapy.astro` — form posts to the provider;
-  keep fields minimal (name, email, message — privacy note in the
-  comparison doc addendum).
+- `src/pages/index.astro` (therapy block of the Services section — was
+  `src/pages/offerings/therapy.astro` before rlw116) — form posts to
+  the provider; keep fields minimal (name, email, message — privacy
+  note in the comparison doc addendum).
 - `src/pages/thanks.astro` — thank-you page (Web3Forms same-domain
   redirect target).
 
@@ -537,7 +604,7 @@ only on the form-provider confirmation; parallel-safe with 6a/6b.
 
 **Tasks**:
 - [ ] T6c.1 Wire form action + thank-you page — files:
-      `src/content/site.json`, `src/pages/offerings/therapy.astro`,
+      `src/content/site.json`, `src/pages/index.astro`,
       `src/pages/thanks.astro`
 - [ ] T6c.2 Human delivery test → MANUAL.md log — files: `MANUAL.md`
 

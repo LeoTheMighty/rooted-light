@@ -30,6 +30,18 @@ information architecture gains a top-level, linkable **Modalities**
 section (previously the modality catalog lived inside the Therapy
 page). A lavender-only refinement round follows before theme promotion.
 
+**Decision update (2026-07-26, Kylie via Leo — rlw116):** Kylie wants
+**one scrollable page**, not multiple pages. The mist hero (rlw115)
+stays as the full-screen first impression, the quote band stays, and
+each former page's content becomes a scroll section navigated by anchor
+links. Renames: **About Me → About**, **Offerings → Services**;
+**About You is removed entirely**. The business name is **Rooted Light
+Healing** (site name everywhere; legal name stays Rooted Light LLC).
+Hero is de-cluttered: owner line reads `Kylie Fustini · Therapist ·
+Reiki Master/Teacher`, the tagline line is dropped from the hero, and
+the intention is reworded to "A place to feel safe, seen, and
+supported — and to leave feeling whole again."
+
 ## Goals
 
 <!-- User goals in prose; business/project goals MUST be numeric + dated so
@@ -91,8 +103,9 @@ page). A lavender-only refinement round follows before theme promotion.
   modalities she practices, then reaches out via an email inquiry form
   (Psychology Today-style); everything after first contact happens in
   SimplePractice.
-- **UC-4**: A visitor reads About Me / About You to gauge personal fit
-  before reaching out.
+- **UC-4**: A visitor reads the About section to gauge personal fit
+  before reaching out. (Revised 2026-07-26, rlw116: was "About Me /
+  About You"; About You is removed per FR-4.)
 - **UC-5**: A visitor digs deeper via Resources — modality explainers,
   reiki background, types of reiki, ICRT reference.
 - **UC-6**: Kylie reviews a set of distinct home-page mockups on her own
@@ -102,10 +115,13 @@ page). A lavender-only refinement round follows before theme promotion.
 
 ## Capabilities
 
-- **CAP-1**: Static multi-page site with the agreed information
-  architecture: Home, About Me, About You, **Modalities**, Resources,
-  Offerings (Reiki & Reiki Training; Therapy). (Modalities promoted to
-  top level 2026-07-25.)
+- **CAP-1**: Static site with the agreed information architecture.
+  (Revised 2026-07-26, rlw116: a **single scrollable page** — full-screen
+  hero → quote band → About → Services → Modalities → Resources sections,
+  each with a stable anchor; anchor-link navigation. Resource explainer
+  detail pages may remain standalone routes. Previously: multi-page —
+  Home, About Me, About You, Modalities, Resources, Offerings; Modalities
+  promoted to top level 2026-07-25.)
 - **CAP-2**: External booking + payment integration point for reiki
   (embed or link-out; provider selected by a comparison in the design
   stage — Calendly and SimplePractice-native are the seed candidates).
@@ -131,30 +147,43 @@ page). A lavender-only refinement round follows before theme promotion.
 
 ### FR-1: Information architecture
 
-The site SHALL have six top-level sections routed as pages: Home, About
-Me, About You, Modalities, Resources, Offerings — with Offerings split
-into Reiki & Reiki Training and Therapy subpages (eight routes total).
-Navigation SHALL reach every section from every page. (Revised
-2026-07-25: Modalities promoted from a Therapy-page subsection to a
-top-level, linkable section.)
+The site SHALL be a single scrollable page whose sections appear in
+this order: full-screen hero, quote band, About, Services, Modalities,
+Resources — each section carrying a stable id anchor. Navigation SHALL
+read Home · About · Services · Modalities · Resources and link to the
+section anchors. The labels "About You" and "Offerings" SHALL NOT
+appear anywhere user-visible. Former page routes SHALL redirect to
+their section anchors (or be removed). (Revised 2026-07-26, rlw116:
+single-page IA per Kylie. Previously: six top-level sections routed as
+pages, eight routes total; 2026-07-25: Modalities promoted to top
+level.)
 
 ### FR-2: Home page
 
 Home SHALL present: a photo/hero area (placeholder until Kylie supplies
-imagery), Rooted Light name + a one-line intention statement drawn from
-the brainstorm language, and clear paths into About, Offerings, and
-Resources.
+imagery), the site name + a one-line intention statement drawn from the
+brainstorm language, and clear paths into About, Services, and
+Resources. (Revised 2026-07-26, rlw116: the hero SHALL show exactly —
+site name "Rooted Light Healing", the owner line `Kylie Fustini ·
+Therapist · Reiki Master/Teacher`, the intention line "A place to feel
+safe, seen, and supported — and to leave feeling whole again.", and the
+pill CTA labeled to match "Services". The tagline line is removed from
+the hero; the paths into sections are the anchor nav + in-page scroll.)
 
 ### FR-3: About Me
 
-About Me SHALL contain three subsections — Experiences (placeholder,
-marked TODO), Interests/Devotions (research, teaching, healing work), and
-Education/Certifications.
+About (renamed from "About Me", 2026-07-26 rlw116; now a section of the
+one-page site) SHALL contain three subsections — Experiences
+(placeholder, marked TODO), Interests/Devotions (research, teaching,
+healing work), and Education/Certifications.
 
 ### FR-4: About You
 
-About You SHALL describe who will benefit from working with Kylie and map
-modalities to the people they're useful for.
+**REMOVED 2026-07-26 (rlw116, Kylie via Leo):** the About You section
+is deleted entirely — page, nav entry, content, and the who-benefits
+modality map. Who-benefits information remains available per-modality
+inside the Modalities catalog (CAP-4 field contract, unchanged). ID
+retained for traceability; no surface implements FR-4.
 
 ### FR-5: Resources
 
@@ -163,7 +192,10 @@ what reiki is, types of reiki, and an ICRT reference link.
 
 ### FR-6: Reiki offering page
 
-The Reiki & Reiki Training page SHALL explain what reiki is and what a
+(Revised 2026-07-26, rlw116: "page" → the reiki block of the
+**Services** section on the one-page site; all content and CTA
+contracts below carry over unchanged.) The Reiki & Reiki Training
+surface SHALL explain what reiki is and what a
 session looks like, describe training offerings, and present a booking
 call-to-action that hands off to the chosen external booking/payment
 provider (where Kylie controls her schedule — e.g. "typically on
@@ -177,11 +209,14 @@ inquiry-only per FR-7.)
 
 ### FR-7: Therapy offering page
 
-The Therapy page SHALL present an email inquiry form as the only contact
-path (no booking widget), a small Psychology Today link, and a short
-modality summary that links to the top-level Modalities page for the
-full catalog. (Revised 2026-07-25: the full per-modality catalog moved
-to FR-13; the four-field content contract lives there now.)
+The Therapy surface SHALL present an email inquiry form as the only
+contact path (no booking widget), a small Psychology Today link, and a
+short modality summary that links to the Modalities catalog. (Revised
+2026-07-25: the full per-modality catalog moved to FR-13. Revised
+2026-07-26, rlw116: "page" → the therapy block of the **Services**
+section; the no-booking-affordance contract applies to that block, and
+the modality links target the in-page #modalities anchors. The 988
+crisis note carries over.)
 
 ### FR-8: Visual language
 
@@ -220,11 +255,13 @@ soft palette.
 
 ### FR-13: Modalities page (added 2026-07-25)
 
-The Modalities page SHALL render the modality catalog at the top level:
-each modality with description, who benefits, resources, and Kylie's
-certifications (the CAP-4 contract), each modality addressable via a
-stable anchor so other pages can deep-link it. Rendered as the clean
-`<details>` accordion (or flat sections if cleaner).
+The Modalities surface SHALL render the modality catalog: each modality
+with description, who benefits, resources, and Kylie's certifications
+(the CAP-4 contract), each modality addressable via a stable anchor so
+any surface can deep-link it. Rendered as the clean `<details>`
+accordion (or flat sections if cleaner). (Revised 2026-07-26, rlw116:
+"page" → the Modalities section of the one-page site; the per-modality
+anchors are now page-global fragments — `/#<modality-id>`.)
 
 ### FR-14: Lavender refinement round (added 2026-07-25)
 
@@ -257,6 +294,17 @@ first).
 - Reiki page carries BOTH a session booking CTA and a training signup
   CTA, each with an off-site (Calendly) href; therapy still has zero
   booking affordances → E-3 revision (2026-07-26).
+- Single-page build: one scrollable home with hero → quote → About →
+  Services → Modalities → Resources sections + anchor nav; no
+  "About You"/"Offerings" labels; old routes redirect → E-2 revision
+  (2026-07-26, rlw116).
+- Booking CTA now lives ON the home page (Services section) → E-4's
+  ≤ 3-click BFS trivially satisfiable at depth 0; keep the graph walk
+  as a regression guard → E-4 revision (2026-07-26, rlw116).
+- E-3's selector contracts (data-cta, data-cta="booking-training",
+  data-modality/data-field, 988, PT link, therapy-block-has-no-booking)
+  carry over scoped to the single page's sections → E-3 revision
+  (2026-07-26, rlw116).
 
 ## Open questions
 

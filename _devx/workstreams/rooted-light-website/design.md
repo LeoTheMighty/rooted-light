@@ -122,8 +122,14 @@
 - **Tailwind for styling**: token-driven vanilla CSS (custom properties)
   is simpler for 6 swappable palettes and keeps mockup diffs readable;
   no utility-class layer needed at this scale.
-- **Single-page site**: the content volume (modality catalog, resources)
-  needs real routes for scannability and future SEO.
+- ~~**Single-page site**: the content volume (modality catalog, resources)
+  needs real routes for scannability and future SEO.~~ **Overturned
+  2026-07-26 (rlw116) — by the client, not by slip**: Kylie explicitly
+  wants one scrollable page. The scannability concern is answered by
+  anchor nav + the `<details>` accordion; resource explainer detail
+  pages remain standalone routes (the long-form content keeps real
+  URLs), so the SEO concern survives where it matters. Former top-level
+  routes redirect to their section anchors.
 
 ## Wrap, don't duplicate
 
@@ -152,9 +158,8 @@ src/
     site.json         # name, tagline, intention words, nav, contact
     about-me.md       # three H2 subsections: Experiences (TODO(kylie)),
                       #   Interests/Devotions, Education/Certifications
-    about-you.md      # who-benefits narrative; closes with a "which
-                      #   modality serves whom" map generated from the
-                      #   modalities collection's who_benefits[] fields
+    (about-you.md deleted 2026-07-26, rlw116 — About You removed; the
+                      #   who-benefits data lives on in modalities/*.md)
     modalities/*.md   # one file per therapy modality (schema below)
     offerings/*.md    # reiki session, reiki training descriptions;
                       #   training carries its own sign-up CTA — same
@@ -166,20 +171,22 @@ src/
     tokens/           # one CSS file per style pack: pack-<name>.css
     base.css          # reset + layout primitives shared by all packs
   layouts/            # per-style-pack home layout + shared page layout
-  pages/
-    index.astro                 # home (final theme)
-    about-me.astro
-    about-you.astro
-    modalities.astro            # top-level modality catalog (added
-                                #   2026-07-25) — renders the modalities
-                                #   collection as the <details> accordion;
-                                #   each modality under a stable id anchor
-                                #   so Therapy/About You deep-link it
-    resources/…                 # resources index + detail pages
-    offerings/index.astro
-    offerings/reiki.astro
-    offerings/therapy.astro     # short modality summary → /modalities/;
-                                #   full catalog no longer lives here
+  pages/                        # (IA revised 2026-07-26, rlw116:
+                                #   single-page — index.astro carries
+                                #   About / Services / Modalities /
+                                #   Resources as anchor sections; the
+                                #   former page files are deleted and
+                                #   their routes redirect via
+                                #   astro.config redirects)
+    index.astro                 # THE page: hero → quote → #about →
+                                #   #services (reiki block incl. both
+                                #   booking CTAs + therapy block incl.
+                                #   inquiry form/PT/988) → #modalities
+                                #   (the <details> accordion, stable
+                                #   per-modality id anchors) →
+                                #   #resources (explainer cards)
+    resources/[slug].astro      # standalone explainer detail pages
+                                #   (kept as real routes on purpose)
     mockups/index.astro         # review index for Kylie (round 2 listed
                                 #   first, round 1 kept below)
     mockups/<pack>.astro        # one home-page mockup per style pack;
@@ -253,6 +260,16 @@ phase, so the public site never ships the review index.)
 - Where does the modality catalog live? → **top-level `/modalities/`
   page** with per-modality anchors (Leo, 2026-07-25); Therapy keeps a
   short summary + link. Nav becomes six sections / eight routes.
+  (Superseded 2026-07-26, rlw116: the catalog is the `#modalities`
+  section of the one-page site; anchors become page-global fragments.)
+- Multi-page or one-page? → **One scrollable page** (Kylie via Leo,
+  2026-07-26, rlw116): hero → quote → About → Services → Modalities →
+  Resources with anchor nav; About You removed; About Me → "About",
+  Offerings → "Services"; resource explainers stay standalone routes;
+  former routes redirect to anchors.
+- Site name? → **"Rooted Light Healing"** (Leo, 2026-07-26): site.json
+  `name`, hero h1, nav brand, `<title>`s. Legal name stays
+  **Rooted Light LLC** (footer).
 
 - Static site generator? → **Astro** (see Trade-offs; decided here).
 - Mockups as designs-in-code vs design-tool files? → **Built HTML style

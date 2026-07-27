@@ -23,19 +23,36 @@
 ## E-2: Full-site static build
 
 <!-- Revised 2026-07-25: Modalities promoted to top level (FR-1/FR-13) —
-     seven routes → eight, five nav sections → six. -->
+     seven routes → eight, five nav sections → six.
+     Revised 2026-07-26 (rlw116): single-page IA — the eight-route
+     assertion becomes a one-scrollable-page assertion: hero → quote →
+     About → Services → Modalities → Resources sections with stable
+     anchors, anchor nav, banned legacy labels, name change to
+     "Rooted Light Healing", resource detail routes still standalone,
+     old routes redirecting. -->
 
 - **Priority:** P0
 - **Covers:** G-2, G-4, CAP-1, CAP-6, FR-1, FR-11, FR-13, UC-7
 - **Trigger:** the site build command is run
 - **Expectation (EARS):** When the site build command is run, the system
-  SHALL produce a fully static output containing all eight routes (Home,
-  About Me, About You, Modalities, Resources, Offerings index or
-  landing, Reiki & Reiki Training, Therapy) with global navigation
-  reaching every section, and no server-side runtime required to serve
-  it.
-- **Threshold:** all 8 routes present as static HTML in build output;
-  every page's nav links to all 6 top-level sections; exit code 0.
+  SHALL produce a fully static output whose home page is a single
+  scrollable document containing, in order: the full-screen hero, the
+  quote band, and About / Services / Modalities / Resources sections
+  each with a stable id anchor; whose navigation reads Home · About ·
+  Services · Modalities · Resources linking to those anchors; which
+  presents no "About You" or "Offerings" label anywhere user-visible;
+  which carries the site name "Rooted Light Healing"; and which requires
+  no server-side runtime to serve.
+- **Threshold:** dist/index.html contains ids `about`, `services`,
+  `modalities`, `resources` in that document order, preceded by the
+  hero and quote band; nav on the home page and on every remaining
+  standalone route links all four section anchors + home; zero
+  user-visible "About You"/"Offerings" labels; "Rooted Light Healing"
+  in the `<title>`, nav brand, and hero h1; each resources-collection
+  entry still renders as a standalone route; each former top-level
+  route (/about-me/, /about-you/, /offerings/, /offerings/reiki/,
+  /offerings/therapy/, /modalities/, /resources/) either absent or a
+  redirect page targeting the one-pager; exit code 0.
 - **Verified by:** _devx/workstreams/rooted-light-website/evals/E-2_site-routes.mjs
 
 ## E-3: Offering-page contracts
@@ -46,37 +63,51 @@
      Revised 2026-07-26: Calendly decided — sessions and trainings are
      separate event types, so the reiki page must carry BOTH a session
      booking CTA and a training signup CTA (UC-2 was previously
-     unenforced). -->
+     unenforced).
+     Revised 2026-07-26 (rlw116): single-page IA — the same selector
+     contracts, scoped to the one-pager's sections instead of routes.
+     The therapy no-booking assertion applies to the therapy block of
+     the Services section; modality links target in-page anchors. -->
 
 - **Priority:** P1
 - **Covers:** UC-1, UC-2, UC-3, CAP-2, CAP-3, CAP-4, FR-6, FR-7, FR-13
-- **Trigger:** the built reiki, therapy, and modalities pages are inspected
-- **Expectation (EARS):** When the built reiki, therapy, and modalities
-  pages are inspected, the system SHALL show an external booking
-  call-to-action for reiki sessions AND an external signup
-  call-to-action for reiki trainings on the reiki page; on the therapy
-  page an email inquiry form, a Psychology Today link, a link to the
-  Modalities page, and no booking widget; and on the modalities page
-  every modality with description / who-benefits / resources /
-  certifications, each under a stable anchor.
-- **Threshold:** reiki page: ≥ 1 session booking CTA
-  (`[data-cta="booking"]`) AND ≥ 1 training signup CTA
+- **Trigger:** the built one-page site's Services and Modalities sections are inspected
+- **Expectation (EARS):** When the built one-page site's Services and
+  Modalities sections are inspected, the system SHALL show an external
+  booking call-to-action for reiki sessions AND an external signup
+  call-to-action for reiki trainings in the reiki block; in the therapy
+  block an email inquiry form, a Psychology Today link, a link to the
+  Modalities section, a 988 crisis note, and no booking widget; and in
+  the Modalities section every modality with description / who-benefits
+  / resources / certifications, each under a stable anchor.
+- **Threshold:** on dist/index.html — reiki block: ≥ 1 session booking
+  CTA (`[data-cta="booking"]`) AND ≥ 1 training signup CTA
   (`[data-cta="booking-training"]`), each with an href resolving
-  off-site (or to the provider embed); therapy page: form element
-  present, "psychologytoday.com" link present, ≥ 1 link to /modalities/,
-  0 booking embeds/links; modalities page: every listed modality has the
-  4 required content fields and an id anchor.
+  off-site (or to the provider embed); therapy block (scoped between
+  the therapy marker and the Modalities section): form element present,
+  "psychologytoday.com" link present, ≥ 1 link to the `#modalities`
+  anchor or a modality anchor, "988" present, 0 booking embeds/links;
+  Modalities section: every listed modality has the 4 required content
+  fields and an id anchor.
 - **Verified by:** _devx/workstreams/rooted-light-website/evals/E-3_offering-contracts.mjs
 
 ## E-4: Booking click depth
+
+<!-- Revised 2026-07-26 (rlw116): single-page IA — the booking CTA now
+     lives on the home page itself (Services section), so the expected
+     depth is 0; the BFS stays as a regression guard (fragment-only
+     hops are not link traversals) and the ≤ 3 bound is unchanged. -->
 
 - **Priority:** P1
 - **Covers:** G-5, UC-1, FR-6
 - **Trigger:** the link graph of the built site is walked from the home page
 - **Expectation (EARS):** When the link graph of the built site is walked
   from the home page, the system SHALL expose a path to the reiki
-  booking call-to-action in at most 3 clicks.
-- **Threshold:** shortest path Home → booking CTA ≤ 3 link traversals.
+  booking call-to-action in at most 3 clicks, with in-page anchor hops
+  counting as 0 clicks.
+- **Threshold:** shortest path Home → booking CTA ≤ 3 link traversals
+  (expected 0 under the single-page IA — the CTA is on the home page);
+  fragment-only hrefs do not count as traversals.
 - **Verified by:** _devx/workstreams/rooted-light-website/evals/E-4_click-depth.mjs
 
 ## E-5: Palette accessibility

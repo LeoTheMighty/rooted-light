@@ -95,4 +95,14 @@ navigated by anchor links. Plus renames and hero copy changes:
   session (`/devx rlw116`).
 - 2026-07-26 — Leo follow-up: business name is "Rooted Light
   Healing" — name AC added.
+- 2026-07-26 — phase 2: spec ACs direct (v2 native); 8 ACs;
+  workstream=rooted-light-website (plan cdea58); red-artifacts=E-2/E-3/
+  E-4 — revision required via devx revise before implementation.
+- 2026-07-26 — T5b.1 done: `devx revise cdea58 --touched prd.md` (4
+  flags reset) → prd/expectations/design/plan revised for single-page
+  IA; E-2 rewritten + observed RED right-reason against the multi-page
+  build; E-3 re-scoped (RED cause unchanged); E-4 anchor-aware. Gates
+  replayed: prd PASS, coverage(design) CONCERNS (pre-existing G-3/UC-7
+  deploy partials), coverage(plan) PASS, evals FAIL→WAIVED (D-9
+  mid-flight precedent). Details in plan spec cdea58 status log.
 - 2026-07-26T20:30:35-06:00 — claimed by /devx in session /devx-2026-07-26T2030-52365

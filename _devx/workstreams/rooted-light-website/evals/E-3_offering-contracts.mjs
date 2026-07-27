@@ -1,16 +1,21 @@
 #!/usr/bin/env node
-// E-3: Offering-page contracts. Covers UC-1, UC-2, UC-3, CAP-2/3/4,
-// FR-6, FR-7, FR-13.
-// Reiki page: ≥1 session booking CTA ([data-cta="booking"]) AND ≥1
-// training signup CTA ([data-cta="booking-training"]) — Calendly splits
-// sessions vs group trainings into separate event types (revised
-// 2026-07-26 via devx revise cdea58) — each with an off-site href
-// (or provider embed). Therapy page: form present, psychologytoday.com
-// link present, ≥1 link to /modalities/, ZERO booking affordances.
-// Modalities page (top-level, revised 2026-07-25 via devx revise
-// cdea58): every modality entry ([data-modality]) carries the 4
-// required fields ([data-field=...]) and an id anchor.
-// --allow-placeholder: skips the external-href requirement (phase 3 use
+// E-3: Offering contracts on the one-page site. Covers UC-1, UC-2,
+// UC-3, CAP-2/3/4, FR-6, FR-7, FR-13.
+// Reiki block (Services section): ≥1 session booking CTA
+// ([data-cta="booking"]) AND ≥1 training signup CTA
+// ([data-cta="booking-training"]) — Calendly splits sessions vs group
+// trainings into separate event types (revised 2026-07-26 via devx
+// revise cdea58) — each with an off-site href (or provider embed).
+// Therapy block (scoped between the therapy marker and the Modalities
+// section): form present, psychologytoday.com link present, 988 crisis
+// note present, ≥1 link to the modalities anchors, ZERO booking
+// affordances. Modalities section: every modality entry
+// ([data-modality]) carries the 4 required fields ([data-field=...])
+// and an id anchor.
+// Revised 2026-07-26 (devx revise cdea58, rlw116): single-page IA —
+// same selector contracts, scoped to dist/index.html section slices
+// (was: offerings/reiki, offerings/therapy, modalities routes).
+// --allow-placeholder: skips the external-href requirement (pre-6b use
 // only) and HARD-ERRORS against a production build (no dist/mockups/).
 import { readFileSync, existsSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
@@ -22,40 +27,45 @@ const allowPlaceholder = process.argv.includes("--allow-placeholder");
 const fail = (msg) => { console.error(`RED E-3: ${msg}`); process.exit(1); };
 
 if (!existsSync(DIST))
-  fail("no dist/ build output — site has not been built yet (feature missing: run `npm run build`, phases 3/6 not landed)");
+  fail("no dist/ build output — site has not been built yet (run `npm run build`)");
 
 if (allowPlaceholder && !existsSync(join(DIST, "mockups")))
   fail("--allow-placeholder used against a production build (no dist/mockups/) — the flag is dead after phase 6; run flagless");
 
-const page = (route) => {
-  const asDir = join(DIST, route, "index.html");
-  const asFile = join(DIST, `${route}.html`);
-  if (existsSync(asDir)) return readFileSync(asDir, "utf8");
-  if (existsSync(asFile)) return readFileSync(asFile, "utf8");
-  fail(`route /${route} missing from dist/ (feature missing: phase 3 not landed)`);
+const homeFile = existsSync(join(DIST, "index.html"))
+  ? join(DIST, "index.html")
+  : null;
+if (!homeFile) fail("dist/ has no index.html (the one-pager is missing)");
+const html = readFileSync(homeFile, "utf8");
+
+// Section slices — the one-pager marks its blocks with data-section=.
+const sliceBetween = (startMarker, endMarker, label) => {
+  const start = html.indexOf(startMarker);
+  if (start === -1) fail(`one-pager missing ${label} (${startMarker})`);
+  const end = endMarker ? html.indexOf(endMarker, start) : html.length;
+  if (end === -1) fail(`one-pager missing the section after ${label} (${endMarker}) — slice unbounded`);
+  return html.slice(start, end);
 };
 
-// --- Reiki page ---
-const reiki = page("offerings/reiki");
-const ctaMatches = [...reiki.matchAll(/<[^>]*data-cta="booking"[^>]*>/g)];
+// --- Reiki block: both CTAs, off-site hrefs (page-global match is safe:
+// --- the therapy-scope assertion below proves no CTA leaks there) ---
+const ctaMatches = [...html.matchAll(/<[^>]*data-cta="booking"[^>]*>/g)];
 if (!ctaMatches.length)
-  fail('reiki page has no [data-cta="booking"] element (selector contract, plan.md T3.3)');
+  fail('one-pager has no [data-cta="booking"] element (session CTA selector contract)');
 const hrefs = ctaMatches
   .map((m) => (m[0].match(/href="([^"]+)"/) || [])[1])
   .filter(Boolean);
 const external = hrefs.some((h) => /^https?:\/\//.test(h));
-const embed = /<iframe[^>]*(calendly|acuity|squareup|simplepractice)/i.test(reiki);
+const embed = /<iframe[^>]*(calendly|acuity|squareup|simplepractice)/i.test(html);
 if (!external && !embed) {
   if (!allowPlaceholder)
     fail(`reiki booking CTA href is not off-site (${hrefs.join(", ") || "no href"}) and no provider embed found — booking not wired (phase 6b)`);
   console.log("E-3 note: placeholder booking href tolerated (--allow-placeholder)");
 }
 
-// Training signup CTA (revised 2026-07-26: Calendly separates the
-// Reiki Training group event type — UC-2 requires an online signup path).
-const trainingMatches = [...reiki.matchAll(/<[^>]*data-cta="booking-training"[^>]*>/g)];
+const trainingMatches = [...html.matchAll(/<[^>]*data-cta="booking-training"[^>]*>/g)];
 if (!trainingMatches.length)
-  fail('reiki page has no [data-cta="booking-training"] element — training signup not wired (phase 6b)');
+  fail('one-pager has no [data-cta="booking-training"] element — training signup not wired (phase 6b)');
 const trainingHrefs = trainingMatches
   .map((m) => (m[0].match(/href="([^"]+)"/) || [])[1])
   .filter(Boolean);
@@ -66,23 +76,40 @@ if (!trainingExternal && !embed) {
   console.log("E-3 note: placeholder training href tolerated (--allow-placeholder)");
 }
 
-// --- Therapy page ---
-const therapy = page("offerings/therapy");
-if (!/<form[\s>]/.test(therapy)) fail("therapy page has no <form> (inquiry form missing)");
-if (!/psychologytoday\.com/.test(therapy)) fail("therapy page has no psychologytoday.com link");
+// --- Therapy block: inquiry-only contract, scoped ---
+const therapy = sliceBetween(
+  'data-section="therapy"',
+  'data-section="modalities"',
+  "therapy block"
+);
+if (!/<form[\s>]/.test(therapy)) fail("therapy block has no <form> (inquiry form missing)");
+if (!/psychologytoday\.com/.test(therapy)) fail("therapy block has no psychologytoday.com link");
+if (!/988/.test(therapy)) fail("therapy block has no 988 crisis note");
 if (/data-cta="booking"/.test(therapy) || /<iframe[^>]*(calendly|acuity|squareup)/i.test(therapy))
-  fail("therapy page contains a booking affordance — contract is inquiry-only");
+  fail("therapy block contains a booking affordance — contract is inquiry-only");
 
-if (!/href="[^"]*\/modalities\/?[^"]*"/.test(therapy))
-  fail("therapy page has no link to /modalities/ (catalog moved top-level, FR-7/FR-13)");
+// --- Modalities section: four-field catalog, scoped ---
+const modalitiesSection = sliceBetween(
+  'data-section="modalities"',
+  'data-section="resources"',
+  "Modalities section"
+);
 
-// --- Modalities page (top-level catalog) ---
-const modalitiesPage = page("modalities");
-const modalities = modalitiesPage.split(/data-modality/g).length - 1;
+// Therapy must deep-link the catalog: #modalities itself or any
+// per-modality id the section actually declares.
+const modalityIds = [
+  ...modalitiesSection.matchAll(/<[^>]*data-modality[^>]*\sid="([^"]+)"/g),
+].map((m) => m[1]);
+const anchorTargets = ["modalities", ...modalityIds];
+if (!anchorTargets.some((id) => new RegExp(`href="[^"]*#${id}"`).test(therapy)))
+  fail("therapy block has no link into the modalities anchors (FR-7/FR-13)");
+const modalities = modalitiesSection.split(/data-modality/g).length - 1;
 if (modalities < 1)
-  fail("modalities page lists no [data-modality] entries (catalog missing, FR-13)");
+  fail("Modalities section lists no [data-modality] entries (catalog missing, FR-13)");
 const REQUIRED = ["what-it-is", "who-benefits", "resources", "certifications"];
-const blocks = modalitiesPage.split(/(?=<[^>]*data-modality)/g).filter((b) => /data-modality/.test(b));
+const blocks = modalitiesSection
+  .split(/(?=<[^>]*data-modality)/g)
+  .filter((b) => /data-modality/.test(b));
 for (const [i, b] of blocks.entries()) {
   const missing = REQUIRED.filter((f) => !b.includes(`data-field="${f}"`));
   if (missing.length)
@@ -91,4 +118,4 @@ for (const [i, b] of blocks.entries()) {
     fail(`modality entry #${i + 1} has no id anchor (deep-link contract, FR-13)`);
 }
 
-console.log(`E-3 PASS: reiki session CTA ${external || embed ? "live" : "placeholder-tolerated"}, training CTA ${trainingExternal || embed ? "live" : "placeholder-tolerated"}, therapy contract clean, modalities catalog clean (${modalities} modalities)`);
+console.log(`E-3 PASS: reiki session CTA ${external || embed ? "live" : "placeholder-tolerated"}, training CTA ${trainingExternal || embed ? "live" : "placeholder-tolerated"}, therapy block contract clean, modalities catalog clean (${modalities} modalities)`);
