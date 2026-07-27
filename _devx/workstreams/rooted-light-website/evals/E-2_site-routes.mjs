@@ -1,10 +1,16 @@
 #!/usr/bin/env node
-// E-2: Full-site static build — all 8 routes present, global nav reaches
-// every top-level section from every page. Covers G-2, G-4, CAP-1,
-// CAP-6, FR-1, FR-11, FR-13, UC-7. Runs against dist/ (any profile).
+// E-2: Single-page static build — the home page is one scrollable
+// document (hero → quote → About → Services → Modalities → Resources,
+// stable id anchors), anchor nav complete on every standalone route,
+// no legacy labels, site name "Rooted Light Healing", old routes
+// redirecting. Covers G-2, G-4, CAP-1, CAP-6, FR-1, FR-11, FR-13,
+// UC-7. Runs against dist/ (any profile; /mockups/ is out of scope —
+// mockup pages are historical review artifacts).
 // Revised 2026-07-25 (devx revise cdea58): Modalities promoted to a
 // top-level section — routes 7 → 8, named nav sections 4 → 5.
-import { readFileSync, existsSync } from "node:fs";
+// Revised 2026-07-26 (devx revise cdea58, rlw116): single-page IA —
+// the eight-route assertion became this one-pager assertion.
+import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,13 +19,25 @@ const DIST = join(ROOT, "dist");
 const fail = (msg) => { console.error(`RED E-2: ${msg}`); process.exit(1); };
 
 if (!existsSync(DIST))
-  fail("no dist/ build output — site has not been built yet (feature missing: run `npm run build`, phase 1 not landed)");
+  fail("no dist/ build output — site has not been built yet (run `npm run build`)");
 
-const ROUTES = [
-  "", "about-me", "about-you", "modalities", "resources",
-  "offerings", "offerings/reiki", "offerings/therapy",
+const SITE_NAME = "Rooted Light Healing";
+// Document order on the one-pager: hero, quote band, then the four
+// anchor sections. Markers are matched by first occurrence.
+const ORDER = [
+  ['class="mist-hero"', "full-screen hero"],
+  ['class="quote-band"', "quote band"],
+  ['id="about"', "About section anchor"],
+  ['id="services"', "Services section anchor"],
+  ['id="modalities"', "Modalities section anchor"],
+  ['id="resources"', "Resources section anchor"],
 ];
-const NAV_SECTIONS = ["about-me", "about-you", "modalities", "resources", "offerings"];
+const ANCHORS = ["about", "services", "modalities", "resources"];
+// Former top-level routes: absent, or a redirect stub to the one-pager.
+const OLD_ROUTES = [
+  "about-me", "about-you", "offerings", "offerings/reiki",
+  "offerings/therapy", "modalities", "resources",
+];
 
 const pageFile = (route) => {
   const asDir = join(DIST, route, "index.html");
@@ -28,20 +46,83 @@ const pageFile = (route) => {
   if (existsSync(asFile)) return asFile;
   return null;
 };
+const stripComments = (html) => html.replace(/<!--[\s\S]*?-->/g, "");
 
-const missing = ROUTES.filter((r) => !pageFile(r));
-if (missing.length)
-  fail(`missing route(s) in dist/: ${missing.map((r) => "/" + r).join(", ")}`);
+// --- The one-pager ---
+const homeFile = pageFile("");
+if (!homeFile) fail("dist/ has no home page");
+const home = readFileSync(homeFile, "utf8");
+// Order/presence and label checks both run comment-stripped: a
+// commented-out section must not satisfy the structure assertions.
+const homeVisible = stripComments(home);
 
-for (const route of ROUTES) {
-  const html = readFileSync(pageFile(route), "utf8");
-  // Home is a nav target too ("/"); the 4 named sections must be linked.
-  const unlinked = NAV_SECTIONS.filter(
-    (s) => !new RegExp(`href="[^"]*\\b${s}\\b[^"]*"`).test(html)
-  );
-  const noHome = !/href="\/(index\.html)?"/.test(html);
-  if (unlinked.length || noHome)
-    fail(`/${route || ""}: nav incomplete — missing link(s) to ${[...unlinked, ...(noHome ? ["home"] : [])].join(", ")}`);
+let cursor = -1;
+for (const [marker, label] of ORDER) {
+  const at = homeVisible.indexOf(marker);
+  if (at === -1) fail(`home page missing ${label} (${marker})`);
+  if (at < cursor) fail(`home page section out of order: ${label} appears before the previous marker`);
+  cursor = at;
 }
 
-console.log(`E-2 PASS: ${ROUTES.length} routes present, nav complete on every page`);
+if (!new RegExp(`<title>[^<]*${SITE_NAME}`).test(home))
+  fail(`home <title> does not carry "${SITE_NAME}"`);
+if (!new RegExp(`<h1[^>]*>[^<]*${SITE_NAME}`).test(home))
+  fail(`home hero h1 does not read "${SITE_NAME}"`);
+
+// --- Nav completeness + banned labels on every standalone route ---
+// Standalone = the one-pager + each resource explainer detail page.
+const resourceDirs = existsSync(join(DIST, "resources"))
+  ? readdirSync(join(DIST, "resources")).filter((d) =>
+      statSync(join(DIST, "resources", d)).isDirectory() &&
+      existsSync(join(DIST, "resources", d, "index.html"))
+    )
+  : [];
+if (resourceDirs.length < 1)
+  fail("no standalone resource explainer detail pages under dist/resources/*/ (they must remain real routes)");
+
+const standalone = [
+  ["", home],
+  ...resourceDirs.map((d) => [
+    `resources/${d}`,
+    readFileSync(join(DIST, "resources", d, "index.html"), "utf8"),
+  ]),
+];
+
+for (const [route, html] of standalone) {
+  const visible = stripComments(html);
+  const missingAnchors = ANCHORS.filter(
+    (a) => !new RegExp(`href="[^"]*#${a}"`).test(visible)
+  );
+  if (missingAnchors.length)
+    fail(`/${route}: nav missing anchor link(s) to ${missingAnchors.join(", ")}`);
+  // Home link, base-aware ("any profile"): the nav anchors carry the
+  // deploy base as their path prefix ("/<base>/#about"), so the home
+  // href is that same prefix — "/" on default builds.
+  const anchorMatch = visible.match(/href="([^"#]*)#about"/);
+  if (!anchorMatch)
+    fail(`/${route}: #about link is not a plain path+fragment href — cannot derive the home href`);
+  const homeHref = anchorMatch[1] || "/";
+  if (!visible.includes(`href="${homeHref}"`))
+    fail(`/${route}: nav has no home link (expected href="${homeHref}")`);
+  if (/About You/.test(visible))
+    fail(`/${route}: banned label "About You" is user-visible`);
+  if (/Offerings/.test(visible))
+    fail(`/${route}: banned label "Offerings" is user-visible`);
+  if (route && !new RegExp(`>\\s*${SITE_NAME}\\s*<`).test(visible))
+    fail(`/${route}: nav brand does not read "${SITE_NAME}"`);
+}
+
+// --- Old routes: gone or redirecting to the one-pager ---
+// Redirect proof is the meta refresh alone: a canonical link is normal
+// SEO markup on a full content page and must not bless a revived route.
+for (const route of OLD_ROUTES) {
+  const f = pageFile(route);
+  if (!f) continue; // removed outright — acceptable
+  const html = readFileSync(f, "utf8");
+  if (!/http-equiv="refresh"/i.test(html))
+    fail(`/${route}/ still serves full content — must be removed or redirect to its section anchor`);
+}
+
+console.log(
+  `E-2 PASS: one-pager with ${ANCHORS.length} anchored sections in order, nav + name clean on ${standalone.length} standalone route(s), ${OLD_ROUTES.length} legacy routes redirecting/removed`
+);

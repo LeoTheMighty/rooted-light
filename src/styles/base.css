@@ -198,8 +198,10 @@ details.card > summary {
   font-size: 1.1rem;
 }
 
-/* Keep the outline heading inline beside the disclosure marker. */
-details.card > summary > h2 {
+/* Keep the outline heading inline beside the disclosure marker.
+   (h3 since rlw116: the accordion sits under the one-pager's
+   h2 "Modalities" section heading.) */
+details.card > summary > h3 {
   display: inline;
   font-size: 1.1rem;
 }
@@ -336,7 +338,8 @@ form button {
   filter: brightness(1.08);
 }
 
-/* Below-the-fold home content (kept from rlw105/rlw103) */
+/* Below-the-fold home content (kept from rlw105/rlw103; rlw116 folds
+   the former pages in as .page-section scroll sections) */
 .home-below {
   width: 100%;
   max-width: 46rem;
@@ -353,6 +356,20 @@ form button {
   font-weight: 500;
   font-size: 1.4rem;
   margin-bottom: 1.2rem;
+}
+
+/* Anchored one-pager sections: land fragment navigation clear of the
+   viewport edge, and give sub-blocks breathing room. */
+.page-section {
+  scroll-margin-top: var(--space-3);
+}
+
+.page-section .service-block + .service-block {
+  margin-top: var(--space-4);
+}
+
+.page-section h3 {
+  font-size: 1.25rem;
 }
 
 .section-cards {

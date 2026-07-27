@@ -1,21 +1,30 @@
 ---
-// Home (rlw115): the Round 2 #1 "Lavender mist" hero skeleton — a
-// full-viewport wash hero with the nav floating over it — colored by
-// the promoted sand-lilac pack. Below the fold, the content this page
-// already carried: the quote band (rlw105) and the five section paths
-// as mist-style soft cards. Offerings-first pill CTA per rlw110; no
-// booking affordance on home (E-4 reaches data-cta via /offerings/).
+// The one-pager (rlw116): Kylie wants one scrollable page. The mist
+// hero (rlw115) and quote band (rlw105) stay; every former page folds
+// in below as an anchored scroll section — About / Services (reiki +
+// therapy) / Modalities / Resources — navigated by the anchor links in
+// site.json nav. data-section markers scope E-3's per-block assertions
+// (the therapy block must stay booking-free); section ids are the nav
+// anchor contract asserted by E-2. Booking + inquiry seams stay on the
+// BookingCTA/InquiryForm components exactly where rlw106/rlw113 expect
+// them.
+import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
+import BookingCTA from "../components/BookingCTA.astro";
+import InquiryForm from "../components/InquiryForm.astro";
+import ModalityAccordion from "../components/ModalityAccordion.astro";
+import ResourceCard from "../components/ResourceCard.astro";
 import site from "../content/site.json";
+import { Content as AboutContent } from "../content/about-me.md";
 import { withBase } from "../lib/paths";
 
-const sections = [
-  { href: "/about-me/", title: "About Me", blurb: "Who I am and how I work." },
-  { href: "/about-you/", title: "About You", blurb: "Who this practice serves." },
-  { href: "/modalities/", title: "Modalities", blurb: "The ways of working, in plain language." },
-  { href: "/offerings/", title: "Offerings", blurb: "Reiki sessions, training, and therapy." },
-  { href: "/resources/", title: "Resources", blurb: "Plain-language explainers." },
-];
+const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) =>
+  a.data.order - b.data.order;
+const offerings = (await getCollection("offerings")).sort(byOrder);
+const sessions = offerings.filter((o) => o.data.kind === "session");
+const trainings = offerings.filter((o) => o.data.kind === "training");
+const modalities = (await getCollection("modalities")).sort(byOrder);
+const resources = (await getCollection("resources")).sort(byOrder);
 ---
 
 <Page title={site.name} bareTitle variant="hero">
@@ -23,9 +32,8 @@ const sections = [
     <!-- TODO(kylie): hero photo/imagery -->
     <h1>{site.name}</h1>
     <p class="owner-line">{site.owner_line}</p>
-    <p class="tagline">{site.tagline}</p>
     <p class="intention">{site.intention}</p>
-    <a class="pill-cta" href={withBase("/offerings/")}>Explore the offerings</a>
+    <a class="pill-cta" href="#services">Explore the services</a>
   </section>
 
   <div class="home-below">
@@ -38,18 +46,129 @@ const sections = [
         <figcaption>— Rumi</figcaption>
       </figure>
     </section>
-    <section>
-      <h2>Begin where you are</h2>
-      <div class="section-cards">
+
+    <section id="about" class="page-section flow" data-section="about">
+      <h2>About</h2>
+      <AboutContent />
+    </section>
+
+    <section id="services" class="page-section flow" data-section="services">
+      <h2>Services</h2>
+
+      <section id="reiki" class="service-block flow">
+        <h3>Reiki</h3>
+        <h4>What reiki is</h4>
+        <p>
+          Placeholder: a grounded description of reiki energy work — gentle,
+          non-invasive, unhurried. <!-- TODO(kylie) -->
+        </p>
+        <p>
+          New to reiki? Start with
+          <a href={withBase("/resources/what-is-reiki/")}>the plain-language explainer</a>.
+        </p>
+        <h4>What a session is like</h4>
+        <p>
+          Placeholder: how a session unfolds — arriving, settling in, the
+          hands-on (or hands-off) work itself, and the quiet close. How long it
+          runs, what to wear, what to bring. <!-- TODO(kylie) -->
+        </p>
         {
-          sections.map((s) => (
-            <a class="soft-card" href={withBase(s.href)}>
-              <h3>{s.title}</h3>
-              <p>{s.blurb}</p>
-            </a>
+          sessions.map((o) => (
+            <article class="card">
+              <p>
+                <strong>{o.data.title}</strong> — {o.data.summary}
+              </p>
+            </article>
           ))
         }
-      </div>
+        <p>
+          <BookingCTA href={site.booking.url} label="Book a reiki session" />
+          <span class="small-note">(online booking opens soon)</span>
+        </p>
+        <h4>Training</h4>
+        <p>
+          Placeholder: learning reiki yourself — levels, lineage, and what each
+          training covers. <!-- TODO(kylie) -->
+        </p>
+        {
+          trainings.map((o) => (
+            <article class="card">
+              <p>
+                <strong>{o.data.title}</strong> — {o.data.summary}
+              </p>
+            </article>
+          ))
+        }
+        <p>
+          <BookingCTA
+            href={site.booking.training_url}
+            label="Sign up for reiki training"
+          />
+          <span class="small-note">(sign-up opens soon)</span>
+        </p>
+      </section>
+
+      <section id="therapy" class="service-block flow" data-section="therapy">
+        <h3>Therapy</h3>
+        <p>
+          Therapy with Kylie begins with a conversation, not a checkout.
+          Scheduling, paperwork, and intake all happen after we connect.
+          <!-- TODO(kylie): voice pass -->
+        </p>
+        <h4>How I work</h4>
+        <p>
+          Sessions draw on a few ways of working, met where you are. Each is
+          described in plain language in the
+          <a href="#modalities">modality catalog below</a>.
+        </p>
+        <ul>
+          {
+            modalities.map((m) => (
+              <li>
+                <strong>{m.data.title}</strong> — {m.data.summary}{" "}
+                <a href={`#${m.id}`}>More →</a>
+              </li>
+            ))
+          }
+        </ul>
+        <h4>Reach out</h4>
+        <p>
+          Share as much or as little as feels right — this is an inquiry, not an
+          intake.
+        </p>
+        <InquiryForm />
+        <p class="small-note">
+          Kylie will also be listed on
+          <!-- TODO(kylie): swap the directory link for her profile URL -->
+          <a href={site.contact.psychology_today_url}>Psychology Today</a>
+          (profile link coming soon).
+        </p>
+        <h4>If you need help right now</h4>
+        <p>
+          This practice is not an emergency service. If you are in crisis, call
+          or text <strong>988</strong> (Suicide &amp; Crisis Lifeline, US) or go
+          to your nearest emergency room.
+        </p>
+      </section>
+    </section>
+
+    <section id="modalities" class="page-section flow" data-section="modalities">
+      <h2>Modalities</h2>
+      <p>
+        The ways of working you'll meet in this practice — each in plain
+        language: what it is, who tends to benefit, where to read more, and the
+        training behind it. <!-- TODO(kylie): intro voice pass -->
+      </p>
+      {modalities.map((m) => <ModalityAccordion modality={m} />)}
+    </section>
+
+    <section id="resources" class="page-section flow" data-section="resources">
+      <h2>Resources</h2>
+      <p>
+        Plain-language explainers about this work — no hype, no jargon.
+        <!-- TODO(kylie): intro voice pass -->
+      </p>
+      {resources.map((r) => <ResourceCard resource={r} />)}
     </section>
   </div>
 </Page>

@@ -1,17 +1,16 @@
 {
-  "name": "Rooted Light",
-  "owner_line": "Kylie Fustini · Therapist & Reiki Practitioner",
+  "name": "Rooted Light Healing",
+  "owner_line": "Kylie Fustini · Therapist · Reiki Master/Teacher",
   "legal_name": "Rooted Light LLC",
   "tagline": "Therapy and reiki, one integrated body of work.",
-  "intention": "A place to feel safe, seen, and unpressured — and to leave feeling whole again.",
-  "intention_words": ["safe", "seen", "unpressured", "empowered", "whole again", "connected"],
+  "intention": "A place to feel safe, seen, and supported — and to leave feeling whole again.",
+  "intention_words": ["safe", "seen", "supported", "empowered", "whole again", "connected"],
   "nav": [
     { "label": "Home", "href": "/" },
-    { "label": "About Me", "href": "/about-me/" },
-    { "label": "About You", "href": "/about-you/" },
-    { "label": "Modalities", "href": "/modalities/" },
-    { "label": "Offerings", "href": "/offerings/" },
-    { "label": "Resources", "href": "/resources/" }
+    { "label": "About", "href": "/#about" },
+    { "label": "Services", "href": "/#services" },
+    { "label": "Modalities", "href": "/#modalities" },
+    { "label": "Resources", "href": "/#resources" }
   ],
   "booking": {
     "url": "#booking-tbd",

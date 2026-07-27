@@ -95,4 +95,70 @@ navigated by anchor links. Plus renames and hero copy changes:
   session (`/devx rlw116`).
 - 2026-07-26 — Leo follow-up: business name is "Rooted Light
   Healing" — name AC added.
+- 2026-07-26 — phase 2: spec ACs direct (v2 native); 8 ACs;
+  workstream=rooted-light-website (plan cdea58); red-artifacts=E-2/E-3/
+  E-4 — revision required via devx revise before implementation.
+- 2026-07-26 — T5b.1 done: `devx revise cdea58 --touched prd.md` (4
+  flags reset) → prd/expectations/design/plan revised for single-page
+  IA; E-2 rewritten + observed RED right-reason against the multi-page
+  build; E-3 re-scoped (RED cause unchanged); E-4 anchor-aware. Gates
+  replayed: prd PASS, coverage(design) CONCERNS (pre-existing G-3/UC-7
+  deploy partials), coverage(plan) PASS, evals FAIL→WAIVED (D-9
+  mid-flight precedent). Details in plan spec cdea58 status log.
+- 2026-07-26 — phase 3 (T5b.2–T5b.4): one-pager implemented —
+  site.json (name "Rooted Light Healing", owner line, new intention,
+  anchor nav), index.astro folds About/Services(reiki+therapy)/
+  Modalities/Resources in as data-section-marked anchor sections;
+  about-you deleted (page+content); about-me/modalities/offerings/*/
+  resources-index pages deleted, routes redirect via astro.config
+  (base-aware destinations — Astro prefixes redirect sources but NOT
+  destinations with `base`; caught on the DEPLOY_BASE profile build);
+  ModalityAccordion/ResourceCard/about-me.md heading demotions for the
+  single-document outline; resource detail pages kept standalone
+  (implementer's call: long-form explainers keep real URLs). Evals:
+  E-2 GREEN (was RED), E-4 GREEN depth 0, E-3 RED right-reason only
+  (booking-training CTA — phase 6b, unchanged); build green both
+  profiles.
+- 2026-07-26 — correction to the line above (phase 4 finding): the
+  flagless E-3 run REDs first on the SESSION CTA off-site check
+  (#booking-tbd); the booking-training-selector RED surfaces under
+  --allow-placeholder. Both are the same phase-6b feature-missing
+  cause.
+- 2026-07-26 — fold-in accounting (implementer's calls, recorded):
+  (a) resource explainer detail pages remain standalone routes;
+  (b) dropped as redundant on a one-pager — the offerings-index
+  therapy-card blurb (+ its TODO(kylie) voice-pass marker; the
+  surviving therapy intro carries the same marker), the modalities- and
+  resources-page closing cross-link paragraphs, and the home
+  "Begin where you are" section-card blurbs (superseded by the anchor
+  nav + the sections themselves); (c) footer keeps legal_name ·
+  tagline; (d) intention_words "unpressured" → "supported" to match
+  the reworded intention line.
+- 2026-07-26 — phase 4: 3-agent parallel adversarial review (Blind
+  Hunter / Edge Case Hunter / Acceptance Auditor); 14 distinct findings
+  (1 HIGH, 4 MED, 9 LOW). HIGH (training CTA renders data-cta="booking",
+  booking-training selector unsatisfiable) verified as phase 6b's
+  planned deliverable (plan.md T6b.2; spec technical note locks the
+  BookingCTA seam for rlw106) — deferred by design, E-3 stays RED
+  guarding it. Fixed in-place: E-2 home-link check made base-aware
+  (was false-RED on the Pages profile — most load-bearing fix), E-2
+  order scan comment-stripped, E-2 redirect proof narrowed to meta
+  refresh (canonical alone no longer blesses a revived route), E-3
+  positive CTA asserts scoped to the reiki slice, E-3 crisis-note
+  assert tightened (988 + "Crisis Lifeline" — the form footnote alone
+  no longer satisfies it), E-3 therapy embed allowlist gains
+  simplepractice (was bypassable), E-3 modality-id regex escaped, E-4
+  norm() drops off-site URLs (path-coincidence false-pass closed).
+  Remaining LOWs dispositioned: --allow-placeholder mockup guard
+  becomes meaningful at rlw107 (no change); preview-renders clause
+  verifiable only post-merge (deploy-pages triggers on main). Re-review
+  of fixed hunks clean; evals re-run green/RED-right-reason on both
+  profiles.
+- 2026-07-26 — phase 5: local CI green (npm run build, both profiles —
+  the configured gate; no lint/coverage runners wired). phase 7: pushed
+  feat/dev-rlw116; PR #13 →
+  https://github.com/LeoTheMighty/rooted-light/pull/13. phase 7.5: tour
+  built (7 stops, 28-file change map, 6-entry decision ledger, 3
+  grep-verified trails) + published to devx-tours; PR body carries the
+  tour link + orientation fallback.
 - 2026-07-26T20:30:35-06:00 — claimed by /devx in session /devx-2026-07-26T2030-52365
