@@ -20,7 +20,11 @@ if (!existsSync(DIST))
   fail("no dist/ build output — site has not been built yet (run `npm run build`)");
 
 const norm = (href) => {
-  let p = href.replace(/^https?:\/\/[^/]+/, "").split(/[?#]/)[0];
+  // Off-site links leave the graph entirely — an external URL whose
+  // path happens to coincide with a dist route must not count as an
+  // internal traversal.
+  if (/^(https?:)?\/\//.test(href) || /^[a-z][a-z0-9+.-]*:/i.test(href)) return null;
+  let p = href.split(/[?#]/)[0];
   if (!p) return null; // fragment-only hop ("#services") — same page, 0 clicks
   if (!p.startsWith("/")) return null; // relative links not used by the site
   p = p.replace(/\/index\.html$/, "/").replace(/\.html$/, "");

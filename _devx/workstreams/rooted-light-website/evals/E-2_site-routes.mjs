@@ -52,10 +52,13 @@ const stripComments = (html) => html.replace(/<!--[\s\S]*?-->/g, "");
 const homeFile = pageFile("");
 if (!homeFile) fail("dist/ has no home page");
 const home = readFileSync(homeFile, "utf8");
+// Order/presence and label checks both run comment-stripped: a
+// commented-out section must not satisfy the structure assertions.
+const homeVisible = stripComments(home);
 
 let cursor = -1;
 for (const [marker, label] of ORDER) {
-  const at = home.indexOf(marker);
+  const at = homeVisible.indexOf(marker);
   if (at === -1) fail(`home page missing ${label} (${marker})`);
   if (at < cursor) fail(`home page section out of order: ${label} appears before the previous marker`);
   cursor = at;
@@ -92,8 +95,15 @@ for (const [route, html] of standalone) {
   );
   if (missingAnchors.length)
     fail(`/${route}: nav missing anchor link(s) to ${missingAnchors.join(", ")}`);
-  if (!/href="\/(index\.html)?"/.test(visible))
-    fail(`/${route}: nav has no home link`);
+  // Home link, base-aware ("any profile"): the nav anchors carry the
+  // deploy base as their path prefix ("/<base>/#about"), so the home
+  // href is that same prefix — "/" on default builds.
+  const anchorMatch = visible.match(/href="([^"#]*)#about"/);
+  if (!anchorMatch)
+    fail(`/${route}: #about link is not a plain path+fragment href — cannot derive the home href`);
+  const homeHref = anchorMatch[1] || "/";
+  if (!visible.includes(`href="${homeHref}"`))
+    fail(`/${route}: nav has no home link (expected href="${homeHref}")`);
   if (/About You/.test(visible))
     fail(`/${route}: banned label "About You" is user-visible`);
   if (/Offerings/.test(visible))
@@ -103,13 +113,13 @@ for (const [route, html] of standalone) {
 }
 
 // --- Old routes: gone or redirecting to the one-pager ---
+// Redirect proof is the meta refresh alone: a canonical link is normal
+// SEO markup on a full content page and must not bless a revived route.
 for (const route of OLD_ROUTES) {
   const f = pageFile(route);
   if (!f) continue; // removed outright — acceptable
   const html = readFileSync(f, "utf8");
-  const redirects =
-    /http-equiv="refresh"/i.test(html) || /<link rel="canonical"/i.test(html);
-  if (!redirects)
+  if (!/http-equiv="refresh"/i.test(html))
     fail(`/${route}/ still serves full content — must be removed or redirect to its section anchor`);
 }
 

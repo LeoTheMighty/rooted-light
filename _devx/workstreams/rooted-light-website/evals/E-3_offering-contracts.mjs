@@ -47,25 +47,32 @@ const sliceBetween = (startMarker, endMarker, label) => {
   return html.slice(start, end);
 };
 
-// --- Reiki block: both CTAs, off-site hrefs (page-global match is safe:
-// --- the therapy-scope assertion below proves no CTA leaks there) ---
-const ctaMatches = [...html.matchAll(/<[^>]*data-cta="booking"[^>]*>/g)];
+// --- Reiki block: both CTAs, off-site hrefs. The positive assertions
+// are scoped to the reiki slice (Services start → therapy marker) so a
+// CTA stranded elsewhere on the page can't satisfy the contract; the
+// therapy-scope assertion below separately proves no CTA leaks there.
+const reikiSlice = sliceBetween(
+  'data-section="services"',
+  'data-section="therapy"',
+  "Services section (reiki block)"
+);
+const ctaMatches = [...reikiSlice.matchAll(/<[^>]*data-cta="booking"[^>]*>/g)];
 if (!ctaMatches.length)
-  fail('one-pager has no [data-cta="booking"] element (session CTA selector contract)');
+  fail('reiki block has no [data-cta="booking"] element (session CTA selector contract)');
 const hrefs = ctaMatches
   .map((m) => (m[0].match(/href="([^"]+)"/) || [])[1])
   .filter(Boolean);
 const external = hrefs.some((h) => /^https?:\/\//.test(h));
-const embed = /<iframe[^>]*(calendly|acuity|squareup|simplepractice)/i.test(html);
+const embed = /<iframe[^>]*(calendly|acuity|squareup|simplepractice)/i.test(reikiSlice);
 if (!external && !embed) {
   if (!allowPlaceholder)
     fail(`reiki booking CTA href is not off-site (${hrefs.join(", ") || "no href"}) and no provider embed found — booking not wired (phase 6b)`);
   console.log("E-3 note: placeholder booking href tolerated (--allow-placeholder)");
 }
 
-const trainingMatches = [...html.matchAll(/<[^>]*data-cta="booking-training"[^>]*>/g)];
+const trainingMatches = [...reikiSlice.matchAll(/<[^>]*data-cta="booking-training"[^>]*>/g)];
 if (!trainingMatches.length)
-  fail('one-pager has no [data-cta="booking-training"] element — training signup not wired (phase 6b)');
+  fail('reiki block has no [data-cta="booking-training"] element — training signup not wired (phase 6b)');
 const trainingHrefs = trainingMatches
   .map((m) => (m[0].match(/href="([^"]+)"/) || [])[1])
   .filter(Boolean);
@@ -84,8 +91,14 @@ const therapy = sliceBetween(
 );
 if (!/<form[\s>]/.test(therapy)) fail("therapy block has no <form> (inquiry form missing)");
 if (!/psychologytoday\.com/.test(therapy)) fail("therapy block has no psychologytoday.com link");
-if (!/988/.test(therapy)) fail("therapy block has no 988 crisis note");
-if (/data-cta="booking"/.test(therapy) || /<iframe[^>]*(calendly|acuity|squareup)/i.test(therapy))
+// "988" alone is satisfied by the inquiry form's own footnote — the
+// standalone crisis section is the contract, so require the Lifeline
+// name it carries.
+if (!/988/.test(therapy) || !/Crisis Lifeline/.test(therapy))
+  fail("therapy block has no 988 / Suicide & Crisis Lifeline note");
+// Same provider allowlist as the page-global embed check above — an
+// embed inside the therapy block must never pass as inquiry-only.
+if (/data-cta="booking"/.test(therapy) || /<iframe[^>]*(calendly|acuity|squareup|simplepractice)/i.test(therapy))
   fail("therapy block contains a booking affordance — contract is inquiry-only");
 
 // --- Modalities section: four-field catalog, scoped ---
@@ -101,7 +114,8 @@ const modalityIds = [
   ...modalitiesSection.matchAll(/<[^>]*data-modality[^>]*\sid="([^"]+)"/g),
 ].map((m) => m[1]);
 const anchorTargets = ["modalities", ...modalityIds];
-if (!anchorTargets.some((id) => new RegExp(`href="[^"]*#${id}"`).test(therapy)))
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+if (!anchorTargets.some((id) => new RegExp(`href="[^"]*#${escapeRe(id)}"`).test(therapy)))
   fail("therapy block has no link into the modalities anchors (FR-7/FR-13)");
 const modalities = modalitiesSection.split(/data-modality/g).length - 1;
 if (modalities < 1)
