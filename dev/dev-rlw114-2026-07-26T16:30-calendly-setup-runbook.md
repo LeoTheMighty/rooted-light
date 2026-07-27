@@ -5,7 +5,7 @@ created: 2026-07-26T16:30:00-06:00
 title: Calendly setup runbook + manual connection chain
 from: _devx/workstreams/rooted-light-website/plan.md (phase 6a)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: in-progress
+status: done
 owner: /devx-2026-07-26T2004-83721
 branch: feat/dev-rlw114
 ---
@@ -77,4 +77,7 @@ site code; parallel-safe with everything.
   invocation misfired on a missing .devx-cache dir → PR opened with an
   empty body; regenerated and fixed via gh pr edit; no unresolved
   placeholders).
+- 2026-07-26 — phase 7.5–8: devx-ci success (run 30231599920); tour
+  built + published (devx-tours 0ad70f7); check-hold clean; merge-gate
+  {"merge":true}; merged via PR #11 (squash → f1ed1bf).
 - 2026-07-26T20:04:46-06:00 — claimed by /devx in session /devx-2026-07-26T2004-83721
