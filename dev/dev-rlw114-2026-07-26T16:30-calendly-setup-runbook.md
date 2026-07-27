@@ -5,8 +5,8 @@ created: 2026-07-26T16:30:00-06:00
 title: Calendly setup runbook + manual connection chain
 from: _devx/workstreams/rooted-light-website/plan.md (phase 6a)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-26T2004-83721
 branch: feat/dev-rlw114
 ---
 
@@ -56,3 +56,4 @@ site code; parallel-safe with everything.
 
 - 2026-07-26T16:30 — emitted by /devx-plan from workstream cdea58
   revision (Calendly decision), phase 6a.
+- 2026-07-26T20:04:46-06:00 — claimed by /devx in session /devx-2026-07-26T2004-83721
