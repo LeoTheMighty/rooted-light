@@ -98,7 +98,7 @@ Target dates track G-1 (mockups to Kylie 2026-08-08) and G-3 (launch
 - [x] Phase 3: Content pages & information architecture — all EIGHT routes incl. /modalities/ (dev spec: rlw103) — merged 2026-07-26
 - [x] Phase 4: Booking-provider comparison — by 2026-08-15 (dev spec: rlw104) — merged 2026-07-25; **picked 2026-07-26: Calendly**
 - [x] Phase 5: Theme promotion (dev spec: rlw105) — merged 2026-07-26, warm sand & lilac site-wide
-- [/] Phase 5b: Single-page IA + renames + "Rooted Light Healing" (dev spec: rlw116) *(added 2026-07-26 from Kylie's direction)*
+- [x] Phase 5b: Single-page IA + renames + "Rooted Light Healing" (dev spec: rlw116) *(added 2026-07-26 from Kylie's direction)* — merged 2026-07-26 (PR #13)
 - [ ] Phase 6a: Calendly setup runbook + manual connection chain — by 2026-08-01 (ready now, parallel-safe) (dev spec: rlw114) *(added 2026-07-26)*
 - [ ] Phase 6b: Reiki session + training booking wiring — by 2026-09-12 (gated: MANUAL.md Calendly chain complete — real event-type links exist) (dev spec: rlw106) *(scope revised 2026-07-26)*
 - [ ] Phase 6c: Therapy inquiry form wiring — by 2026-09-12 (gated: form-provider confirmation in INTERVIEW.md) (dev spec: rlw113) *(split from old phase 6, 2026-07-26)*
