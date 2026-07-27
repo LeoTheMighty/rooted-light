@@ -17,9 +17,20 @@ interface Props {
   bareTitle?: boolean;
   /** Per-page meta description; falls back to the site intention line. */
   description?: string;
+  /** "hero" (rlw115, home only): nav floats transparent over the page's
+   *  own full-viewport wash hero; main is full-bleed (the page manages
+   *  its own wrapping); footer wears the wash-foot treatment. Every
+   *  other page keeps the default rendering untouched. */
+  variant?: "default" | "hero";
 }
 
-const { title, bareTitle = false, description = site.intention } = Astro.props;
+const {
+  title,
+  bareTitle = false,
+  description = site.intention,
+  variant = "default",
+} = Astro.props;
+const isHero = variant === "hero";
 const docTitle = title === site.name ? site.name : `${title} · ${site.name}`;
 // Astro.url.pathname includes the configured base, so hrefs are
 // base-prefixed via withBase() before comparing.
@@ -40,7 +51,7 @@ const noindex = Boolean(process.env.DEPLOY_NOINDEX);
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
   </head>
-  <body>
+  <body class={isHero ? "page-hero" : undefined}>
     <header class="site-header">
       <div class="wrap">
         <a class="brand" href={withBase("/")}>{site.name}</a>
@@ -62,8 +73,8 @@ const noindex = Boolean(process.env.DEPLOY_NOINDEX);
         </nav>
       </div>
     </header>
-    <main class="wrap flow">
-      {!bareTitle && <h1>{title}</h1>}
+    <main class={isHero ? "full-bleed" : "wrap flow"}>
+      {!bareTitle && !isHero && <h1>{title}</h1>}
       <slot />
     </main>
     <footer class="site-footer">

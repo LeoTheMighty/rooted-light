@@ -1,37 +1,55 @@
 ---
-// Home (FR-2 shape), themed by rlw105: hero carries Kylie's name (rlw111
-// locked decision "Kylie on front page") and a favorite-quote band in the
-// picked mockup's treatment. Placeholder quote is the round-4 mockup's —
-// Kylie swaps in her own favorite later.
+// Home (rlw115): the Round 2 #1 "Lavender mist" hero skeleton — a
+// full-viewport wash hero with the nav floating over it — colored by
+// the promoted sand-lilac pack. Below the fold, the content this page
+// already carried: the quote band (rlw105) and the five section paths
+// as mist-style soft cards. Offerings-first pill CTA per rlw110; no
+// booking affordance on home (E-4 reaches data-cta via /offerings/).
 import Page from "../layouts/Page.astro";
 import site from "../content/site.json";
 import { withBase } from "../lib/paths";
+
+const sections = [
+  { href: "/about-me/", title: "About Me", blurb: "Who I am and how I work." },
+  { href: "/about-you/", title: "About You", blurb: "Who this practice serves." },
+  { href: "/modalities/", title: "Modalities", blurb: "The ways of working, in plain language." },
+  { href: "/offerings/", title: "Offerings", blurb: "Reiki sessions, training, and therapy." },
+  { href: "/resources/", title: "Resources", blurb: "Plain-language explainers." },
+];
 ---
 
-<Page title={site.name} bareTitle>
-  <section class="card hero">
+<Page title={site.name} bareTitle variant="hero">
+  <section class="mist-hero">
     <!-- TODO(kylie): hero photo/imagery -->
     <h1>{site.name}</h1>
     <p class="owner-line">{site.owner_line}</p>
-    <p>{site.intention}</p>
+    <p class="tagline">{site.tagline}</p>
+    <p class="intention">{site.intention}</p>
+    <a class="pill-cta" href={withBase("/offerings/")}>Explore the offerings</a>
   </section>
-  <section class="quote-band">
-    <!-- TODO(kylie): swap in your favorite quote + attribution -->
-    <figure>
-      <blockquote>
-        <p>The wound is the place where the Light enters you.</p>
-      </blockquote>
-      <figcaption>— Rumi</figcaption>
-    </figure>
-  </section>
-  <section>
-    <h2>Begin where you are</h2>
-    <ul>
-      <li><a href={withBase("/about-me/")}>About Me</a> — who I am and how I work</li>
-      <li><a href={withBase("/about-you/")}>About You</a> — who this practice serves</li>
-      <li><a href={withBase("/modalities/")}>Modalities</a> — the ways of working, in plain language</li>
-      <li><a href={withBase("/offerings/")}>Offerings</a> — reiki sessions, training, and therapy</li>
-      <li><a href={withBase("/resources/")}>Resources</a> — plain-language explainers</li>
-    </ul>
-  </section>
+
+  <div class="home-below">
+    <section class="quote-band">
+      <!-- TODO(kylie): swap in your favorite quote + attribution -->
+      <figure>
+        <blockquote>
+          <p>The wound is the place where the Light enters you.</p>
+        </blockquote>
+        <figcaption>— Rumi</figcaption>
+      </figure>
+    </section>
+    <section>
+      <h2>Begin where you are</h2>
+      <div class="section-cards">
+        {
+          sections.map((s) => (
+            <a class="soft-card" href={withBase(s.href)}>
+              <h3>{s.title}</h3>
+              <p>{s.blurb}</p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </div>
 </Page>
