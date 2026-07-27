@@ -105,4 +105,18 @@ navigated by anchor links. Plus renames and hero copy changes:
   replayed: prd PASS, coverage(design) CONCERNS (pre-existing G-3/UC-7
   deploy partials), coverage(plan) PASS, evals FAIL→WAIVED (D-9
   mid-flight precedent). Details in plan spec cdea58 status log.
+- 2026-07-26 — phase 3 (T5b.2–T5b.4): one-pager implemented —
+  site.json (name "Rooted Light Healing", owner line, new intention,
+  anchor nav), index.astro folds About/Services(reiki+therapy)/
+  Modalities/Resources in as data-section-marked anchor sections;
+  about-you deleted (page+content); about-me/modalities/offerings/*/
+  resources-index pages deleted, routes redirect via astro.config
+  (base-aware destinations — Astro prefixes redirect sources but NOT
+  destinations with `base`; caught on the DEPLOY_BASE profile build);
+  ModalityAccordion/ResourceCard/about-me.md heading demotions for the
+  single-document outline; resource detail pages kept standalone
+  (implementer's call: long-form explainers keep real URLs). Evals:
+  E-2 GREEN (was RED), E-4 GREEN depth 0, E-3 RED right-reason only
+  (booking-training CTA — phase 6b, unchanged); build green both
+  profiles.
 - 2026-07-26T20:30:35-06:00 — claimed by /devx in session /devx-2026-07-26T2030-52365

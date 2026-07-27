@@ -1,14 +1,14 @@
 ---
-// One modality entry in the top-level catalog (FR-13): a native
-// <details> carrying the four contractual fields ([data-field=...])
-// and a stable id anchor so About You / Therapy can deep-link
-// /modalities/#<id>. E-3 asserts this exact DOM shape — data-modality
+// One modality entry in the catalog (FR-13): a native <details>
+// carrying the four contractual fields ([data-field=...]) and a stable
+// id anchor so the therapy block can deep-link #<id> on the one-pager. E-3 asserts this exact DOM shape — data-modality
 // and id must sit on the same element. Rendered open: fragment
 // navigation to the <details> element itself does not auto-expand it
 // (the ancestor-revealing algorithm only opens *ancestor* details),
 // so with zero client JS, open-by-default is what keeps deep-linked
-// content visible. The h2 in <summary> keeps the modality name in the
-// document outline (h1 → h2 → h3 fields).
+// content visible. The h3 in <summary> keeps the modality name in the
+// one-pager's outline (h1 hero → h2 Modalities → h3 name → h4 fields;
+// demoted from h2/h3 by rlw116's single-page fold-in).
 import type { CollectionEntry } from "astro:content";
 import { withBase } from "../lib/paths";
 
@@ -21,20 +21,20 @@ const { title, what_it_is, who_benefits, resources, certifications } =
 ---
 
 <details class="card" data-modality={modality.id} id={modality.id} open>
-  <summary><h2>{title}</h2></summary>
+  <summary><h3>{title}</h3></summary>
   <div class="flow accordion-body">
     <section data-field="what-it-is">
-      <h3>What it is</h3>
+      <h4>What it is</h4>
       <p>{what_it_is}</p>
     </section>
     <section data-field="who-benefits">
-      <h3>Who tends to benefit</h3>
+      <h4>Who tends to benefit</h4>
       <ul>
         {who_benefits.map((w) => <li>{w}</li>)}
       </ul>
     </section>
     <section data-field="resources">
-      <h3>Learn more</h3>
+      <h4>Learn more</h4>
       <ul>
         {
           resources.map((r) => (
@@ -46,7 +46,7 @@ const { title, what_it_is, who_benefits, resources, certifications } =
       </ul>
     </section>
     <section data-field="certifications">
-      <h3>Training &amp; certifications</h3>
+      <h4>Training &amp; certifications</h4>
       <ul>
         {certifications.map((c) => <li>{c}</li>)}
       </ul>
