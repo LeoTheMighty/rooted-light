@@ -30,9 +30,15 @@ navigated by anchor links. Plus renames and hero copy changes:
   `A place to feel safe, seen, and supported — and to leave feeling
   whole again.` The tagline line ("Therapy and reiki, one integrated
   body of work.") is removed from the hero.
+- **The business is called "Rooted Light Healing"** (Leo, follow-up
+  same day): site name everywhere — site.json `name`, hero h1, nav
+  brand, `<title>`s. Legal name stays `Rooted Light LLC` unless Leo
+  says otherwise (footer keeps it).
 
 ## Acceptance criteria
 
+- [ ] Site name is "Rooted Light Healing" in site.json, hero h1, nav
+      brand, and document titles (legal_name unchanged)
 - [ ] Home is a single scrollable page: full-screen mist hero → quote
       band → About → Services → Modalities → Resources sections, in
       that order, each with a stable id anchor
@@ -87,3 +93,5 @@ navigated by anchor links. Plus renames and hero copy changes:
   one-page scrollable site; renames About/Services; hero copy
   simplification). Filed-only per Leo — execution starts in a fresh
   session (`/devx rlw116`).
+- 2026-07-26 — Leo follow-up: business name is "Rooted Light
+  Healing" — name AC added.
