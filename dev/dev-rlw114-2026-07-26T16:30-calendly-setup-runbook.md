@@ -71,4 +71,10 @@ site code; parallel-safe with everything.
   in-place — most load-bearing: removed two UI-path claims (§1 Billing
   location, §3 "left nav") not grounded in the fetched help docs, per
   the spec's researched-not-from-memory requirement; re-review clean.
+- 2026-07-26 — phase 5–7: npm run build green (64 pages, docs-only);
+  pushed feat/dev-rlw114; PR #11 —
+  https://github.com/LeoTheMighty/rooted-light/pull/11 (first pr-body
+  invocation misfired on a missing .devx-cache dir → PR opened with an
+  empty body; regenerated and fixed via gh pr edit; no unresolved
+  placeholders).
 - 2026-07-26T20:04:46-06:00 — claimed by /devx in session /devx-2026-07-26T2004-83721
