@@ -61,3 +61,31 @@ untouched.
   skeleton + promoted accents; entered_at: execute; rlw113/rlw114
   hashes taken by the concurrent Calendly re-plan).
 - 2026-07-26T20:09:32-06:00 — claimed by /devx in session /devx-2026-07-26T2009-84135
+- 2026-07-26 — phase 2: spec ACs direct (v2 native); 5 ACs;
+  workstream=rooted-light-website; red-artifacts=none (visual item;
+  E-1..E-5/E-7 + Pages base build are the guardrails). Skeleton
+  reference re-read: HomeDusk.{astro,css} + pack-lavender-mist wash
+  vars; target = that hero shape, sand-lilac tokens, 100dvh.
+- 2026-07-26 — phase 3: Page.astro grows variant="hero" (transparent
+  absolute header, full-bleed main, no layout h1; default rendering
+  untouched — verified therapy carries no page-hero class); base.css
+  gains pack-agnostic --wash-hero/--wash-foot (color-mix secondary→bg
+  per mist's gradient shape), .mist-hero (100dvh, centered, clamp
+  type), horizontal-wrap float-nav on home mobile (stacked nav would
+  eat the first impression), .pill-cta, .home-below + .section-cards +
+  .soft-card (mist drift-card treatment); index.astro: hero = name +
+  owner line + tagline + intention + one offerings pill (no data-cta
+  on home), below fold keeps quote band + five section links as soft
+  cards. DOM contract verified in dist (14 checks).
+- 2026-07-26 — phase 4: single rigorous pass (visual CSS diff, no
+  eval-contract markers touched); 2 findings, both fixed in-place —
+  header wrap edge padding restored to the wrap default (0.4rem was
+  tighter than the mockup's treatment) and 100vh fallback added before
+  100dvh (engines without dvh would collapse the hero). Re-verified in
+  rebuilt dist. NOTE: E-3 now RED on a NEW phase-6b assertion
+  (data-cta="booking-training", introduced by the concurrent cdea58
+  revision 784d952) — inherited from main, not a regression from this
+  diff; CI waives evals via continue-on-error until 6b lands (rlw106).
+- 2026-07-26 — phase 5: local gates green — default build exit 0;
+  E-1/E-2/E-4/E-5/E-7 PASS (E-3 expected-RED per note above); Pages
+  base build: zero unprefixed hrefs on home, pill CTA prefixed.
