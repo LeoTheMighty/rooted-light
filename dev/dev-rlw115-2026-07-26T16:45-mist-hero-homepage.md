@@ -5,8 +5,8 @@ created: 2026-07-26T16:45:00-06:00
 title: Home page — Lavender-mist hero skeleton with sand-lilac accents
 from: user instruction 2026-07-26 (Leo — "front page like the lavender mist home page (round 2, #1) with the new accents; full screen on desktop and phone; less busy; keep all content")
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-26T2009-84135
 branch: feat/dev-rlw115
 entered_at: execute
 ---
@@ -60,3 +60,4 @@ untouched.
 - 2026-07-26T16:45 — filed by /devx from Leo's instruction (round-2 #1
   skeleton + promoted accents; entered_at: execute; rlw113/rlw114
   hashes taken by the concurrent Calendly re-plan).
+- 2026-07-26T20:09:32-06:00 — claimed by /devx in session /devx-2026-07-26T2009-84135
