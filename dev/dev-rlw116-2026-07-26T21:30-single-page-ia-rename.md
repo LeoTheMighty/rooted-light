@@ -154,4 +154,11 @@ navigated by anchor links. Plus renames and hero copy changes:
   verifiable only post-merge (deploy-pages triggers on main). Re-review
   of fixed hunks clean; evals re-run green/RED-right-reason on both
   profiles.
+- 2026-07-26 — phase 5: local CI green (npm run build, both profiles —
+  the configured gate; no lint/coverage runners wired). phase 7: pushed
+  feat/dev-rlw116; PR #13 →
+  https://github.com/LeoTheMighty/rooted-light/pull/13. phase 7.5: tour
+  built (7 stops, 28-file change map, 6-entry decision ledger, 3
+  grep-verified trails) + published to devx-tours; PR body carries the
+  tour link + orientation fallback.
 - 2026-07-26T20:30:35-06:00 — claimed by /devx in session /devx-2026-07-26T2030-52365
