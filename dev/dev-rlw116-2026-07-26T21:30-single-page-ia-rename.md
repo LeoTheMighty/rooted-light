@@ -5,8 +5,8 @@ created: 2026-07-26T21:30:00-06:00
 title: Single-page IA — scrollable sections, About/Services renames, hero copy
 from: user instruction 2026-07-26 (Leo, relaying Kylie — one-page site, section renames, hero simplification)
 plan: plan/plan-cdea58-2026-07-25T08:55-rooted-light-website.md
-status: ready
-owner: null
+status: in-progress
+owner: /devx-2026-07-26T2030-52365
 branch: feat/dev-rlw116
 entered_at: execute
 ---
@@ -95,3 +95,4 @@ navigated by anchor links. Plus renames and hero copy changes:
   session (`/devx rlw116`).
 - 2026-07-26 — Leo follow-up: business name is "Rooted Light
   Healing" — name AC added.
+- 2026-07-26T20:30:35-06:00 — claimed by /devx in session /devx-2026-07-26T2030-52365
