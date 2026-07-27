@@ -42,7 +42,8 @@ built with placeholder-marked copy, ≥ 6 distinct home-page mockups behind
 `/mockups/` for Kylie's review (delivered to her by 2026-08-08), a
 written booking-provider comparison with a recommendation, booking/form
 integration wired to the chosen providers, and a repeatable static
-deploy to S3 + CloudFront on the chosen domain by 2026-09-30. Evals
+deploy on GitHub Pages with Kylie's existing domain attached (revised
+2026-07-27: was S3 + CloudFront) by 2026-09-30. Evals
 E-1..E-7 green under their respective profiles.
 
 ## What we're NOT doing
@@ -102,7 +103,7 @@ Target dates track G-1 (mockups to Kylie 2026-08-08) and G-3 (launch
 - [ ] Phase 6a: Calendly setup runbook + manual connection chain — by 2026-08-01 (ready now, parallel-safe) (dev spec: rlw114) *(added 2026-07-26)*
 - [ ] Phase 6b: Reiki session + training booking wiring — by 2026-09-12 (gated: MANUAL.md Calendly chain complete — real event-type links exist) (dev spec: rlw106) *(scope revised 2026-07-26)*
 - [ ] Phase 6c: Therapy inquiry form wiring — by 2026-09-12 (gated: form-provider confirmation in INTERVIEW.md) (dev spec: rlw113) *(split from old phase 6, 2026-07-26)*
-- [ ] Phase 7: Deploy — S3 + CloudFront + domain — by 2026-09-23 (buffer to 09-30) (gated: 6b + 6c) (dev spec: rlw107)
+- [ ] Phase 7: Deploy — promote GitHub Pages to production + attach Kylie's domain — by 2026-09-23 (buffer to 09-30) (gated: 6b + 6c; domain no longer blocks — DNS repoint is attach-later) (dev spec: rlw107) *(rescoped 2026-07-27: no AWS)*
 
 ## Phases
 
@@ -608,33 +609,44 @@ only on the form-provider confirmation; parallel-safe with 6a/6b.
       `src/pages/thanks.astro`
 - [ ] T6c.2 Human delivery test → MANUAL.md log — files: `MANUAL.md`
 
-### 7. Phase: Deploy — S3 + CloudFront + domain
+### 7. Phase: Deploy — promote GitHub Pages to production + attach Kylie's domain (rescoped 2026-07-27: no AWS)
 
-**Overview**: Ship it. S3 bucket + CloudFront distribution + ACM cert +
-the chosen domain (Route53 or external registrar DNS), deploy wired
-into the existing `.github/workflows/devx-deploy.yml` stub (inside its
-managed markers — wrap, don't duplicate), production build profile
-excluding `/mockups/` via a postbuild prune (`rm -rf dist/mockups` in
-the `build:prod` script — Astro has no config option to exclude a pages
-directory; env-guarded `getStaticPaths` is the fallback if prune proves
-brittle). Domain purchase and console steps needing Leo's AWS account
-go to MANUAL.md.
+**Overview**: Ship it — by promoting what already ships. The rlw112
+Pages workflow deploys every merge to main; this phase makes that THE
+production deploy: production build profile excluding `/mockups/` via a
+postbuild prune (`rm -rf dist/mockups` in the `build:prod` script —
+Astro has no config option to exclude a pages directory; env-guarded
+`getStaticPaths` is the fallback if prune proves brittle), drop
+`DEPLOY_NOINDEX` + rebuild at base `/` when the domain attaches, update
+deploy-pages.yml from "temporary preview" to permanent (its
+self-deletion comment dies), and attach Kylie's existing
+Squarespace-registered domain by DNS repoint (4 apex A records + www
+CNAME at Squarespace's DNS panel; GitHub provisions HTTPS
+automatically). No S3, no CloudFront, no ACM, no AWS credentials —
+`.github/workflows/devx-deploy.yml` stays an unused stub (delete or
+leave; note in the runbook). Squarespace DNS steps (Kylie's account) go
+to MANUAL.md.
 
 **Files**:
-- `.github/workflows/devx-deploy.yml` — build + `aws s3 sync` +
-  CloudFront invalidation on push to main, inside the stub's markers.
+- `.github/workflows/deploy-pages.yml` — becomes the permanent deploy:
+  `build:prod` (mockup prune), `DEPLOY_NOINDEX` dropped and
+  `DEPLOY_SITE`/`DEPLOY_BASE` flipped to the custom domain + `/` at
+  cutover.
 - `package.json` — `build:prod` script (build + mockup prune);
   `build:full` remains for E-1/E-5.
-- `docs/DEPLOY.md` — provisioning runbook (IaC only if trivial; a
-  documented console/CLI runbook is acceptable at this scale).
-- `MANUAL.md` — domain purchase, ACM validation, OIDC/credentials
-  setup for CI.
+- `docs/DEPLOY.md` — Pages custom-domain runbook: repo Settings →
+  Pages → custom domain, the 4 GitHub apex IPs + www CNAME, Squarespace
+  DNS panel walk-through, don't-touch-MX warning, hard-cutover note
+  (staging = the github.io URL, flip once with Kylie watching).
+- `MANUAL.md` — DNS records in Kylie's Squarespace account; exact
+  domain string recorded (INTERVIEW TODO(leo)); enforce-HTTPS toggle
+  after cert issuance.
 
 **Context**:
-- G-4: hosting < $5/mo — S3+CloudFront at this traffic is cents.
-- Domain decision should already be answered (bundled into phase 4's
-  INTERVIEW touchpoint); phase blocks on it only at the DNS step
-  (bucket + distribution can precede it).
+- G-4: hosting < $5/mo — Pages is $0. Constraint: repo stays public.
+- Domain no longer gates anything: deployment is continuous today on
+  the github.io URL; the repoint is attach-later
+  (decisions/2026-07-26-domain-reuse-squarespace.md, option (b)).
 - **Launch content checkpoint**: before DNS cutover, every
   `TODO(kylie)` marker is either resolved or consciously deferred by
   Kylie/Leo (grep for the marker; decision logged in MANUAL.md). The
@@ -649,13 +661,15 @@ go to MANUAL.md.
     against the production `dist/`; E-1, E-5 green against
     `build:full` output.
   - `grep -r "TODO(kylie)"` output reviewed and dispositioned.
+  - Kylie's mail (if any MX on the domain) still works post-repoint.
 
 **Tasks**:
 - [ ] T7.1 `build:prod` profile with mockup prune — files:
-      `package.json`, `astro.config.mjs`
-- [ ] T7.2 Provision S3 + CloudFront + cert; document runbook —
-      files: `docs/DEPLOY.md`, `MANUAL.md`
-- [ ] T7.3 Deploy workflow inside devx-deploy.yml markers — files:
-      `.github/workflows/devx-deploy.yml`
+      `package.json`
+- [ ] T7.2 deploy-pages.yml → permanent production deploy (prune,
+      noindex/base flip staged behind the domain attach) — files:
+      `.github/workflows/deploy-pages.yml`
+- [ ] T7.3 Custom-domain runbook — files: `docs/DEPLOY.md`,
+      `MANUAL.md` (Squarespace DNS chain)
 - [ ] T7.4 Content checkpoint + DNS cutover + cold-client
       verification — files: `MANUAL.md` log

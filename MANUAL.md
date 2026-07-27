@@ -51,7 +51,11 @@ Filed: 2026-07-26 by /devx-plan (cdea58 revision — Calendly decision).
 
 ## Lavender refinement package (rlw108)
 
-- [ ] **Send the round-2 (lavender refinement) package to Kylie**
+- [x] **SUPERSEDED 2026-07-27** — the refinement pick was answered
+  2026-07-26 (Warm sand & lilac, via Leo) and the theme shipped
+  (rlw105); the live one-pager preview is now the thing to show Kylie,
+  not the mockup package. Kept for history:
+- ~~**Send the round-2 (lavender refinement) package to Kylie**~~
   Supersedes the rlw102 send below if it hasn't gone out yet — the new
   package contains both rounds, refinements first, and every mockup now
   carries the Modalities section. Run `npm run mockups:package` →
@@ -67,7 +71,11 @@ Filed: 2026-07-26 by /devx-plan (cdea58 revision — Calendly decision).
 
 ## Mockup review package (rlw102)
 
-- [ ] **Send the style-direction package to Kylie + verify on a phone**
+- [x] **SUPERSEDED 2026-07-27** — style pick answered 2026-07-25 (soft
+  lavender dusk) and finalized 2026-07-26; the long-lead content
+  request folded into the how-to-finish email to Kylie. Kept for
+  history:
+- ~~**Send the style-direction package to Kylie + verify on a phone**~~
   The package is built: run `npm run mockups:package` → it writes two
   artifacts to `.devx-cache/`:
   - `rooted-light-mockups.html` — **send this one.** A single

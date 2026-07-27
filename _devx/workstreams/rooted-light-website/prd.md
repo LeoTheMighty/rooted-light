@@ -52,8 +52,12 @@ supported — and to leave feeling whole again."
   **2026-08-08**.
 - **G-2**: Full site (all five sections, placeholder copy where real content
   is pending) builds statically and renders locally by **2026-08-29**.
-- **G-3**: Site is live on a custom domain via CloudFront with a working
-  reiki booking path (external provider) by **2026-09-30**.
+- **G-3**: Site is live on a custom domain with a working reiki booking
+  path (external provider) by **2026-09-30**. (Revised 2026-07-27, Leo:
+  host is **GitHub Pages** — the rlw112 pipeline already deploys every
+  merge; "was CloudFront". The domain is Kylie's existing
+  Squarespace-registered one, attached by DNS repoint — see
+  decisions/2026-07-26-domain-reuse-squarespace.md.)
 - **G-4**: Recurring infrastructure cost (hosting, excluding domain
   registration and booking-provider fees) **< $5/month**; zero servers for
   Leo to maintain.
@@ -110,8 +114,10 @@ supported — and to leave feeling whole again."
   reiki background, types of reiki, ICRT reference.
 - **UC-6**: Kylie reviews a set of distinct home-page mockups on her own
   device and picks a direction (or a blend).
-- **UC-7**: Leo deploys the chosen site as a static build behind
-  CloudFront on a custom domain.
+- **UC-7**: Leo deploys the chosen site as a static build on GitHub
+  Pages with Kylie's custom domain attached. (Revised 2026-07-27: was
+  "behind CloudFront"; deployment is already continuous on every merge
+  to main — the remaining work is production hygiene + the DNS repoint.)
 
 ## Capabilities
 
@@ -140,8 +146,11 @@ supported — and to leave feeling whole again."
 - **CAP-5**: Design-exploration pipeline: multiple visually distinct
   home-page mockups built from one shared content source, packaged into a
   single index Kylie can browse and compare.
-- **CAP-6**: Static build output deployable to S3 + CloudFront (deferred
-  to the deploy phase; no infra work during design exploration).
+- **CAP-6**: Static build output deployable to GitHub Pages — already
+  exercised on every merge by the rlw112 workflow; the deploy phase
+  promotes it to production (mockup prune, un-noindex, domain attach).
+  (Revised 2026-07-27: was "S3 + CloudFront, deferred to the deploy
+  phase". Zero AWS — Pages is $0/mo, serverless, auto-HTTPS.)
 
 ## Feature requirements
 
@@ -244,8 +253,14 @@ phase, not a PRD input.)
 
 ### FR-11: Static deploy target
 
-The chosen site SHALL build to static files servable from S3 +
-CloudFront with a custom domain; no server-side runtime.
+The chosen site SHALL build to static files served by GitHub Pages
+with a custom domain attached (DNS repoint at the registrar; GitHub
+provisions HTTPS automatically); no server-side runtime, no AWS.
+(Revised 2026-07-27: was "S3 + CloudFront". Rationale: the Pages
+pipeline exists and deploys continuously; Squarespace DNS can't ALIAS
+an apex to CloudFront but Pages publishes real apex A records —
+decisions/2026-07-26-domain-reuse-squarespace.md option (b); G-4's
+cost bar drops from cents to $0.)
 
 ### FR-12: Responsive + accessible baseline
 
@@ -315,8 +330,11 @@ first).
   price/format/seat cap) — owner: Kylie (INTERVIEW.md entry filed
   2026-07-26). Blocks publishing the event types, not the runbook or
   account setup.
-- Domain name (rootedlight.com vs rootedlightllc.com vs …) — owner: user
-  (Kylie/Leo). Needed before deploy phase only.
+- ~~Domain name (rootedlight.com vs rootedlightllc.com vs …)~~ —
+  **RESOLVED 2026-07-26 (Leo): reuse Kylie's existing
+  Squarespace-registered domain** (provisional; exact string still
+  TODO(leo) — nothing blocks on it, and 2026-07-27's GitHub Pages
+  decision means the attach is a pure DNS repoint whenever it lands).
 - Photography / imagery from Kylie — owner: user. Mockups use tasteful
   placeholders until then.
 - Real "Experiences" copy — owner: user. Placeholder-marked in build.

@@ -19,8 +19,9 @@
   pages behind a review index Kylie can open anywhere. The winning style
   pack becomes the site theme; the remaining pages are built on it. All
   dynamic behavior (reiki booking/payment, therapy inquiry form) is
-  delegated to external providers via link-out/embed, keeping the deploy a
-  pure S3 + CloudFront static bucket.
+  delegated to external providers via link-out/embed, keeping the deploy
+  pure static hosting (GitHub Pages — revised 2026-07-27; was an S3 +
+  CloudFront bucket).
 
 ## Constraints
 
@@ -90,8 +91,9 @@
 
 - Booking-provider *selection* (the comparison doc is in scope as an
   artifact; the decision is Kylie/Leo's — FR-10).
-- Final copy, photography, domain purchase, DNS/CloudFront provisioning
-  mechanics (deploy phase executes; this design only fixes the target).
+- Final copy, photography, and the DNS repoint of Kylie's existing
+  domain (deploy phase executes; this design only fixes the target —
+  revised 2026-07-27: no domain purchase, no CloudFront provisioning).
 - CMS, blog, client portal, analytics beyond a privacy-light pageview
   counter (can be added later without redesign).
 
@@ -284,7 +286,14 @@ phase, so the public site never ships the review index.)
   collect-at-booking (Leo, 2026-07-26; rationale in the Booking
   integration point above).
 - Hosting shape? → S3 + CloudFront static, per Leo (execution deferred
-  to deploy phase).
+  to deploy phase). (Superseded 2026-07-27, Leo: **GitHub Pages,
+  permanent** — the rlw112 preview pipeline is the deploy. Rationale:
+  it already ships every merge; $0/mo beats G-4's bar; auto-HTTPS;
+  Kylie's Squarespace DNS can't ALIAS an apex to CloudFront but Pages
+  publishes real apex A records — option (b) in
+  decisions/2026-07-26-domain-reuse-squarespace.md. Requires the repo
+  to stay public; revisit only if it goes private or traffic ever
+  demands a CDN.)
 
 ## Unresolved design questions
 

@@ -54,7 +54,22 @@ move fast on good names.
 **Recommendation:** rootedlight.com if available; otherwise ask Kylie
 which variant feels right before falling back.
 
-- [ ] Pick (and register) the domain.
+- [x] **ANSWERED 2026-07-26 (Leo): reuse Kylie's existing domain** — she
+  already registered one through Squarespace for her current Squarespace
+  site, so no new registration. Provisional: "she might change it at
+  some point, but we'll do this one for now" — so nothing in the build
+  should hard-code the string. Registrar ≠ host: the domain points
+  wherever we tell it. Full reasoning, constraints, and the CloudFront
+  knock-on:
+  `_devx/workstreams/rooted-light-website/decisions/2026-07-26-domain-reuse-squarespace.md`
+- [ ] Record the exact domain string (`TODO(leo)` in the decision doc) —
+  nothing else is blocked on it.
+- [x] **rlw107 assumption — RESOLVED 2026-07-27 (Leo): GitHub Pages,
+  permanent.** "What do we need any AWS usage for?" — CloudFront
+  dropped entirely; the rlw112 Pages pipeline is the production deploy.
+  Squarespace keeps registration + DNS (Pages publishes real apex A
+  records, so the ALIAS problem vanishes). rlw107 rescoped accordingly;
+  the domain no longer gates anything.
 
 ## (from /devx rlw104) Booking provider + payment timing + form provider — decide together with the domain name above
 

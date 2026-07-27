@@ -26,6 +26,6 @@
 - [x] `dev/dev-rlw116-2026-07-26T21:30-single-page-ia-rename.md` — Single-page IA — scrollable sections on home, About You removed, About/Services renames, hero copy + owner line (Kylie via Leo 2026-07-26; E-2/E-4 revised via devx revise cdea58) PR: https://github.com/LeoTheMighty/rooted-light/pull/13 (merged 7bb768a)
 - [-] `dev/dev-rlw106-2026-07-25T09:19-booking-form-wiring.md` — Reiki session + training booking wiring — live Calendly links (scope revised 2026-07-26; blocked: rlw114 + MANUAL.md Calendly chain steps 1–7; NOTE: after rlw116, targets the Services section not /offerings/reiki/)
 - [-] `dev/dev-rlw113-2026-07-26T16:31-therapy-form-wiring.md` — Therapy inquiry form wiring (split from rlw106; blocked: form-provider confirmation in INTERVIEW.md)
-- [-] `dev/dev-rlw107-2026-07-25T09:20-deploy-s3-cloudfront.md` — Deploy — S3 + CloudFront + domain, production build profile (blocked: rlw106, rlw113)
+- [-] `dev/dev-rlw107-2026-07-25T09:20-deploy-s3-cloudfront.md` — Deploy — promote GitHub Pages to production + attach Kylie's domain (rescoped 2026-07-27: no AWS; domain no longer gates) (blocked: rlw106, rlw113)
 - [ ] `dev/dev-rlwret-2026-07-25T09:15-retro-rooted-light-website.md` — Retro + LEARN.md updates (interim retro discipline). Status: ready. Blocked-by: rlw101, rlw102, rlw103, rlw104, rlw105, rlw106, rlw107.
 
