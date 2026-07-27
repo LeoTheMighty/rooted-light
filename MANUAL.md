@@ -10,41 +10,41 @@
 
 ## Calendly connection chain (cdea58 rev 2026-07-26 → rlw114/rlw106)
 
-Do these **in order** — each unblocks the next. rlw114 will deliver a
-click-by-click runbook (`docs/CALENDLY-SETUP.md`); steps 1–2 need no
-runbook and can start **today**. Money lands in Kylie's PayPal from
-step 8 onward.
+Do these **in order** — each unblocks the next. The click-by-click
+runbook is **[`docs/CALENDLY-SETUP.md`](docs/CALENDLY-SETUP.md)**
+(shipped by rlw114) — every step below points at its section; the
+how-to details, prices, and caveats live there and in the comparison
+doc, not here. Steps 1–2 can start **today**. Money lands in Kylie's
+PayPal from step 8 onward.
 
-- [ ] **1. PayPal Business account for Kylie** — the long pole: identity
-  verification can take days, so start first. Upgrade her existing
-  personal PayPal to Business or create one (needs her legal name/SSN or
-  EIN, bank account). Required for Calendly payment collection.
-- [ ] **2. Calendly account on Standard** — sign up with Kylie's email;
-  subscribe to **Standard** ($10/mo billed annually — recommended — or
-  $12/mo monthly). Free tier can't do payments or a second event type.
-- [ ] **3. Connect PayPal to Calendly** — Calendly → Integrations →
-  PayPal → log in with the Business account from step 1. (Runbook §3.)
+- [ ] **1. PayPal Business account for Kylie** (runbook §2) — the long
+  pole: identity verification can take days, so start first. Required
+  for Calendly payment collection; the runbook covers
+  upgrade-vs-new-account and what to have ready.
+- [ ] **2. Calendly account on Standard** (runbook §1) — sign up with
+  Kylie's email; subscribe to Standard.
+- [ ] **3. Connect PayPal to Calendly** (runbook §3) — log in with the
+  Business account from step 1.
 - [ ] **4. Kylie's numbers** — answer the INTERVIEW.md entry "Calendly
-  event-type details": session price + duration, training price +
-  format + seat cap. (A decision, tracked there; listed here because
-  step 5 consumes it.)
-- [ ] **5. Create the two event types** (runbook §4–5): "Reiki Session"
-  (1:1) and "Reiki Training" (group event, seat cap), each with PayPal
-  collection ON — client pays the full amount at booking. Nothing else
-  is made public — therapy is never bookable.
+  event-type details — Kylie's numbers": session price + duration,
+  training price + format + seat cap. (A decision, tracked there;
+  listed here because step 5 consumes it.)
+- [ ] **5. Create the two event types** (runbook §4–§5): "Reiki
+  Session" (1:1) and "Reiki Training" (group, seat-capped), each with
+  PayPal collection ON. Nothing else is made public — therapy is never
+  bookable.
 - [ ] **6. Kylie picks her schedule** (runbook §6) — recurring weekly
-  availability (typically Fridays), minimum notice, how far out clients
-  can book, buffers between sessions. All hers, all changeable anytime
-  in Calendly without touching the site.
-- [ ] **7. Capture the two event-type links** — copy the "Reiki Session"
-  and "Reiki Training" share links and paste them into a reply to this
-  chain (or straight into `src/content/site.json` `booking.url` /
-  `booking.training_url`). **This unblocks rlw106** (site wiring).
+  availability, minimum notice, booking horizon, buffers. All hers,
+  all changeable anytime in Calendly without touching the site.
+- [ ] **7. Capture the two event-type links** (runbook §7) — copy the
+  "Reiki Session" and "Reiki Training" share links and paste them into
+  a reply to this chain (or straight into `src/content/site.json`
+  `booking.url` / `booking.training_url`). **This unblocks rlw106**
+  (site wiring).
 - [ ] **8. Paid end-to-end test** (after rlw106 merges; runbook §7
-  script): book + pay a real test session AND a training seat via
-  PayPal from the live site, confirm the money arrives in Kylie's
-  PayPal, then cancel and refund both (refunds are manual, in PayPal —
-  Calendly won't do it for you). Log the result in the rlw106 spec.
+  copy-paste checklist): book + pay a real session AND a training seat
+  from the live site, confirm funds arrive, then cancel and refund
+  both. Log the result in the rlw106 spec.
 
 Filed: 2026-07-26 by /devx-plan (cdea58 revision — Calendly decision).
 

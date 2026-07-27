@@ -56,4 +56,19 @@ site code; parallel-safe with everything.
 
 - 2026-07-26T16:30 — emitted by /devx-plan from workstream cdea58
   revision (Calendly decision), phase 6a.
+- 2026-07-26 — phase 2: spec ACs direct (v2 native); 5 ACs;
+  workstream=rooted-light-website (phase 6a, verification=human);
+  red-artifacts=none (docs-only, human-verified phase).
+- 2026-07-26 — phase 3: web-researched current Calendly/PayPal flows
+  (calendly.com/help/calendly-paypal, group-event-type-overview,
+  how-to-set-up-an-event-type, availability articles; PayPal
+  upgrade/business-signup pages — all fetched 2026-07-26); authored
+  docs/CALENDLY-SETUP.md (7 sections, TODO(kylie) placeholders wired
+  to INTERVIEW.md entry); MANUAL.md chain re-pointed at runbook
+  sections with restated facts trimmed (wrap-don't-duplicate).
+- 2026-07-26 — phase 4: single-pass adversarial review (docs-only,
+  under threshold); 3 findings (0 HIGH, 1 MED, 2 LOW); ALL fixed
+  in-place — most load-bearing: removed two UI-path claims (§1 Billing
+  location, §3 "left nav") not grounded in the fetched help docs, per
+  the spec's researched-not-from-memory requirement; re-review clean.
 - 2026-07-26T20:04:46-06:00 — claimed by /devx in session /devx-2026-07-26T2004-83721
